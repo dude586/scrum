@@ -24,3 +24,4 @@ fetch(url).then(function (response){console.log(response);})
 }
 
 document.addEventListener("DOMContentLoaded", testapi);
+
