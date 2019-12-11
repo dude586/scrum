@@ -17,6 +17,10 @@ fetch(request)
     .then(function (data){console.log(data);})
     .catch(function (error){console.log(error);});
 
-console.log("test");}
+console.log("test");
+
+url = 'https://scrumserver.tenobe.org/scrum/api/bericht/read.php';
+fetch(url).then(function (response){console.log(response);})
+}
 
 document.addEventListener("DOMContentLoaded", testapi);
