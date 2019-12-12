@@ -15,3 +15,7 @@ deKnop.onclick = function () {
 
 
 }
+
+let url = 'https://scrumserver.tenobe.org/scrum/api/bericht/read.php?';
+fetch(url)
+    .then(function (response){console.log(response);});
