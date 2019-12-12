@@ -1,61 +1,45 @@
 const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-async function zoekURL(zoekURLstring) {
-
-let url = rooturl + "/profiel/search.php?"+zoekURLstring;
 
 let allPersons = [];
-console.log(url);
 
-await fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-        console.log(data);
-        allPersons = getArrayOfPersons(data);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-    console.log(allPersons);
+async function zoekURL(zoekURLstring) {
+    
+    let url = rooturl + "/profiel/search.php?" + zoekURLstring;
 
+    console.log(url);
 
-    return await allPersons;
+    await fetch(url)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            getArrayOfPersons(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
+
 function getArrayOfPersons(data) {
-    let person = {
-        voornaam : "",  
-        familienaam : "",
-        oogkleur : ""
-
-    }
-
-    let array = [];
     for (const el of data) {
+        let person = {};
         person.voornaam = el.voornaam;
         person.familienaam = el.familienaam;
-        person.oogkleur= el.oogkleur;
-        array.push(person);
+        person.oogkleur = el.oogkleur;
+        allPersons.push(person);
     }
-    console.log(array);
-    return array;
-
 }
-
-
 
 
 
 function testapi() {
-  
-   const zoekresultaten = zoekURL("sexe=v&haarkleur=Goudblond");
-   const tester=(zoekresultaten);
-   
-   console.log(zoekresultaten);
-   console.log(tester);
-   // console.log(zoekresultaten[0].voornaam);
+
+    zoekURL("oogkleur=groen");
+    for(const p of allPersons){
+        console.log(p);
+    }
 
 }
 
-document.getElementById("toevoegen").addEventListener("click",testapi);
-
+document.getElementById("toevoegen").addEventListener("click", testapi);
