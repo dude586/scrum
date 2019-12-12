@@ -68,6 +68,7 @@ function ToonSterrenbeeldFoto(Sterrenbeeld)
 {
    var URL = "img/" + Sterrenbeeld + ".png";
    document.getElementById("Sterrenbeeldimg").src = URL;
+   document.getElementById("SterrenbeeldLabel").textContent = Sterrenbeeld;
 }
 var Persoon = {
    GeboorteDatum : "1999-06-28"
