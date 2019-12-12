@@ -1,15 +1,52 @@
-function testapi() {
-   
-    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/search.php?voornaam=david';
-    fetch(url)
-        .then(function (response){return response.json();})
-        .then(function (data){console.log(data)})
-        .catch(function (error){console.log(error);})
+const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
+function zoekURL(zoekURLstring) {
 
-        let tmpdata=fetch(url).arrayBuffer; 
-//   console.log(datatmp);  
- console.log(tmpdata); 
+let url = rooturl + "/profiel/search.php?"+zoekURLstring;
+
+let allPersons = [];
+console.log(url);
+
+fetch(url)
+    .then(function (resp) {
+        return resp.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        allPersons = getArrayOfPersons(data);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    console.log(allPersons);
+    return allPersons;
+}
+function getArrayOfPersons(data) {
+    let person = {
+        voornaam : "",  
+        familienaam : ""
+
+    }
+
+    let array = [];
+    for (const el of data) {
+        person.voornaam = el.voornaam;
+        person.familienaam = el.familienaam;
+        array.push(person);
+    }
+    console.log(array);
+    return array;
+
+}
+
+
+
+
+
+function testapi() {
   
+   const zoekresultaten = zoekURL("sexe=m");
+   console.log(zoekresultaten);
+   console.log(zoekresultaten[0].voornaam);
 
 }
 document.addEventListener("DOMContentLoaded", testapi);
@@ -68,6 +105,7 @@ function ToonSterrenbeeldFoto(Sterrenbeeld)
 {
    var URL = "img/" + Sterrenbeeld + ".png";
    document.getElementById("Sterrenbeeldimg").src = URL;
+   document.getElementById("SterrenbeeldLabel").textContent = Sterrenbeeld;
 }
 var Persoon = {
    GeboorteDatum : "1999-06-28"
