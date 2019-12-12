@@ -6,6 +6,9 @@ function GetSterrenbeeld(PersoonObj){
     console.log(Datum.getMonth());
     SterrenbeeldDatum(Datum);
 }
+
+
+
 function SterrenbeeldDatum(Datum)
 {
     if((Datum >= new Date(Datum.getFullYear() + "-12-22") && Datum <=new Date(Datum.getFullYear() + "-01-19")))
@@ -43,6 +46,12 @@ function SterrenbeeldDatum(Datum)
 
     if((Datum >= new Date(Datum.getFullYear() + "-11-23") && Datum <=new Date(Datum.getFullYear() + "-12-21")))
         console.log("Boogschutter");
+}
+
+function ToonSterrenbeeldFoto(Sterrenbeeld)
+{
+   var URL = "img/" + Sterrenbeeld + ".png";
+   document.getElementById("Sterrenbeeldimg").src = URL;
 }
 var Persoon = {
    GeboorteDatum : "1999-8-28"
