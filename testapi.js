@@ -35,6 +35,11 @@ function getArrayOfPersons(data) {
 
 function testapi() {
 
+    var date = new Date();
+    var curDate = null;
+    do { curDate = new Date(); }
+    while(curDate-date < 8000);
+
     zoekURL("oogkleur=groen");
     for(const p of allPersons){
         console.log(p);
