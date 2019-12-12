@@ -29,3 +29,17 @@ div{
 
 
 
+/*cover test*/
+
+#cover {
+	width: 100%;
+	height: 250px;
+	background: url("../assets/images/everton-vila-AsahNlC0VhQ-unsplash.jpg");
+	background-size: cover;
+	background-position: 0 500;
+}
+
+img {
+	width: 230px;
+	
+}
