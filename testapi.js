@@ -1,28 +1,17 @@
-function testapi() {let url = 'https://scrumserver.tenobe.org/scrum/api/favoriet/like.php';
+function testapi() {
+   
+    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/search.php?voornaam=david';
+    fetch(url)
+        .then(function (response){return response.json();})
+        .then(function (data){console.log(data)})
+        .catch(function (error){console.log(error);})
 
-let data = {
-    mijnId: 3,
-    anderId: 9
+        let tmpdata=fetch(url).arrayBuffer; 
+//   console.log(datatmp);  
+ console.log(tmpdata); 
+  
+
 }
-
-var request = new Request(url, {
-    method: 'POST',                 //request methode
-    body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
-    headers: new Headers({          //onze API verwacht application/json
-        'Content-Type': 'application/json'
-    })
-});
-fetch(request)
-    .then(function (response){return response.json();})
-    .then(function (data){console.log(data);})
-    .catch(function (error){console.log(error);});
-
-console.log("test");
-
-url = 'https://scrumserver.tenobe.org/scrum/api/bericht/read.php';
-fetch(url).then(function (response){console.log(response);})
-}
-
 document.addEventListener("DOMContentLoaded", testapi);
 
 // test 
