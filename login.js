@@ -31,10 +31,10 @@
                 console.log('Deze request wordt verstuurd : ');
                 console.log(request);
 
-                       
+                     let ID = "";  
                 fetch(request)
                     .then(function (resp) { return resp.json(); })
-                    .then(function (data) { console.log(data);
+                    .then(function (data) { ID = data.ID;
                         if (data.message == 'Authorized') {
                             console.log("Reactie van backend API : Correcte gegevens");                      
                             window.location.href = "userDetail.html";
@@ -45,5 +45,6 @@
                     .catch(function (error) { console.log(error); });
             });
         
+
         };
     
