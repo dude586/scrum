@@ -85,22 +85,34 @@ let user = {
 }
                     
 //Update img url to img tag.
-
+var testing;
 function readURL(input) {
+	let self = this;
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            document.getElementById("fotoSrc").attr('src', e.target.result);
+            document.getElementById("fotoToDiv").src = e.target.result;
+            self.imageData = e.target.result;
+           var testing = FileReader.result;
+           console.log(testing);
         }
-
+    //	let test = reader.readAsDataURL(file);
+//      console.log(test);
         reader.readAsDataURL(input.files[0]);
+        
     }
-}
 
-$("#imgInp").change(function(){
-    readURL(this);
-});
+}
+ 
+document.getElementById("fotoSrc").onchange = function() {
+   readURL(this);
+   var tst = document.getElementById("fotoToDiv").src;
+    console.log(tst);
+};
+
+
+//handleForm
 
 const handleFormSubmit = function() {
 	//FETCH HOW MANY USER IDs there are and use that number++ to add id to this new user
