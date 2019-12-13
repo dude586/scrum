@@ -93,7 +93,7 @@ fetch(url)
         return resp.json();
     })
     .then(function (data) {
-        console.log(data);
+        // console.log(data);
         getArrayOfPersons(data);
 
     })
@@ -106,11 +106,9 @@ function getArrayOfPersons(data) {
     let arrayHaar = [];
     for (const el of data) {
         let kleurHaar = el.haarkleur;
-        //console.log(kleur);
         arrayHaar.push(kleurHaar);
     }
     let unique = [...new Set(arrayHaar)];
-    console.log(unique);
     for (const el of unique) {
         let option = new Option(el);
         select.appendChild(option);
@@ -120,17 +118,15 @@ function getArrayOfPersons(data) {
     let arrayOgen = [];
     for (const el of data) {
         let kleurOgen = el.oogkleur;
-        //console.log(kleur);
         arrayOgen.push(kleurOgen);
     }
     let unique2 = [...new Set(arrayOgen)];
-    console.log(unique2);
-    //console.log(unique);
     for (const el2 of unique2) {
         let option2 = new Option(el2);
         select2.appendChild(option2);
     }
 
+}
 }
 function sterrenBeeldNaarJpeg(Datum) {
     let jpegnaam = "";
@@ -172,7 +168,7 @@ function sterrenBeeldNaarJpeg(Datum) {
 
     return jpegnaam;
 }
-}
+
 filterInitialisatie();
 
 
