@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/css.css">
-    <script type="text/javascript" src="javascript.js" defer></script>
+    <!-- <script type="text/javascript" src="javascript.js" defer></script> -->
+    <script type="text/javascript" src="js/formulier.js" defer></script>
     <title>Inscrijven</title>
 </head>
 <body>
-  <form method="post" action="http://">
+  <form>
   <fieldset id="Personalia">
     <legend>Personalia:</legend>
         <div><label for="foto">Foto</label><img src="#" alt="jouw Foto" height="100" width="100"></div>
@@ -32,17 +33,16 @@
           
           <div><label for="nickname">nickname</label><input type="text" id="nickname"></div>
           <div><label for="wachtwoord">Familienaam</label><input type="password" id="wachtwoord"></div>
-
-    
       
   </fieldset>
   <fieldset id="identificatie">
       <legend>voer hier uw nickname en wachtwoord in :</legend>
           <div><label for="nickname">nickname</label><input type="text" id="nickname"></div>
           <div><label for="wachtwoord">Familienaam</label><input type="password" id="wachtwoord"></div>
-       
   </fieldset>
-  <div ><input type="submit" value="verzenden" id="submit"></div>
+  
+  <!-- <div ><input type="submit" value="verzenden" id="submit"></div> -->
 </form>
+<button id="submit">verzenden</button>
 </body>
 </html>
