@@ -32,6 +32,7 @@ document.getElementById("submit").onclick=function(){
 		eersteInvalid.classList.add("fout"); 
 		
 	}else{
+		
 		//controleer als de wachtwoord werd het zelfde herhaald
 	    
 	    if(document.getElementById("wachtwoord").value !==herhaalWachtwoord.value){ //niet het zelde
@@ -41,6 +42,30 @@ document.getElementById("submit").onclick=function(){
 		}else{
 		
 			herhaalWachtwoord.classList.remove("fout");
+			// controleer als de nicknaam al bestaat
+			const nickname=document.getElementById("nickname").value;
+			console.log(nickname);
+			
+			let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
+
+			let data = {
+				nickname: nickname
+				
+			}
+			
+			var request = new Request(url, {
+				method: 'POST',                 //request methode
+				body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+				headers: new Headers({          //onze API verwacht application/json
+					'Content-Type': 'application/json'
+				})
+			});
+			
+			fetch(request)
+			.then(function (response){return response.json();})
+			.then(function (data){console.log(data);})
+			.catch(function (error){console.log(error);});	
+			
 
 			//hier stuur de gegevens
 	
