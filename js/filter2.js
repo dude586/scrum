@@ -83,7 +83,7 @@ deKnop.onclick = function () {
         alert(zoekurl);    
 }
 
-console.log("test");
+
 const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
 
 let url = rooturl + '/profiel/read.php';
@@ -170,6 +170,8 @@ function sterrenBeeldNaarJpeg(Datum) {
 }
 
 filterInitialisatie();
+
+//test
 
 
 
