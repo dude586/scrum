@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   
-    <script type="text/javascript" src="js/test.js" defer></script>
+    <link rel="stylesheet" href="css/css.css">
+
+    <script type="text/javascript" src="js/filter.js" defer></script>
 
 
     <title>Document</title>
@@ -16,45 +17,65 @@
     <form name="frmFilter" method="">
         <table>
             <tr>
-                <td align ="center"><h1>Filter uw zoekopdracht</h1></td>
+                <td align="center">
+                    <h1>Filter uw zoekopdracht</h1>
+                </td>
             </tr>
             <tr>
                 <td>
                     <label for="MinGrootte" class="">Grootte van: </label>
-                    <input type="number" id="minGrootte"  class="" />
+                    <input type="number" id="minGrootte" class="" />
                 </td>
                 <td>
                     <label for="MaxGrootte"> tot: </label>
-                    <input type="number" id="maxGrootte"  class="" />
+                    <input type="number" id="maxGrootte" class="" />
                 </td>
                 <br /><br>
-                <tr>
-                    <td>
-                        <label for="minLeeftijd">Leeftijd van: </label>
-                        <input type="number" name="" id="minLeeftijd"/>
-                    </td>
-                    <td>
-                        <label for="maxLeeftijd"> tot:  </label>
-                        <input type="number" name="" id="maxLeeftijd"/>
-                    </td>
-                </tr>
-                <br /><br>
-                <tr>
-                    <td>
-                        <label for="kleurOgen">Kleur ogen</label>
-                        <select  id ="kleurOgen">
-                                <option value="blauw">Blauw</option>
-                                <option value="bruin">Bruin</option>
-                                <option value="groen">Groener</option>
-                              </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <button id="verstuur" >Verstuur</button>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <label for="minLeeftijd">Leeftijd van: </label>
+                    <input type="number" name="" id="minLeeftijd" />
+                </td>
+                <td>
+                    <label for="maxLeeftijd"> tot: </label>
+                    <input type="number" name="" id="maxLeeftijd" />
+                </td>
+            </tr>
+            <br /><br>
+            <tr>
+                <td>
+                    <label for="kleurOgen">Kleur ogen</label>
+                    <select id="kleurOgen">
+                        <option value="">Kies een kleur</option>
+                        
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="kleurHaar">Kleur haar</label>
+                    <select id="kleurHaar">
+                            <option value="">Kies een kleur</option> 
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="geslacht">Geslacht</label>
+                    <select id="geslacht">
+                        <option value="">Kies geslacht</option>
+                        <option value="man">Man</option>
+                        <option value="vrouw">Vrouw</option>
+                    </select>
+                </td>
+            </tr>
+            <br>
+            <tr>
+                <td>
+                    <button id="verstuur">Verstuur</button>
+                </td>
+            </tr>
         </table>
     </form>
     <div></div>
-    </body>
+</body>
