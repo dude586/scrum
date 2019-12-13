@@ -14,7 +14,7 @@
 <body>
     <head>
     	<div id="cover">
-    	<div class="text-center"><img src="assets/images/logo.png"></div>
+    	<div class="text-center"><img id="logo-img" src="assets/images/logo.png"></div>
 		</div>
     </head>
     <main class="m-5 high">
@@ -27,16 +27,16 @@
 	    			<li>
 	    			blblblb.	
 	    			</li>
-	    		</ul>
+				</ul>
+				<button type="submit" id="zoekformulier" class="btn btn-primary">test1</button>
 	    	</div>
 	    	<div id="login" class="col-9 orange-color">
 	    		<div class="d-flex align-items-center justify-content-center">
 	    		
 						<form class="border p-3">
 				 			<div class="form-group">
-						    	<label for="inputEmail">Email address</label>
-						    	<input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
-								<small id="emailHelp" class="form-text text-muted">We zullen uw e-mail nooit met iemand anders delen.</small>
+						    	<label for="nickname">Nickname</label>
+						    	<input type="email" class="form-control" id="inputNick" placeholder="Nickname" required>
 				  			</div>
 				  			<div class="form-group">
 				  				<label for="inputPassword">Wachtwoord</label>
@@ -48,20 +48,149 @@
 	    	</div>
 	    	<div id="profiel" class="col-9 orange-color">
 	    		<div class="d-flex align-items-center justify-content-center">
-	    			profiel
+						<div class="container contact-form">
+								<div class="contact-image">
+									<img src="assets/images/logo.png"  />
+								</div>
+								<form>
+									<h3><span id="profielVan">Details van </span></h3>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="detailNick">Nickname : </label> <input type="text" class="form-control" id="detailNick"
+													value="nog niet ontvangen">
+											</div>
+											<div class="form-group">
+												<label for="detailFnaam">Familienaam : </label> <input type="text" class="form-control" id="detailFnaam"
+													value="nog niet ontvangen">
+											</div>
+											<div class="form-group">
+												<label for="detailVnaam">Voornaam : </label> <input type="text" class="form-control" id="detailVnaam"
+													value="nog niet ontvangen">
+											</div>
+											<div class="form-group">
+												<label for="detailGeboortedatum">Geboortedatum : </label> <input type="text" class="form-control"
+													id="detailGeboortedatum" value="nog niet ontvangen">
+											</div>
+											<div class="form-group">
+												<label for="detailHaarkleur">Haarkleur : </label> <input type="text" class="form-control" id="detailHaarkleur"
+													value="nog niet ontvangen">
+											</div>
+											<div class="form-group">
+												<label for="detailBeroep">Beroep : </label> <input type="text" class="form-control" id="detailBeroep"
+													value="nog niet ontvangen">
+											</div>
+											<div class="form-group">
+												<label for="detailEmail">Email : </label> <input type="text" class="form-control" id="detailEmail"
+													value="nog niet ontvangen">
+											</div>
+											
+											<div class="form-group">
+												<label for="detailLovecoins">Lovecoins : </label> <input type="text" class="form-control" id="detailLovecoins"
+													value="nog niet ontvangen">
+											</div>
+						
+						
+											<div class="form-group">
+												<input type="submit" name="btnSubmit"  id="btnSubmit" class="btnContact" value="Update" onclick="return false;" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<img id="detailFoto" src="https://scrumserver.tenobe.org/scrum/img/no_image.png" alt="profielfoto"
+													class="profielfoto">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<img id="Sterrenbeeldimg" src="">
+												<label id="SterrenbeeldLabel"></label>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
 	    		</div>
 	    	</div>
 	    	<div id="zoek" class="col-9 orange-color">
 	    		<div class="d-flex align-items-center justify-content-center">
-	    			profiel
+						<form name="frmFilter" method="">
+								<table>
+									<tr>
+										<td align="center">
+											<h1>Filter uw zoekopdracht</h1>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="MinGrootte" class="">Grootte van: </label>
+											<input type="number" id="minGrootte" class="" />
+										</td>
+										<td>
+											<label for="MaxGrootte"> tot: </label>
+											<input type="number" id="maxGrootte" class="" />
+										</td>
+										<br /><br>
+									<tr>
+										<td>
+											<label for="minLeeftijd">Leeftijd van: </label>
+											<input type="number" name="" id="minLeeftijd" />
+										</td>
+										<td>
+											<label for="maxLeeftijd"> tot: </label>
+											<input type="number" name="" id="maxLeeftijd" />
+										</td>
+									</tr>
+									<br /><br>
+									<tr>
+										<td>
+											<label for="kleurOgen">Kleur ogen</label>
+											<select id="kleurOgen">
+												<option value="">Kies een kleur</option>
+												
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="kleurHaar">Kleur haar</label>
+											<select id="kleurHaar">
+													<option value="">Kies een kleur</option> 
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label for="geslacht">Geslacht</label>
+											<select id="geslacht">
+												<option value="">Kies geslacht</option>
+												<option value="man">Man</option>
+												<option value="vrouw">Vrouw</option>
+											</select>
+										</td>
+									</tr>
+									<br>
+									<tr>
+										<td>
+											<button id="verstuur">Verstuur</button>
+										</td>
+									</tr>
+								</table>
+							</form>
 	    		</div>
 	    	</div>
 	    	<div id="zoekresults" class="col-9 orange-color">
 	    		<div class="d-flex align-items-center justify-content-center">
-	    			profiel
+						<table id="uitvoerzoektabel">
+								<tbody>
+					  
+								</tbody>
+							  </table>
 	    		</div>
-	    	</div>
-	    </div>
+			</div>
+
+		</div>
+		
     </main>
 </body>
 </html>

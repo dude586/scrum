@@ -10,9 +10,7 @@
   <form>
   <fieldset id="Personalia">
     <legend>Personalia:</legend>
-    <input type="file" name="pic" accept="image/*">
-    <input type="submit">
-        <div id="kader"><img src="#" alt="jouw Foto" height="150" width="150"></div> <button type="button" id="upload">Upload</button>
+        <div id="kader"><img id="fotoToDiv" src="#" alt="jouw Foto" height="150" width="150"></div><input id="fotoSrc"type="file" name="pic" accept="image/*" required>
         <div><label for="familienaam">familienaam</label><input type="text" id="familienaam" required ></div>
         <div><label for="voornaam">voornaam</label><input type="text" id="voornaam" required ></div>
         <div><label for="geboortedatum">geboortedatum</label><input type="text" id="geboortedatum" placeholder="dd/mm/jjjj" required ></div>
