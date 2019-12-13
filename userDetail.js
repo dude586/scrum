@@ -1,7 +1,10 @@
+"use strict";
+
 window.onload = function () {
+
     let profielData;
 
-    let profielId = ID;
+    let profielId = '8';
     //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
 
     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielId;
@@ -55,11 +58,8 @@ window.onload = function () {
             .then(function (data) { console.log(data); })
             .catch(function (error) { console.log(error); });
 
-    }); 
-
-            
+    });         
 };
-
 function GetSterrenbeeld(PersoonObj){
     console.log("test");
     console.log(PersoonObj);
