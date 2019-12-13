@@ -1,5 +1,5 @@
 "use strict"
-let zoekurl = "";
+function filterInitialisatie(){
 const deKnop = document.getElementById("verstuur");
 deKnop.onclick = function () {
     let IDminGr = document.getElementById("minGrootte").value;
@@ -10,7 +10,7 @@ deKnop.onclick = function () {
     let IDKLeurOgen = document.getElementById("kleurOgen").value;
     let IDgeslacht = document.getElementById("geslacht").value;
 
-    //let zoekurl = "";
+    let zoekurl = "";
 
 
 
@@ -25,9 +25,8 @@ deKnop.onclick = function () {
         if (IDKleurHaar !== "") { zoekurl = zoekurl + "haarkleur=" + IDKleurHaar + "&"; }
         if (IDKLeurOgen !== "") { zoekurl = zoekurl + "oogkleur=" + IDKLeurOgen + "&"; }
         if (IDgeslacht !== "") { zoekurl = zoekurl + "sexe=" + IDgeslacht + "&"; }
-        zoekurl.substring(0, zoekurl.length - 1);
-        console.log(zoekurl);
-        console.log("test");
+        zoekurl= zoekurl.substring(0, zoekurl.length - 1);
+        
     }
 
 
@@ -74,13 +73,17 @@ deKnop.onclick = function () {
                 // leeftijdcell=toString(getAge("1994-06-14"));
 
 
-
+                
             }
+           
+            
         })
         .catch(function (error) { console.log(error); });
 
-
+        alert(zoekurl);    
 }
+
+console.log("test");
 const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
 
 let url = rooturl + '/profiel/read.php';
@@ -169,6 +172,8 @@ function sterrenBeeldNaarJpeg(Datum) {
 
     return jpegnaam;
 }
+}
+filterInitialisatie();
 
 
 
