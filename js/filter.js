@@ -1,4 +1,5 @@
 "use strict"
+function filterInitialisatie(){
 const deKnop = document.getElementById("verstuur");
 deKnop.onclick = function () {
     let IDminGr = document.getElementById("minGrootte").value;
@@ -170,6 +171,7 @@ function sterrenBeeldNaarJpeg(Datum) {
         jpegnaam = "boogschutter";
 
     return jpegnaam;
+}
 }
 
 
