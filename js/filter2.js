@@ -108,6 +108,7 @@ function getArrayOfPersons(data) {
         let kleurHaar = el.haarkleur;
         arrayHaar.push(kleurHaar);
     }
+    //haal de unieke indexen uit de array
     let unique = [...new Set(arrayHaar)];
     for (const el of unique) {
         let option = new Option(el);
