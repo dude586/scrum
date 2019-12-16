@@ -1,5 +1,5 @@
 "use strict"
-let alleDivid = ["login", "profiel", "zoek", "zoekresults", "nieuwegebruiker"];
+let alleDivid = ["login", "profiel", "zoek", "zoekresults", "nieuwegebruiker","toonprofiel"];
 
 function toonDIV(divid) {
     for (let teller = 0; teller < alleDivid.length; teller++) {
@@ -42,6 +42,67 @@ document.getElementById('mijnprofiel').addEventListener('click', function (e)
   {toonDIV("profiel");
 
   })
+
+  document.getElementById('menulucky').addEventListener('click', function (e)
+  {let profielId = Math.floor(Math.random() * 7)+1;
+      
+    toonprofiel("20");
+
+  })
+
+  document.getElementById('menulogin').addEventListener('click', function (e)
+  {toonDIV("login");
+
+  })
+
+function toonprofiel(profielid)
+{toonDIV("toonprofiel");
+    
+    
+
+
+
+
+
+
+
+
+
+
+            let profielData;
+
+           profielid="8";
+
+            //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
+
+            let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
+            console.log(url);   
+
+            fetch(url)
+                .then(function (resp) { return resp.json(); })
+                .then(function (data) {
+
+                    profielData = data;
+                    
+
+                    document.getElementById('toondetailNick').value = profielData.nickname;
+                    document.getElementById('toondetailFnaam').value = profielData.familienaam;
+                    document.getElementById('toondetailVnaam').value = profielData.voornaam;
+                    document.getElementById('toondetailGeboortedatum').value = profielData.geboortedatum;
+                    document.getElementById('toondetailHaarkleur').value = profielData.haarkleur;
+                    document.getElementById('toondetailBeroep').value = profielData.beroep;
+                    document.getElementById('toondetailEmail').value = profielData.email;
+                   // document.getElementById('detailLovecoins').value = profielData.lovecoins;
+                    document.getElementById('toondetailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
+                    document.getElementById('toondetailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
+                    document.getElementById('toonprofielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
+
+                    console.log("TESTING");
+                    GetSterrenbeeld(profielData.geboortedatum);
+                })
+                .catch(function (error) { console.log(error); });
+
+}
 //---------------------------------------------------------------------------------------------------------------------
 //Cicylo domain 
 //---------------------------------------------------------------------------------------------------------------------
