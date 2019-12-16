@@ -13,11 +13,37 @@ function filterInitialisatie() {
         let zoekurl = "";
 
 
+        //aanpassing voor validatie
+        
+    
 
+
+       
         if ((IDminGr === "") && (IDmaxGr === "") && (IDminLeeftijd === "") && (IDmaxLeeftijd === "") && (IDKleurHaar === "") && (IDKLeurOgen === "") && (IDgeslacht === "")) {
             alert('invullen die handel');
         } else {
+            if( IDminGr !== ""){
+                if(IDminGr < 80 || IDminGr > 250){
+                    alert("Min grootte moet tussen 80 en 250 cm liggen.");
+                }
+            }
+            if( IDmaxGr !== ""){
+                if(IDmaxGr < 80 || IDmaxGr > 250){
+                    alert("Max grootte moet tussen 80 en 250 cm liggen.");
+                }
+            }
+            if( IDminLeeftijd !== ""){
+                if(IDminLeeftijd < 18 || IDminLeeftijd> 100){
+                    alert("Min leeftijd moet tussen 18 en 100 jaar liggen.");
+                }
+            }
+            if( IDmaxLeeftijd !== ""){
+                if(IDmaxLeeftijd < 18 || IDmaxLeeftijd > 100){
+                    alert("Max leeftijd moet tussen 18 en 100 jaar liggen.");
+                }
+            }
 
+        
             if (IDminGr !== "") { zoekurl = zoekurl + "rangeMinGrootte=" + IDminGr + "&"; }
             if (IDmaxGr !== "") { zoekurl = zoekurl + "rangeMaxGrootte=" + IDminGr + "&"; }
             if (IDminLeeftijd !== "") { zoekurl = zoekurl + "rangeMinGrootte=" + IDminLeeftijd + "&"; }
@@ -25,11 +51,11 @@ function filterInitialisatie() {
             if (IDKleurHaar !== "") { zoekurl = zoekurl + "haarkleur=" + IDKleurHaar + "&"; }
             if (IDKLeurOgen !== "") { zoekurl = zoekurl + "oogkleur=" + IDKLeurOgen + "&"; }
             if (IDgeslacht !== "") { zoekurl = zoekurl + "sexe=" + IDgeslacht + "&"; }
-            zoekurl = zoekurl.substring(0, zoekurl.length - 1);
-
+            zoekurl= zoekurl.substring(0, zoekurl.length - 1);
+          
         }
-
-
+        
+        
         let teller = 0;
 
         const zoektabelid = document.getElementById("uitvoerzoektabel");
@@ -80,7 +106,6 @@ function filterInitialisatie() {
             })
             .catch(function (error) { console.log(error); });
 
-        alert(zoekurl);
     }
 
 
