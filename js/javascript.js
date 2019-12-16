@@ -426,12 +426,14 @@ document.getElementById('zoekformulier').addEventListener('click', function ()
             let optionSexe = elSexe.sexe;
             arraySexe.push(optionSexe);
         }
+        console.log(arraySexe);
         //Unieke idexen removen
         let unique3 = [...new Set(arraySexe)];
         for (const el3 of unique3) {
             let option3 = new Option(el3);
             selectSexe.appendChild(option3);
         }
+        
     }
 
 
