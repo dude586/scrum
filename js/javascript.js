@@ -18,56 +18,6 @@ function toonDIV(divid)
 //Cicylo domain 
 //---------------------------------------------------------------------------------------------------------------------
 
-async function confirmeerid()
-
-{  let terugkeerid = "";
-let nickname = document.getElementById('inputNick').value;
-let wachtwoord = document.getElementById('inputPassword').value;
-
-console.log('nickname = ' + nickname);
-console.log('wachtwoord = ' + wachtwoord);
-
-let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/authenticate.php';
-
-
-console.log('Backend API url = ' + url);
-
-let data = {
-    nickname: nickname,
-    wachtwoord: wachtwoord
-}
-
-
-
-var request = new Request(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: new Headers({
-        'Content-Type': 'application/json'
-    })
-});
-let ID="";
-await fetch(request)
-                    .then(function (resp) { return resp.json(); })
-                    .then(function (data) { ID = data.ID;
-                        if (data.message == 'Authorized') {
-                            console.log("Reactie van backend API : Correcte gegevens");                      
-                            
-                        } else {
-                            console.log("Reactie van backend API : Verkeerde gegevens");        
-                        }
-                    })
-                    .catch(function (error) { console.log(error); });
-
-
-terugkeerid=data.id;
-console.log(ID);
-console.log(data);  
-console.log("dataid");
-
-console.log(data.id);
-    return  terugkeerid;
-}
 
 
 
@@ -107,16 +57,16 @@ window.onload = function() {
   console.log('Deze request wordt verstuurd : ');
   console.log(request);
   console.log("id");
-  console.log(confirmeerid());
+
 
      //  let ID = "";  
-       let ID="";
-
+       let tmpID="";
+  
 
   fetch(request)
       .then(function (resp) { return resp.json(); })
-      .then(function (data) { tmpID = data.ID;
-          console.log(data.ID);
+      .then(function (data) { tmpID = data.id;
+          console.log(data.id);
           if (data.message == 'Authorized') {
               console.log("Reactie van backend API : Correcte gegevens");                      
               toonDIV("profiel");
@@ -139,11 +89,11 @@ window.onload = function() {
 
     let profielData;
             
-console.log("id "+tmpID);
-    let profielId = "8";
+    console.log("id "+tmpID);
+    
     //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
 
-    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielId;
+    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + tmpID;
 
     fetch(url)
         .then(function (resp) { return resp.json(); })
