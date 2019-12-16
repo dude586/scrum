@@ -344,21 +344,50 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     toonDIV("zoek");
                 }
             }
-
+            console.log(IDmaxLeeftijd);
+            console.log(IDminLeeftijd);
 
             if (checkTeller === 0) {
-                if (IDmaxLeeftijd !== "") { zoekurl = zoekurl + "rangeMinGrootte=" + IDmaxLeeftijd + "&"; }
-                if (IDminLeeftijd !== "") { zoekurl = zoekurl + "rangeMinGrootte=" + IDminLeeftijd + "&"; }
-                if (IDmaxGr !== "") { zoekurl = zoekurl + "rangeMaxGrootte=" + IDminGr + "&"; }
-                if (IDminGr !== "") { zoekurl = zoekurl + "rangeMinGrootte=" + IDminGr + "&"; }
-                if (IDKleurHaar !== "") { zoekurl = zoekurl + "haarkleur=" + IDKleurHaar + "&"; }
-                if (IDKLeurOgen !== "") { zoekurl = zoekurl + "oogkleur=" + IDKLeurOgen + "&"; }
-                if (IDgeslacht !== "") { zoekurl = zoekurl + "sexe=" + IDgeslacht + "&"; }
+                var date = new Date();
+                date.setFullYear(date.getFullYear() - IDmaxLeeftijd);
+                 var dd = date.getDate();
+                 var mm = date.getMonth() +1;
+                 var yyyy = date.getFullYear();
+                 if(dd < 10){
+                     dd = '0'+dd;
+                 }
+                 if(mm <10){
+                     mm = '0'+mm;
+                 }
+                 date = yyyy+'-'+mm+'-'+dd;
+                 console.log(date);
+                var date2 = new Date();
+                date2.setFullYear(date2.getFullYear() - IDminLeeftijd);
+                var dd2 = date2.getDate();
+                 var mm2 = date2.getMonth() +1;
+                 var yyyy2 = date2.getFullYear();
+                 if(dd2 < 10){
+                     dd2 = '0'+dd2;
+                 }
+                 if(mm2 <10){
+                     mm2 = '0'+mm2;
+                 }
+                 date2 = yyyy2+'-'+mm2+'-'+dd2;
+                
+                if (IDminLeeftijd !== "") { zoekurl = zoekurl + "geboortedatumOperator=range&rangeMinGeboortedatum=" + date2 + '&'; }
+                if (IDmaxLeeftijd !== "") { zoekurl = zoekurl + "rangeMaxGeboortedatum=" + date+ '&'; }
+               
+                if (IDminGr !== "") { zoekurl = zoekurl + "grootteOperator=range&rangeMinGrootte=" + IDminGr + '&'; }
+                if (IDmaxGr !== "") { zoekurl = zoekurl + "rangeMaxGrootte=" + IDmaxGr + '&'; }
+                if (IDKleurHaar !== "") { zoekurl = zoekurl + "haarkleur=" + IDKleurHaar + '&'; }
+                if (IDKLeurOgen !== "") { zoekurl = zoekurl + "oogkleur=" + IDKLeurOgen + '&'; }
+                if (IDgeslacht !== "") { zoekurl = zoekurl + "sexe=" + IDgeslacht + '&'; }
                 zoekurl = zoekurl.substring(0, zoekurl.length - 1);
-                let teller = 0;
-        console.log(zoekurl);
+                let checkTeller = 0;
+      
         const zoektabelid = document.getElementById("uitvoerzoektabel");
         let url = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?" + zoekurl;
+        console.log(url);
         //LET OP : rooturl = https://scrumserver.tenobe.org/scrum/api
         fetch(url)
             .then(function (resp) { return resp.json(); })
