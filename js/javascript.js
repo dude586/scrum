@@ -1,5 +1,5 @@
 "use strict"
-let alleDivid = ["login","profiel","zoek","zoekresults"];
+let alleDivid = ["login","profiel","zoek","zoekresults","nieuwegebruiker"];
 
 function toonDIV(divid)
 {   for (let teller = 0; teller < alleDivid.length; teller++) 
@@ -15,9 +15,65 @@ function toonDIV(divid)
 
 
 
-
 //Cicylo domain 
 //---------------------------------------------------------------------------------------------------------------------
+
+async function confirmeerid()
+
+{  let terugkeerid = "";
+let nickname = document.getElementById('inputNick').value;
+let wachtwoord = document.getElementById('inputPassword').value;
+
+console.log('nickname = ' + nickname);
+console.log('wachtwoord = ' + wachtwoord);
+
+let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/authenticate.php';
+
+
+console.log('Backend API url = ' + url);
+
+let data = {
+    nickname: nickname,
+    wachtwoord: wachtwoord
+}
+
+
+
+var request = new Request(url, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: new Headers({
+        'Content-Type': 'application/json'
+    })
+});
+let ID="";
+await fetch(request)
+                    .then(function (resp) { return resp.json(); })
+                    .then(function (data) { ID = data.ID;
+                        if (data.message == 'Authorized') {
+                            console.log("Reactie van backend API : Correcte gegevens");                      
+                            
+                        } else {
+                            console.log("Reactie van backend API : Verkeerde gegevens");        
+                        }
+                    })
+                    .catch(function (error) { console.log(error); });
+
+
+terugkeerid=data.id;
+console.log(ID);
+console.log(data);  
+console.log("dataid");
+
+console.log(data.id);
+    return  terugkeerid;
+}
+
+
+
+
+
+
 window.onload = function() {
  toonDIV("login");
  console.log("testdiv");
@@ -50,9 +106,13 @@ window.onload = function() {
   
   console.log('Deze request wordt verstuurd : ');
   console.log(request);
+  console.log("id");
+  console.log(confirmeerid());
 
      //  let ID = "";  
-       let tmpID="";
+       let ID="";
+
+
   fetch(request)
       .then(function (resp) { return resp.json(); })
       .then(function (data) { const tmpID = data.ID;
