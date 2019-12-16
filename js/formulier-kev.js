@@ -52,10 +52,8 @@ async function mainFunction() {
 	//Check user object
 	//console.log(user);
 	//console.log(JSON.stringify(user));
-
   	//convert object to JSON
- 	
-  	
+ 		
 	var request = new Request('https://scrumserver.tenobe.org/scrum/api/profiel/create.php', {
         method: 'POST',
         body: JSON.stringify(user),
@@ -77,16 +75,13 @@ async function mainFunction() {
 //end mainFunction
 };
 
-
- //FUNCTIONS!!!!
+ //FUNCTIONS
 
  function uploadPicture(base64String) {
-            console.log('• Foto wordt doorgestuurd naar de API.');
+            console.log('•Foto wordt doorgestuurd naar de API.');
             let naam = user.foto;
             let afbeelding = base64String;
-
             let url = 'https://scrumserver.tenobe.org/scrum/api/image/upload.php';
-
             let data = {
                 naam: naam,
                 afbeelding: afbeelding
@@ -105,8 +100,7 @@ async function mainFunction() {
                     console.log('• Foto inladen in IMG');
                     console.log('==> OK');
                     console.log('==> Klaar');
-                    console.log(data.fileURL);
-                    
+                    console.log(data.fileURL);                   
                     //user.foto = data.fileURL;
                     //user.foto = input_string.replace(.*(_),'');
                 })
@@ -130,8 +124,10 @@ async function mainFunction() {
 
 //Validate that inputs are not empty
   let inputs = document.getElementsByTagName("input");
-  for (var i = 1; i < 12; i++) {
+  for (var i = 0; i < 12; i++) {
   	if (inputs[i].value == "") {
+  		let test = inputs[0].value;
+  		console.log(test);
  		inputs[i].focus();
     	return false;
   	}
@@ -172,15 +168,6 @@ document.getElementById("fotoSrc").onchange = function() {
 
 // Submit button VALIDATION
 document.getElementById("button").onclick = mainFunction;
-
-
-
-
-
-
-
-
-
 
 
 
