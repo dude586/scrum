@@ -3,7 +3,7 @@
 
 const foutmeldingspan=document.getElementById("foutmeldingspan");
 
-const invoerelementen=document.querySelectorAll("input,select");
+const invoerelementen=document.querySelectorAll("input[type=text],input[type=number],select");
 for(const element of invoerelementen){
     element.onchange=function(){
         if(this.checkValidity()){
@@ -13,21 +13,37 @@ for(const element of invoerelementen){
 			this.classList.add("fout");
 			foutmeldingspan.innerText="invalid invoer verplict";
 		}
-
-        
     }
 }
 
-//upload button onclick
-document.getElementById("upload").onclick=function(){
-window.open("https://scrumserver.tenobe.org/scrum/frontend/fotoWebcam.html");
+//Update img url to img tag.
+var testing;
+function readURL(input) {
+	let self = this;
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+
+		reader.onload = function (e) {
+			document.getElementById("fotoToDiv").src = e.target.result;
+		}
+		reader.readAsDataURL(input.files[0]);
+		
+	}
+
 }
+ 
+document.getElementById("fotoSrc").onchange = function() {
+   readURL(this);
+   var tst = document.getElementById("fotoToDiv").src;
+	
+};
 
 //verzenden button onclick
 document.getElementById("submit").onclick=function(){
 	
 	//valideren
-	const eersteInvalid=document.querySelector("input:invalid,select:invalid");
+	const img=document.getElementById("fotoToDiv");
+	const eersteInvalid=document.querySelector("input[type=text]:invalid,input[type=number]:invalid,select:invalid");
 	const herhaalWachtwoord=document.getElementById("h-wachtwoord");
 	const nicknaam=document.getElementById("nickname");
 
@@ -49,7 +65,7 @@ document.getElementById("submit").onclick=function(){
 			foutmeldingspan.innerText="de wachtwoord werd niet het zefde hehaald";
 			
 		}else{
-		
+				
 			herhaalWachtwoord.classList.remove("fout");
 			foutmeldingspan.innerText="";
 			// controleer als de nicknaam al bestaat
@@ -83,8 +99,19 @@ document.getElementById("submit").onclick=function(){
 					nicknaam.classList.add("fout");
 					foutmeldingspan.innerText="de gekozen nickname bestaat al";
 				}else{
+					
 					nicknaam.classList.remove("fout");
 					foutmeldingspan.innerText="";
+					//controleer als de foto werd geladen
+					console.log(img.src);
+			        if(img.src==="#"){
+						
+						foutmeldingspan.innerText="kies een foto";
+						img.parentElement.style.borderColor="#f00"
+                    }else{
+						foutmeldingspan.innerText="";
+						img.parentElement.style.borderColor="";
+
 					// hier alles ok stuur de gegevens
 					/*/--------------------------------------------------------------------------------------------------
 					let user = {
@@ -103,32 +130,7 @@ document.getElementById("submit").onclick=function(){
 						lovecoins: "3"
 					}
 										
-					//Update img url to img tag.
-					var testing;
-					function readURL(input) {
-						let self = this;
-						if (input.files && input.files[0]) {
-							var reader = new FileReader();
 					
-							reader.onload = function (e) {
-								document.getElementById("fotoToDiv").src = e.target.result;
-								self.imageData = e.target.result;
-							   var testing = FileReader.result;
-							   console.log(testing);
-							}
-						//	let test = reader.readAsDataURL(file);
-					//      console.log(test);
-							reader.readAsDataURL(input.files[0]);
-							
-						}
-					
-					}
-					 
-					document.getElementById("fotoSrc").onchange = function() {
-					   readURL(this);
-					   var tst = document.getElementById("fotoToDiv").src;
-						console.log(tst);
-					};
 					
 					
 					//handleForm
@@ -191,6 +193,7 @@ document.getElementById("submit").onclick=function(){
 
 					//--------------------------------------------------------------------------------------------------	
 				*/	
+			    	}
 				}
 
 			}

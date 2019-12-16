@@ -115,7 +115,7 @@ window.onload = function() {
 
   fetch(request)
       .then(function (resp) { return resp.json(); })
-      .then(function (data) { const tmpID = data.ID;
+      .then(function (data) { tmpID = data.ID;
           console.log(data.ID);
           if (data.message == 'Authorized') {
               console.log("Reactie van backend API : Correcte gegevens");                      
