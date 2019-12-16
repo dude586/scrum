@@ -15,9 +15,34 @@ function toonDIV(divid) {
 
 
 }
+let menuDIVid = ["ingelogdmenu","nietingelogdmenu"];
+
+
+function toonmenuDIV(divid) {
+for (let teller = 0; teller < menuDIVid.length; teller++) {
+    const elemDividtmp = document.getElementById(menuDIVid[teller]);
+    console.log(menuDIVid[teller]);
+    elemDividtmp.style.display = "none";
+}
+if (divid !== "none") {
+    const elemDivid = document.getElementById(divid);
+    elemDivid.style.display = "block";
+}
+
+}
+
+let userID ="";
 
 
 
+
+//David domain 
+//---------------------------------------------------------------------------------------------------------------------
+document.getElementById('mijnprofiel').addEventListener('click', function (e)
+  {toonDIV("profiel");
+
+  })
+//---------------------------------------------------------------------------------------------------------------------
 //Cicylo domain 
 //---------------------------------------------------------------------------------------------------------------------
 
@@ -29,8 +54,11 @@ function toonDIV(divid) {
 
 window.onload = function () {
     toonDIV("login");
-    console.log("testdiv");
+
+    toonmenuDIV("nietingelogdmenu");
+    
     document.getElementById('btnlogin').addEventListener('click', function (e) {
+        toonmenuDIV("ingelogdmenu");
         console.log('Je hebt op de Login-knop geklikt');
         let nickname = document.getElementById('inputNick').value;
         let wachtwoord = document.getElementById('inputPassword').value;
@@ -70,6 +98,7 @@ window.onload = function () {
             .then(function (resp) { return resp.json(); })
             .then(function (data) {
                 tmpID = data.id;
+                userID=tmpID;
                 console.log(data.id);
                 if (data.message == 'Authorized') {
                     console.log("Reactie van backend API : Correcte gegevens");
@@ -112,7 +141,7 @@ window.onload = function () {
                             document.getElementById('detailHaarkleur').value = profielData.haarkleur;
                             document.getElementById('detailBeroep').value = profielData.beroep;
                             document.getElementById('detailEmail').value = profielData.email;
-                            document.getElementById('detailLovecoins').value = profielData.lovecoins;
+                           // document.getElementById('detailLovecoins').value = profielData.lovecoins;
                             document.getElementById('detailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
                             document.getElementById('detailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
                             document.getElementById('profielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
@@ -133,7 +162,7 @@ window.onload = function () {
                         profielData.haarkleur = document.getElementById('detailHaarkleur').value;
                         profielData.beroep = document.getElementById('detailBeroep').value;
                         profielData.email = document.getElementById('detailEmail').value;
-                        profielData.lovecoins = document.getElementById('detailLovecoins').value;
+                       // profielData.lovecoins = document.getElementById('detailLovecoins').value;
 
                         var request = new Request(urlUpdate, {
                             method: 'PUT',
@@ -145,7 +174,7 @@ window.onload = function () {
 
                         fetch(request)
                             .then(function (resp) { return resp.json(); })
-                            .then(function (data) { console.log(data); })
+                            .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
                             .catch(function (error) { console.log(error); });
 
                     });
@@ -421,8 +450,14 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     emailcell.innerText = tmp.email;
                     // sterrenbeeldcell.innerText=sterrenBeeldNaarJpeg(tmp.geboortedatum);
                     const datumDatumformaat = new Date(tmp.geboortedatum);
-                    sterrenbeeldcell.innerText = sterrenBeeldNaarJpeg(datumDatumformaat);
-
+                    // sterrenbeeldcell.innerText = sterrenBeeldNaarJpeg(datumDatumformaat);
+                    
+                    sterrenbeeldcell.innerHTML =sterrenBeeldNaarJpeg(datumDatumformaat);
+                    let img = document.createElement('img');
+                    img.width=50;
+                    // img.className("smallogo-img");
+                    img.src="img/"+sterrenBeeldNaarJpeg(datumDatumformaat)+".png";
+                    sterrenbeeldcell.appendChild(img);
 
                     // leeftijdcell=toString(getAge("1994-06-14"));
 
