@@ -42,12 +42,7 @@ form #formfoot{
     overflow: auto;
 }
 
-/*valideren*/
-
-.fout{
-  border-color: red;
-  color:red;
-} 
+/*valideren*/ 
 #foutmeldingspan{
     display: inline-block;
     padding-left: 15px;
