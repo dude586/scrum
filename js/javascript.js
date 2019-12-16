@@ -323,7 +323,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
     toonDIV("zoek");
     const deKnop = document.getElementById("verstuur");
     deKnop.onclick = function () {
-        
+
 
 
         toonDIV("zoekresults");
@@ -419,7 +419,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 
                 let teller = 0;
-
+                
                 const zoektabelid = document.getElementById("uitvoerzoektabel");
                 let url = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?" + zoekurl;
                 console.log(url);
@@ -427,48 +427,54 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                 fetch(url)
                     .then(function (resp) { return resp.json(); })
                     .then(function (data) {
-                        for (const tmp of data) {
-                            teller = teller + 1;
-                            if (teller > 20) { break; }
+                        console.log(data);
+                        if (data.message === "Geen profielen gevonden.") {
+                            toonDIV("zoek");
+                            alert('geen overeenkomsten gevonden');
+                        } else {
+                            for (const tmp of data) {
+                                teller = teller + 1;
+                                if (teller > 20) { break; }
 
 
-                            const tr = zoektabelid.insertRow();
-                            const nicknamecell = tr.insertCell();
-                            const voornaamcell = tr.insertCell();
-                            const familienaamcell = tr.insertCell();
-                            const geslachtcell = tr.insertCell();
-                            const leeftijdcell = tr.insertCell();
-                            const emailcell = tr.insertCell();
-                            const sterrenbeeldcell = tr.insertCell();
-
-
-
-
-                            const leeftijd = Math.floor((new Date() - new Date(tmp.geboortedatum).getTime()) / 3.15576e+10);
-
-                            console.log(tmp);
-
-                            voornaamcell.innerText = tmp.voornaam;
-                            familienaamcell.innerText = tmp.familienaam;
-                            leeftijdcell.innerText = leeftijd;
-                            geslachtcell.innerText = tmp.sexe;
-                            nicknamecell.innerText = tmp.nickname;
-                            emailcell.innerText = tmp.email;
-                            // sterrenbeeldcell.innerText=sterrenBeeldNaarJpeg(tmp.geboortedatum);
-                            const datumDatumformaat = new Date(tmp.geboortedatum);
-                            // sterrenbeeldcell.innerText = sterrenBeeldNaarJpeg(datumDatumformaat);
-
-                            sterrenbeeldcell.innerHTML = sterrenBeeldNaarJpeg(datumDatumformaat);
-                            let img = document.createElement('img');
-                            img.width = 50;
-                            // img.className("smallogo-img");
-                            img.src = "img/" + sterrenBeeldNaarJpeg(datumDatumformaat) + ".png";
-                            sterrenbeeldcell.appendChild(img);
-
-                            // leeftijdcell=toString(getAge("1994-06-14"));
+                                const tr = zoektabelid.insertRow();
+                                const nicknamecell = tr.insertCell();
+                                const voornaamcell = tr.insertCell();
+                                const familienaamcell = tr.insertCell();
+                                const geslachtcell = tr.insertCell();
+                                const leeftijdcell = tr.insertCell();
+                                const emailcell = tr.insertCell();
+                                const sterrenbeeldcell = tr.insertCell();
 
 
 
+
+                                const leeftijd = Math.floor((new Date() - new Date(tmp.geboortedatum).getTime()) / 3.15576e+10);
+
+                                console.log(tmp);
+
+                                voornaamcell.innerText = tmp.voornaam;
+                                familienaamcell.innerText = tmp.familienaam;
+                                leeftijdcell.innerText = leeftijd;
+                                geslachtcell.innerText = tmp.sexe;
+                                nicknamecell.innerText = tmp.nickname;
+                                emailcell.innerText = tmp.email;
+                                // sterrenbeeldcell.innerText=sterrenBeeldNaarJpeg(tmp.geboortedatum);
+                                const datumDatumformaat = new Date(tmp.geboortedatum);
+                                // sterrenbeeldcell.innerText = sterrenBeeldNaarJpeg(datumDatumformaat);
+
+                                sterrenbeeldcell.innerHTML = sterrenBeeldNaarJpeg(datumDatumformaat);
+                                let img = document.createElement('img');
+                                img.width = 50;
+                                // img.className("smallogo-img");
+                                img.src = "img/" + sterrenBeeldNaarJpeg(datumDatumformaat) + ".png";
+                                sterrenbeeldcell.appendChild(img);
+
+                                // leeftijdcell=toString(getAge("1994-06-14"));
+
+
+
+                            }
                         }
 
 
