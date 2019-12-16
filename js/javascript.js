@@ -403,8 +403,11 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                 }
                 date2 = yyyy2 + '-' + mm2 + '-' + dd2;
 
-                if (IDminLeeftijd !== "") { zoekurl = zoekurl + "geboortedatumOperator=range&rangeMinGeboortedatum=" + date2 + '&'; }
-                if (IDmaxLeeftijd !== "") { zoekurl = zoekurl + "rangeMaxGeboortedatum=" + date + '&'; }
+                //url += '?geboortedatumOperator=range&rangeMinGeboortedatum=' + rangeMinGeboortedatum + '&rangeMaxGeboortedatum=' + rangeMaxGeboortedatum;
+
+
+                if (IDminLeeftijd !== "") { zoekurl = zoekurl + "geboortedatumOperator=range&rangeMinGeboortedatum=" + date + '&'; }
+                if (IDmaxLeeftijd !== "") { zoekurl = zoekurl + "rangeMaxGeboortedatum=" + date2 + '&'; }
 
                 if (IDminGr !== "") { zoekurl = zoekurl + "grootteOperator=range&rangeMinGrootte=" + IDminGr + '&'; }
                 if (IDmaxGr !== "") { zoekurl = zoekurl + "rangeMaxGrootte=" + IDmaxGr + '&'; }
