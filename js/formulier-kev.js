@@ -41,12 +41,10 @@ async function mainFunction() {
 	user.grootte = input['grootte'].value;
 	user.nickname = input['nickname'].value;
 	user.wachtwoord = input['wachtwoord'].value;
+	await uploadPicture(document.getElementById("fotoToDiv").src);  
 
-	if (validateForm() === false) {
-		console.log("false validateForm");
-		console.log(user);
-		
-	} else {
+	if (validateForm()) {
+
 	console.log("it has been sended");
 	console.log(user);
 	//Check user object
@@ -66,10 +64,13 @@ async function mainFunction() {
                     .then( function (resp)  { return resp.json(); })
                     .then( function (user)  { console.log(user);  })
                     .catch(function (error) { console.log(error); });
-    
-      uploadPicture(document.getElementById("fotoToDiv").src);              
-    
-    //end else
+				
+	} else { 
+
+		console.log("false validateForm");
+		console.log(user);
+
+
     };  
               
 //end mainFunction
@@ -100,7 +101,9 @@ async function mainFunction() {
                     console.log('• Foto inladen in IMG');
                     console.log('==> OK');
                     console.log('==> Klaar');
-                    console.log(data.fileURL);                   
+                    let test = data.fileURL;
+                    user.foto = test;
+                    console.log(test);                   
                     //user.foto = data.fileURL;
                     //user.foto = input_string.replace(.*(_),'');
                 })
@@ -126,8 +129,6 @@ async function mainFunction() {
   let inputs = document.getElementsByTagName("input");
   for (var i = 0; i < 12; i++) {
   	if (inputs[i].value == "") {
-  		let test = inputs[0].value;
-  		console.log(test);
  		inputs[i].focus();
     	return false;
   	}
@@ -151,8 +152,7 @@ function readURL(input) {
         var reader = new FileReader();
         reader.onload = function (e) {
             document.getElementById("fotoToDiv").src = e.target.result;
-            user.foto = "foto.jpg"
-            console.log(document.getElementById("fotoToDiv").src);
+            user.foto = input.name;
         }
         reader.readAsDataURL(input.files[0]);      
     }
