@@ -470,6 +470,18 @@ document.getElementById('zoekformulier').addEventListener('click', function ()
             select2.appendChild(option2);
         }
 
+        const selectSexe = document.getElementById("geslacht");
+        let arraySexe = [];
+        for(const elSexe of data){
+            let optionSexe = elSexe.sexe;
+            arraySexe.push(optionSexe);
+        }
+        //Unieke idexen removen
+        let unique3 = [...new Set(arraySexe)];
+        for (const el3 of unique3) {
+            let option3 = new Option(el3);
+            selectSexe.appendChild(option3);
+        }
     }
 
 
