@@ -375,8 +375,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                  date2 = yyyy2+'-'+mm2+'-'+dd2;
                 
                 if (IDminLeeftijd !== "") { zoekurl = zoekurl + "geboortedatumOperator=range&rangeMinGeboortedatum=" + date2 + '&'; }
-                if (IDmaxLeeftijd !== "") { zoekurl = zoekurl + "rangeMaxGeboortedatum=" + date+ '&'; }
-               
+                if (IDmaxLeeftijd !== "") { zoekurl = zoekurl + "rangeMaxGeboortedatum=" + date + '&'; }
                 if (IDminGr !== "") { zoekurl = zoekurl + "grootteOperator=range&rangeMinGrootte=" + IDminGr + '&'; }
                 if (IDmaxGr !== "") { zoekurl = zoekurl + "rangeMaxGrootte=" + IDmaxGr + '&'; }
                 if (IDKleurHaar !== "") { zoekurl = zoekurl + "haarkleur=" + IDKleurHaar + '&'; }
