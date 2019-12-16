@@ -174,7 +174,7 @@ window.onload = function () {
 
                         fetch(request)
                             .then(function (resp) { return resp.json(); })
-                            .then(function (data) { console.log(data); })
+                            .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
                             .catch(function (error) { console.log(error); });
 
                     });
