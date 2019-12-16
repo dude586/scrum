@@ -70,7 +70,7 @@ zoek.addEventListener("click", () => {
 
     let rangeMinGeboortedatum = document.getElementById('min').value;
     let rangeMaxGeboortedatum = document.getElementById('max').value;
-
+    
 
     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/search.php'
     url += '?geboortedatumOperator=range&rangeMinGeboortedatum=' + rangeMinGeboortedatum + '&rangeMaxGeboortedatum=' + rangeMaxGeboortedatum;
