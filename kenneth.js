@@ -1,10 +1,12 @@
+// AFBEELDING UPLOADEN op server:
 let naam;
 let afbeelding;
 let dataAfbeelding;
+let img = document.querySelector('img');
 
 document.querySelector('input[type="file"]').addEventListener('change', function () {
     if (this.files && this.files[0]) {
-        let img = document.querySelector('img');
+
         const file = this.files[0];
         console.log(file);
         naam = file.name;
@@ -35,22 +37,52 @@ document.querySelector('input[type="file"]').addEventListener('change', function
                 })
             });
 
-            postImageToApi(request);
+            postImageToApi(request)
         });
     }
 
 });
 
-function postImageToApi(request){
+function postImageToApi(request) {
     fetch(request)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-        console.log(data);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
+
+            console.log(data.fileName);
+            console.log(data.fileURL);
+
+            img.src = data.fileURL;
+
+            console.log(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
+
+// ZOEKEN OP RANGE (Geboortedatum): 
+const zoek = document.getElementById("zoek");
+
+zoek.addEventListener("click", () => {
+
+    let rangeMinGeboortedatum = document.getElementById('min').value;
+    let rangeMaxGeboortedatum = document.getElementById('max').value;
+    
+
+    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/search.php'
+    url += '?geboortedatumOperator=range&rangeMinGeboortedatum=' + rangeMinGeboortedatum + '&rangeMaxGeboortedatum=' + rangeMaxGeboortedatum;
+
+    fetch(url)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});

@@ -33,7 +33,7 @@ const jaar = nu.getFullYear()-18;
 document.getElementById("geboortedatum").max=`${jaar}-${maand2}-${dag2}`;
 
 //verzenden button onclick
-document.getElementById("submit").onclick=function(){
+document.getElementById("button").onclick=function(){
 	
 	//valideren
 	const foutmeldingspan=document.getElementById("foutmeldingspan");
