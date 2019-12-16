@@ -1,9 +1,10 @@
 
-        window.onload = function () {
-       
+    
+         window.onload = function () {
+
             document.getElementById('btnlogin').addEventListener('click', function (e) {
                 console.log('Je hebt op de Login-knop geklikt');
-                let nickname = document.getElementById('inputEmail').value;
+                let nickname = document.getElementById('inputNick').value;
                 let wachtwoord = document.getElementById('inputPassword').value;
 
                 console.log('nickname = ' + nickname);
@@ -13,16 +14,16 @@
                 
                 console.log('Backend API url = ' + url);
 
-                let Data = {
+                let data = {
                     nickname: nickname,
                     wachtwoord: wachtwoord
                 }
                 console.log('Deze data wordt verstuurd : ');
-                console.log(Data);
+                console.log(data);
 
                 var request = new Request(url, {
                     method: 'POST',
-                    body: JSON.stringify(Data),
+                    body: JSON.stringify(data),
                     headers: new Headers({
                         'Content-Type': 'application/json'
                     })
@@ -30,21 +31,33 @@
                 
                 console.log('Deze request wordt verstuurd : ');
                 console.log(request);
+let id;
 
-                     let ID = "";  
                 fetch(request)
                     .then(function (resp) { return resp.json(); })
-                    .then(function (data) { ID = data.ID;
-                        if (data.message == 'Authorized') {
+                    .then(function (Data) {id = Data.id;
+                        if (Data.message == 'Authorized') {
+                        
                             console.log("Reactie van backend API : Correcte gegevens");                      
-                            window.location.href = "userDetail.html";
+                            alert("JAAAA");
                         } else {
                             console.log("Reactie van backend API : Verkeerde gegevens");        
                         }
                     })
                     .catch(function (error) { console.log(error); });
-            });
-    //
+                    console.log(id);
+            
+                });
+console.log(id);
+        };
+
+
+
+
+
+
+        function test(){
+            console.log(id);
+
 
         };
-    
