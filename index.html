@@ -1,177 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="css/css.css">
 
-    <script type="text/javascript" src="js/javascript.js" defer></script>
-    <title>Document</title>
+	<script type="text/javascript" src="js/javascript.js" defer></script>
+	<title>Document</title>
 </head>
+
 <body>
-    <head>
-    	<div id="cover">
-    	<div class="text-center"><img id="logo-img" src="assets/images/logo.png"></div>
+
+	<head>
+		<div id="cover">
+			<div class="text-center"><img id="logo-img" src="assets/images/logo.png"></div>
 		</div>
-    </head>
-    <main class="m-5 high">
-	    <div class="row">
-	    	<div class="col-3 orange-color border">
-	    		<ul>
-	    			<li>
-	   				Login
-	    			</li>
-	    			<li>
-	    			blblblb.	
-	    			</li>
-				</ul>
-				<button type="submit" id="zoekformulier" class="btn btn-primary">test1</button>
-	    	</div>
-	    	<div id="login" class="col-9 orange-color">
-	    		<div class="d-flex align-items-center justify-content-center">
-	    		
-						<form class="border p-3">
-				 			<div class="form-group">
-						    	<label for="nickname">Nickname</label>
-						    	<input type="email" class="form-control" id="inputNick" placeholder="Nickname" required>
-				  			</div>
-				  			<div class="form-group">
-				  				<label for="inputPassword">Wachtwoord</label>
-				  				<input type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord" required>
-				  			</div>
-				  			<button type="submit" id="btnlogin" class="btn btn-primary">Registreren</button>
-						</form>
-	    		</div>
-	    	</div>
-	    	<div id="profiel" class="col-9 orange-color">
-	    		<div class="d-flex align-items-center justify-content-center">
-						<div class="container contact-form">
-								<div class="contact-image">
-									<img src="assets/images/logo.png"  />
-								</div>
-								<form>
-									<h3><span id="profielVan">Details van </span></h3>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label for="detailNick">Nickname : </label> <input type="text" class="form-control" id="detailNick"
-													value="nog niet ontvangen">
-											</div>
-											<div class="form-group">
-												<label for="detailFnaam">Familienaam : </label> <input type="text" class="form-control" id="detailFnaam"
-													value="nog niet ontvangen">
-											</div>
-											<div class="form-group">
-												<label for="detailVnaam">Voornaam : </label> <input type="text" class="form-control" id="detailVnaam"
-													value="nog niet ontvangen">
-											</div>
-											<div class="form-group">
-												<label for="detailGeboortedatum">Geboortedatum : </label> <input type="text" class="form-control"
-													id="detailGeboortedatum" value="nog niet ontvangen">
-											</div>
-											<div class="form-group">
-												<label for="detailHaarkleur">Haarkleur : </label> <input type="text" class="form-control" id="detailHaarkleur"
-													value="nog niet ontvangen">
-											</div>
-											<div class="form-group">
-												<label for="detailBeroep">Beroep : </label> <input type="text" class="form-control" id="detailBeroep"
-													value="nog niet ontvangen">
-											</div>
-											<div class="form-group">
-												<label for="detailEmail">Email : </label> <input type="text" class="form-control" id="detailEmail"
-													value="nog niet ontvangen">
-											</div>
-											
-											<div class="form-group">
-												<label for="detailLovecoins">Lovecoins : </label> <input type="text" class="form-control" id="detailLovecoins"
-													value="nog niet ontvangen">
-											</div>
-						
-						
-											<div class="form-group">
-												<input type="submit" name="btnSubmit"  id="btnSubmit" class="btnContact" value="Update" onclick="return false;" />
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<img id="detailFoto" src="https://scrumserver.tenobe.org/scrum/img/no_image.png" alt="profielfoto"
-													class="profielfoto">
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<img id="Sterrenbeeldimg" src="">
-												<label id="SterrenbeeldLabel"></label>
-											</div>
-										</div>
-									</div>
-								</form>
-							</div>
-	    		</div>
-	    	</div>
-	    	<div id="zoek" class="col-9 orange-color">
-	    		<div class="d-flex align-items-center justify-content-center">
-						<form name="frmFilter" method="">
-								
-											<h1>Filter uw zoekopdracht</h1>
-										
-									
-											<label for="MinGrootte" class="">Grootte van: </label>
-											<input type="number" id="minGrootte" class="" />
-										
-											<label for="MaxGrootte"> tot: </label>
-											<input type="number" id="maxGrootte" class="" />
-										
-										<br /><br>
-									
-											<label for="minLeeftijd">Leeftijd van: </label>
-											<input type="number" name="" id="minLeeftijd" />
-									
-											<label for="maxLeeftijd"> tot: </label>
-											<input type="number" name="" id="maxLeeftijd" />
-										
-									<br /><br>
-									
-											<label for="kleurOgen">Kleur ogen</label>
-											<select id="kleurOgen">
-												<option value="">Kies een kleur</option>
-												
-											</select>
-									
-											<label for="kleurHaar">Kleur haar</label>
-											<select id="kleurHaar">
-													<option value="">Kies een kleur</option> 
-											</select>
-										
-											<label for="geslacht">Geslacht</label>
-											<select id="geslacht">
-												<option value="">Kies geslacht</option>
-												<option value="man">Man</option>
-												<option value="vrouw">Vrouw</option>
-											</select>
-										
-									<br>
-									
-											<button id="verstuur">Verstuur</button>
-										
-							</form>
-	    		</div>
-	    	</div>
-	    	<div id="zoekresults" class="col-9 orange-color">
-	    		<div class="d-flex align-items-center justify-content-center">
-						<table id="uitvoerzoektabel">
-								<tbody>
-					  
-								</tbody>
-							  </table>
-	    		</div>
+	</head>
+	<main class="m-5 high">
+		<div class="row">
+			<div class="col-3 orange-color border">
+				<div id="ingelogdmenu">
+				  <button type="button" id="zoekformulier" class="btn btn-primary">Zoek</button><br>
+				  <button type="button" id="mijnprofiel" class="btn btn-primary">Mijn Profiel</button>
+				</div>
+				<div id="nietingelogdmenu">
+					<button type="button" id="menulogin" class="btn btn-primary">Login</button><br>
+					<button type="button" id="menuregistreer" class="btn btn-primary">Registreer</button><br>
+					<button type="button" id="menulucky" class="btn btn-primary">I feel lucky!</button>
+				</div>
 			</div>
 
+
+			<!-- Login DIV -->
+			<div id="login" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+
+					<form class="border p-3">
+						<div class="form-group">
+							<label for="nickname">Nickname</label>
+							<input type="text" class="form-control" id="inputNick" placeholder="Nickname">
+						</div>
+						<div class="form-group">
+							<label for="inputPassword">Wachtwoord</label>
+							<input type="password" class="form-control" id="inputPassword" placeholder="Wachtwoord"
+								required>
+						</div>
+						<button type="button" id="btnlogin" class="btn btn-primary">Registreren</button>
+					</form>
+				</div>
+			</div>
+
+
+
+
+			<!-- Nieuwe Gebruiker -->
+
+			<div id="nieuwegebruiker" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+				</div>
+			</div>
+
+			<!-- Nieuwe Gebruiker end -->
+
+			<!-- Profiel -->
+
+			<div id="profiel" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+					<div class="container contact-form">
+						<div class="contact-image">
+							<img src="assets/images/logo.png" />
+						</div>
+						<form>
+							<h3><span id="profielVan">Details van </span></h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="detailNick">Nickname : </label> <input type="text"
+											class="form-control" id="detailNick" value="nog niet ontvangen">
+									</div>
+									<div class="form-group">
+										<label for="detailFnaam">Familienaam : </label> <input type="text"
+											class="form-control" id="detailFnaam" value="nog niet ontvangen">
+									</div>
+									<div class="form-group">
+										<label for="detailVnaam">Voornaam : </label> <input type="text"
+											class="form-control" id="detailVnaam" value="nog niet ontvangen">
+									</div>
+									<div class="form-group">
+										<label for="detailGeboortedatum">Geboortedatum : </label> <input type="text"
+											class="form-control" id="detailGeboortedatum" value="nog niet ontvangen">
+									</div>
+									<div class="form-group">
+										<label for="detailHaarkleur">Haarkleur : </label> <input type="text"
+											class="form-control" id="detailHaarkleur" value="nog niet ontvangen">
+									</div>
+									<div class="form-group">
+										<label for="detailBeroep">Beroep : </label> <input type="text"
+											class="form-control" id="detailBeroep" value="nog niet ontvangen">
+									</div>
+									<div class="form-group">
+										<label for="detailEmail">Email : </label> <input type="text"
+											class="form-control" id="detailEmail" value="nog niet ontvangen">
+									</div>
+
+									
+
+
+									<div class="form-group">
+										<input type="submit" name="btnSubmit" id="btnSubmit" class="btnContact"
+											value="Update" onclick="return false;" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<img id="detailFoto" src="https://scrumserver.tenobe.org/scrum/img/no_image.png"
+											alt="profielfoto" class="profielfoto">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<img id="Sterrenbeeldimg" src="">
+										<label id="SterrenbeeldLabel"></label>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Profiel END -->
+
+			<!-- Zoekfunctie -->
+
+			<div id="zoek" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+					<form class="p-5" name="frmFilter" method="">
+
+						<h1>Filter uw zoekopdracht</h1>
+
+						<div class="form-group">
+							<label for="MinGrootte" class="">Grootte van:(in cm) </label>
+							<input type="number" id="minGrootte" class="" />
+						</div>
+
+						<div class="form-group">
+							<label for="MaxGrootte"> tot:(in cm) </label>
+							<input type="number" id="maxGrootte" class="" />
+						</div>
+						
+
+
+						<div class="form-group">
+							<label for="minLeeftijd">Leeftijd van: </label>
+							<input type="number" name="" id="minLeeftijd" />
+						</div>
+
+						<div class="form-group">
+							<label for="maxLeeftijd"> tot: </label>
+							<input type="number" name="" id="maxLeeftijd" />
+						</div>
+						
+
+
+						<div class="form-group">
+							<label for="kleurOgen">Kleur ogen</label>
+							<select id="kleurOgen">
+								<option value="">Kies een kleur</option>
+
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="kleurHaar">Kleur haar</label>
+							<select id="kleurHaar">
+								<option value="">Kies een kleur</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="geslacht">Geslacht</label>
+							<select id="geslacht">
+								<option value="">Kies geslacht</option>
+								
+							</select>
+							<button type="button" id="verstuur">Verstuur</button>
+						</div>
+					
+
+						
+						
+					</form>
+					
+					
+				</div>
+			</div>
+
+			<!-- Zoekfunctie end  -->
+
+
+			<!-- Zoekresultaten -->
+
+			<div id="zoekresults" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+					<table id="uitvoerzoektabel">
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- Zoekresultaten end  -->
+
+			<!-- Toonprofiel -->
+			<div id="toonprofiel" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+					<div class="container contact-form">
+						<div class="contact-image">
+							<img src="assets/images/logo.png" />
+						</div>
+						<form>
+							<h3><span id="profielVan">Details van </span></h3>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="toondetailNick">Nickname : </label> <input type="text"
+											class="form-control" id="toondetailNick" value="nog niet ontvangen" readonly>
+									</div>
+									<div class="form-group">
+										<label for="toondetailFnaam">Familienaam : </label> <input type="text"
+											class="form-control" id="toondetailFnaam" value="nog niet ontvangen" readonly>
+									</div>
+									<div class="form-group">
+										<label for="toondetailVnaam">Voornaam : </label> <input type="text"
+											class="form-control" id="toondetailVnaam" value="nog niet ontvangen" readonly>
+									</div>
+									<div class="form-group">
+										<label for="toondetailGeboortedatum">Geboortedatum : </label> <input type="text"
+											class="form-control" id="toondetailGeboortedatum" value="nog niet ontvangen" readonly>
+									</div>
+									<div class="form-group">
+										<label for="toondetailHaarkleur">Haarkleur : </label> <input type="text"
+											class="form-control" id="toondetailHaarkleur" value="nog niet ontvangen" readonly>
+									</div>
+									<div class="form-group">
+										<label for="toondetailBeroep">Beroep : </label> <input type="text"
+											class="form-control" id="toondetailBeroep" value="nog niet ontvangen" readonly>
+									</div>
+									<div class="form-group">
+										<label for="toondetailEmail">Email : </label> <input type="text"
+											class="form-control" id="toondetailEmail" value="nog niet ontvangen" readonly>
+									</div>
+
+									
+
+
+									
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<img id="detailFoto" src="https://scrumserver.tenobe.org/scrum/img/no_image.png"
+											alt="profielfoto" class="profielfoto">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<img id="Sterrenbeeldimg" src="">
+										<label id="SterrenbeeldLabel"></label>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Einde Toonprofiel-->
+			
 		</div>
-		
-    </main>
+
+	</main>
 </body>
+
 </html>
