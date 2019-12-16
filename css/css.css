@@ -27,6 +27,7 @@ form #submit{
     width: 100px;
     height: 40px; 
     display: block; 
+    float: left;
 }
 form div{
     padding: 8px 0;
@@ -37,13 +38,23 @@ form div#kader{
     height: 150px;
     border:1px solid gray;
 }
+form #formfoot{
+    overflow: auto;
+}
 
 /*valideren*/
 
 .fout{
   border-color: red;
   color:red;
-}    
+} 
+#foutmeldingspan{
+    display: inline-block;
+    padding-left: 15px;
+    margin-top:10px;
+    color:red;
+    font-size:large;
+}   
 
 
 
@@ -71,3 +82,7 @@ input[type="file"] {
 	margin-top: 10px;
 }
 
+input[type=file]{ 
+    color:transparent;
+   
+}
