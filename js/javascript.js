@@ -312,6 +312,7 @@ window.onload = function () {
                     toonDIV("profiel");
                     let profielData;
                     let profielNickData;
+                    let profielDateData;
                     console.log("id " + tmpID);
                     superuserid = tmpID;
 
@@ -337,6 +338,7 @@ window.onload = function () {
                             document.getElementById('detailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
                             document.getElementById('profielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
                             profielNickData = profielData.nickname;
+                            profielDateData = profielData.geboortedatum
                             console.log("TESTING");
                             GetSterrenbeeld(profielData.geboortedatum);
                         })
