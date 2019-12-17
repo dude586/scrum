@@ -26,52 +26,6 @@ function toonDIV(divid) {
 }
 
 
-//Checkt of er een verbinding is
-
-function checkVerbinding()
-{  
-   // let ok = true;
-    const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-let url = rooturl + '/profiel/read.php';
-
-fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-       
-
-    })
-    .catch(function (error) {
-       toonDIV("techprobleemdatabank");
-       ok=false;
-       throw new Error('Error in the Database');
-    });
-    
-}
-
-function booleanCheckVerbinding()
-{  
-   let ok = true;
-    const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-let url = rooturl + '/profiel/read.php';
-
-fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-       
-
-    })
-    .catch(function (error) {
-       toonDIV("techprobleemdatabank");
-       ok=false;
-       
-    });
-    return ok;  
-}
-
 let menuDIVid = ["ingelogdmenu", "nietingelogdmenu"];
 
 //Toont het juiste linkermenu
@@ -113,7 +67,10 @@ document.location.reload(true);
 document.getElementById('mijnprofiel').addEventListener('click', function (e) {
     toonDIV("profiel");
 
-  })
+})
+
+document.getElementById('menulucky').addEventListener('click', function (e) {
+    let profielId = Math.floor(Math.random() * 7) + 1;})
 
   document.getElementById('menulucky').addEventListener('click', function (e)
   {let randomID = Math.floor(Math.random() * 5000)+1;
@@ -123,17 +80,15 @@ document.getElementById('mijnprofiel').addEventListener('click', function (e) {
     console.log(randomID);
     console.log(idTekst);
 
-  })
+})
 
-  document.getElementById('menulogin').addEventListener('click', function (e)
-  {toonDIV("login");
+document.getElementById('menulogin').addEventListener('click', function (e) {
+    toonDIV("login");
 
-  })
+})
 
-function toonprofiel(profielid)
-{toonDIV("toonprofiel");
-    
-    
+function toonprofiel(profielid) {
+    toonDIV("toonprofiel");
 
 
 
@@ -144,38 +99,40 @@ function toonprofiel(profielid)
 
 
 
-            let profielData;
+
+
+    let profielData;
+
+    profielid = "8";
 
            
 
-            //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
+    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
+    console.log(url);
 
-            let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
-            console.log(url);   
+    fetch(url)
+        .then(function (resp) { return resp.json(); })
+        .then(function (data) {
 
-            fetch(url)
-                .then(function (resp) { return resp.json(); })
-                .then(function (data) {
+            profielData = data;
 
-                    profielData = data;
-                    
 
-                    document.getElementById('toondetailNick').value = profielData.nickname;
-                    document.getElementById('toondetailFnaam').value = profielData.familienaam;
-                    document.getElementById('toondetailVnaam').value = profielData.voornaam;
-                    document.getElementById('toondetailGeboortedatum').value = profielData.geboortedatum;
-                    document.getElementById('toondetailHaarkleur').value = profielData.haarkleur;
-                    document.getElementById('toondetailBeroep').value = profielData.beroep;
-                    document.getElementById('toondetailEmail').value = profielData.email;
-                   // document.getElementById('detailLovecoins').value = profielData.lovecoins;
-                    document.getElementById('toondetailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
-                    document.getElementById('toondetailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
-                    document.getElementById('toonprofielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
+            document.getElementById('toondetailNick').value = profielData.nickname;
+            document.getElementById('toondetailFnaam').value = profielData.familienaam;
+            document.getElementById('toondetailVnaam').value = profielData.voornaam;
+            document.getElementById('toondetailGeboortedatum').value = profielData.geboortedatum;
+            document.getElementById('toondetailHaarkleur').value = profielData.haarkleur;
+            document.getElementById('toondetailBeroep').value = profielData.beroep;
+            document.getElementById('toondetailEmail').value = profielData.email;
+            // document.getElementById('detailLovecoins').value = profielData.lovecoins;
+            document.getElementById('toondetailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
+            document.getElementById('toondetailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
+            document.getElementById('toonprofielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
 
-                    console.log("TESTING");
-                    GetSterrenbeeld(profielData.geboortedatum);
-                })
-                .catch(function (error) { console.log(error); });
+            console.log("TESTING");
+            GetSterrenbeeld(profielData.geboortedatum);
+        })
+        .catch(function (error) { console.log(error); });
 
                 function GetSterrenbeeld(PersoonObj) {
                     console.log("test");
@@ -242,8 +199,6 @@ function toonprofiel(profielid)
 
 
 window.onload = function () {
-
-    
     toonDIV("login");
 
     toonmenuDIV("nietingelogdmenu");
@@ -284,7 +239,7 @@ window.onload = function () {
         //  let ID = "";  
         let tmpID = "";
 
-        checkVerbinding();
+
         fetch(request)
             .then(function (resp) { return resp.json(); })
             .then(function (data) {
@@ -294,12 +249,31 @@ window.onload = function () {
                 if (data.message == 'Authorized') {
                     console.log("Reactie van backend API : Correcte gegevens");
                     toonDIV("profiel");
+
+
+
+
+
+
+                    // toont profiel, html wordt dan aangepast
+
+
+
+
+
+
+
+
+
+
                     let profielData;
 
                     console.log("id " + tmpID);
 
+                    //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
+
                     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + tmpID;
-                    
+
                     fetch(url)
                         .then(function (resp) { return resp.json(); })
                         .then(function (data) {
@@ -349,12 +323,7 @@ window.onload = function () {
                             .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
                             .catch(function (error) { console.log(error); });
 
-                    
-                    
-
                     });
-                
-                
 
                     // scope test later
                     //
