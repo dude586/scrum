@@ -1,4 +1,5 @@
 "use strict"
+// Globale Scope variabelen
 let alleDivid = ["login",
                  "profiel", 
                  "zoek",
@@ -10,8 +11,10 @@ let alleDivid = ["login",
                    "registreernieuwegebruiker",
                    "loginerrormessage"];
 
-// Toont de juiste div in de stagin area
 let superuserid="";
+
+// Toont de juiste div in de stagin area
+
 function toonDIV(divid) {
     for (let teller = 0; teller < alleDivid.length; teller++) {
         const elemDividtmp = document.getElementById(alleDivid[teller]);
@@ -148,19 +151,7 @@ function toonprofiel(profielid) {
     toonDIV("toonprofiel");
 
 
-
-
-
-
-
-
-
-
-
-
     let profielData;
-
-
 
     //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
 
