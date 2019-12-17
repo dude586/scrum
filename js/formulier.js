@@ -1,28 +1,5 @@
 "use strict"
 
-//Update img url to img tag.
-var testing;
-function readURL(input) {
-	let self = this;
-	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-
-		reader.onload = function (e) {
-			document.getElementById("fotoToDiv").src = e.target.result;
-		}
-		reader.readAsDataURL(input.files[0]);
-		
-	}
-
-}
- 
-document.getElementById("fotoSrc").onchange = function() {
-   readURL(this);
-   var tst = document.getElementById("fotoToDiv").src;
-	
-};
-
-
 // bepalen de max attribuut van de geboortedatum :leeftijd >=18 jaar
 const nu = new Date();
 const dag = nu.getDate();
@@ -32,10 +9,8 @@ const maand2 = ((maand < 10) ? "0" : "") + maand;
 const jaar = nu.getFullYear()-18;
 document.getElementById("geboortedatum").max=`${jaar}-${maand2}-${dag2}`;
 
-//verzenden button onclick
-document.getElementById("button").onclick=function(){
-	
-	//valideren
+function validateForm(){
+	let allesok=true;
 	const foutmeldingspan=document.getElementById("foutmeldingspan");
 	
 	const herhaalWachtwoord=document.getElementById("h-wachtwoord");
@@ -47,11 +22,13 @@ document.getElementById("button").onclick=function(){
 	if(eersteInvalid !==null ){ /*er is ivalid invoer*/
 	    let labeltext=eersteInvalid.previousElementSibling.innerText;
 		foutmeldingspan.innerText=`een valid invoer is verplict bij ${labeltext}`;
+		allesok=false;
 
 	}else{
 		//controleer als de wachtwoord werd het zelfde herhaald
 	    if(document.getElementById("wachtwoord").value !==herhaalWachtwoord.value){ //niet het zelfde
-                   foutmeldingspan.innerText="de wachtwoord werd niet het zefde hehaald";
+			foutmeldingspan.innerText="de wachtwoord werd niet het zefde hehaald";
+			allesok=false;
 		}else{	
 			    // controleer als de nicknaam al bestaat
 			    const nickname=document.getElementById("nickname").value;
@@ -77,18 +54,31 @@ document.getElementById("button").onclick=function(){
 			
 				   if (data.message==="Profiel nickname niet beschikbaar"){
 						foutmeldingspan.innerText="de gekozen nickname bestaat al";
+						allesok=false;
 					}else{
 						  //controleer als de foto werd geladen
 					      if(img.src==="#"){
 							  foutmeldingspan.innerText="kies een foto";
+							  allesok=false;
 							}else{
 								foutmeldingspan.innerText="";								
-								// hier alles ok stuur de gegevens
 							}
+
 					}
 				}
 			
 		}
+	}
+	return allesok;
+
+}
+
+//verzenden button onclick
+document.getElementById("button").onclick=function(){
+
+	if(validateForm()){
+
+		//stuur de gegevens
 	}
 }
 

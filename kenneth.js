@@ -51,7 +51,7 @@ function postImageToApi(request) {
         .then(function (data) {
 
             console.log(data.fileName);
-            console.log(data.fileURL);
+ 
 
             img.src = data.fileURL;
 
