@@ -510,7 +510,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
         let IDmaxLeeftijd = document.getElementById("maxLeeftijd").value;
         let IDKleurHaar = document.getElementById("kleurHaar").value;
         let IDKLeurOgen = document.getElementById("kleurOgen").value;
-        IDgeslacht = document.getElementById("geslacht").value;
+        let IDgeslacht = document.getElementById("geslacht").value;
 
         let zoekurl = "";
         let checkTeller = 0
