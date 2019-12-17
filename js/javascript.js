@@ -1,5 +1,14 @@
 "use strict"
-let alleDivid = ["login", "profiel", "zoek", "zoekresults", "nieuwegebruiker", "toonprofiel"];
+let alleDivid = ["login",
+                 "profiel", 
+                 "zoek",
+                  "zoekresults",
+                   "nieuwegebruiker",
+                   "toonprofiel",
+                   "techprobleem",
+                   "techprobleemdatabank"];
+
+// Toont de juiste div in de stagin area
 
 function toonDIV(divid) {
     for (let teller = 0; teller < alleDivid.length; teller++) {
@@ -15,8 +24,11 @@ function toonDIV(divid) {
 
 
 }
+
+
 let menuDIVid = ["ingelogdmenu", "nietingelogdmenu"];
 
+//Toont het juiste linkermenu
 
 function toonmenuDIV(divid) {
     for (let teller = 0; teller < menuDIVid.length; teller++) {
@@ -38,6 +50,20 @@ let userID = "";
 
 //David domain 
 //---------------------------------------------------------------------------------------------------------------------
+
+
+
+document.getElementById('menulogout').addEventListener('click', function (e) {
+document.location.reload(true);
+
+
+})
+
+
+
+
+
+
 document.getElementById('mijnprofiel').addEventListener('click', function (e) {
     toonDIV("profiel");
 
@@ -46,7 +72,13 @@ document.getElementById('mijnprofiel').addEventListener('click', function (e) {
 document.getElementById('menulucky').addEventListener('click', function (e) {
     let profielId = Math.floor(Math.random() * 7) + 1;
 
-    toonprofiel("20");
+  document.getElementById('menulucky').addEventListener('click', function (e)
+  {let randomID = Math.floor(Math.random() * 5000)+1;
+    let idTekst = randomID.toString();
+    toonprofiel(idTekst);
+
+    console.log(randomID);
+    console.log(idTekst);
 
 })
 
@@ -73,7 +105,7 @@ function toonprofiel(profielid) {
 
     profielid = "8";
 
-    //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
+           
 
     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
     console.log(url);
@@ -101,6 +133,59 @@ function toonprofiel(profielid) {
             GetSterrenbeeld(profielData.geboortedatum);
         })
         .catch(function (error) { console.log(error); });
+
+                function GetSterrenbeeld(PersoonObj) {
+                    console.log("test");
+                    console.log(PersoonObj);
+                    var Datum = new Date(PersoonObj);
+                    SterrenbeeldDatum(Datum);
+                }
+
+
+
+                function SterrenbeeldDatum(Datum) {
+                    if ((Datum >= new Date(Datum.getFullYear() + "-11-23") || Datum <= new Date(Datum.getFullYear() + "-01-19")))
+                        ToonSterrenbeeldFoto("steenbok");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-01-20") && Datum <= new Date(Datum.getFullYear() + "-02-19")))
+                        ToonSterrenbeeldFoto("waterman");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-02-20") && Datum <= new Date(Datum.getFullYear() + "-03-20")))
+                        ToonSterrenbeeldFoto("vissen");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-03-21") && Datum <= new Date(Datum.getFullYear() + "-04-20")))
+                        ToonSterrenbeeldFoto("ram");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-04-21") && Datum <= new Date(Datum.getFullYear() + "-05-20")))
+                        ToonSterrenbeeldFoto("stier");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-05-21") && Datum <= new Date(Datum.getFullYear() + "-06-21")))
+                        ToonSterrenbeeldFoto("tweeling");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-22")))
+                        ToonSterrenbeeldFoto("kreeft");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-07-23") && Datum <= new Date(Datum.getFullYear() + "-08-23")))
+                        ToonSterrenbeeldFoto("leeuw");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-08-24") && Datum <= new Date(Datum.getFullYear() + "-09-23")))
+                        ToonSterrenbeeldFoto("maagd");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-09-24") && Datum <= new Date(Datum.getFullYear() + "-10-23")))
+                        ToonSterrenbeeldFoto("weegschaal");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-10-24") && Datum <= new Date(Datum.getFullYear() + "-11-22")))
+                        ToonSterrenbeeldFoto("schorpioen");
+
+                    else if ((Datum >= new Date(Datum.getFullYear() + "-11-23") && Datum <= new Date(Datum.getFullYear() + "-12-21")))
+                        ToonSterrenbeeldFoto("boogschutter");
+                }
+
+                function ToonSterrenbeeldFoto(Sterrenbeeld) {
+                    var URL = "img/" + Sterrenbeeld + ".png";
+                    document.getElementById("toonSterrenbeeldimg").src = URL;
+                    document.getElementById("toonSterrenbeeldLabel").textContent = Sterrenbeeld;
+                }
 
 }
 //---------------------------------------------------------------------------------------------------------------------
@@ -202,7 +287,7 @@ window.onload = function () {
                             document.getElementById('detailHaarkleur').value = profielData.haarkleur;
                             document.getElementById('detailBeroep').value = profielData.beroep;
                             document.getElementById('detailEmail').value = profielData.email;
-                            // document.getElementById('detailLovecoins').value = profielData.lovecoins;
+                            document.getElementById('toonlovecoins').value = profielData.lovecoins;
                             document.getElementById('detailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
                             document.getElementById('detailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
                             document.getElementById('profielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
@@ -271,7 +356,7 @@ window.onload = function () {
                         else if ((Datum >= new Date(Datum.getFullYear() + "-05-21") && Datum <= new Date(Datum.getFullYear() + "-06-21")))
                             ToonSterrenbeeldFoto("tweeling");
 
-                        else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-12")))
+                        else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-22")))
                             ToonSterrenbeeldFoto("kreeft");
 
                         else if ((Datum >= new Date(Datum.getFullYear() + "-07-23") && Datum <= new Date(Datum.getFullYear() + "-08-23")))
@@ -354,7 +439,7 @@ function sterrenBeeldNaarJpeg(Datum) {
     else if ((Datum >= new Date(Datum.getFullYear() + "-05-21") && Datum <= new Date(Datum.getFullYear() + "-06-21")))
         jpegnaam = "tweeling";
 
-    else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-12")))
+    else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-22")))
         jpegnaam = "kreeft";
 
     else if ((Datum >= new Date(Datum.getFullYear() + "-07-23") && Datum <= new Date(Datum.getFullYear() + "-08-23")))
@@ -657,6 +742,5 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 //Jan's Domain & David's Domain
 //--------------------------------------------------------------------------------------------------------------------------------------
-
 
 
