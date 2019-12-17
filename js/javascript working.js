@@ -494,9 +494,9 @@ function sterrenBeeldNaarJpeg(Datum) {
 
 
 document.getElementById('zoekformulier').addEventListener('click', function () {
-    console.log("zoekformulier");
-
-
+    //console.log("zoekformulier");
+     document.getElementById("geslacht").value = "";
+    
     toonDIV("zoek");
     const deKnop = document.getElementById("verstuur");
     deKnop.onclick = function () {
@@ -510,7 +510,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
         let IDmaxLeeftijd = document.getElementById("maxLeeftijd").value;
         let IDKleurHaar = document.getElementById("kleurHaar").value;
         let IDKLeurOgen = document.getElementById("kleurOgen").value;
-        let IDgeslacht = document.getElementById("geslacht").value;
+        IDgeslacht = document.getElementById("geslacht").value;
 
         let zoekurl = "";
         let checkTeller = 0
@@ -550,8 +550,9 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     toonDIV("zoek");
                 }
             }
-            console.log(IDmaxLeeftijd);
-            console.log(IDminLeeftijd);
+           
+            //console.log(IDmaxLeeftijd);
+            //console.log(IDminLeeftijd);
 
             if (checkTeller === 0) {
                 var date = new Date();
@@ -566,7 +567,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     mm = '0' + mm;
                 }
                 date = yyyy + '-' + mm + '-' + dd;
-                console.log(date);
+                //console.log(date);
                 var date2 = new Date();
                 date2.setFullYear(date2.getFullYear() - IDminLeeftijd);
                 var dd2 = date2.getDate();
@@ -596,15 +597,15 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 
                 let teller = 0;
-                
+
                 const zoektabelid = document.getElementById("uitvoerzoektabel");
                 let url = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?" + zoekurl;
-                console.log(url);
+                //console.log(url);
                 //LET OP : rooturl = https://scrumserver.tenobe.org/scrum/api
                 fetch(url)
                     .then(function (resp) { return resp.json(); })
                     .then(function (data) {
-                        console.log(data);
+                        //console.log(data);
                         if (data.message === "Geen profielen gevonden.") {
                             toonDIV("zoek");
                             alert('geen overeenkomsten gevonden');
@@ -690,6 +691,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
     function getArrayOfPersons(data) {
         const select = document.getElementById("kleurHaar");
         let arrayHaar = [];
+        while(select.hasChildNodes()){
+            select.removeChild(select.firstChild);
+        }
+        let legeOPtie3 = document.createElement("option");
+        legeOPtie3.value = "";
+        legeOPtie3.innerText = "Kies een kleur van haar";
+        select.appendChild(legeOPtie3);
         for (const el of data) {
             let kleurHaar = el.haarkleur;
             arrayHaar.push(kleurHaar);
@@ -703,6 +711,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const select2 = document.getElementById("kleurOgen");
         let arrayOgen = [];
+        while(select2.hasChildNodes()){
+            select2.removeChild(select2.firstChild);
+        }
+        let legeOPtie = document.createElement("option");
+        legeOPtie.value = "";
+        legeOPtie.innerText = "Kies een kleur van ogen";
+        select2.appendChild(legeOPtie);
         for (const el of data) {
             let kleurOgen = el.oogkleur;
             arrayOgen.push(kleurOgen);
@@ -715,6 +730,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const selectSexe = document.getElementById("geslacht");
         let arraySexe = [];
+        while(selectSexe.hasChildNodes()){
+            selectSexe.removeChild(selectSexe.firstChild);
+        }
+        let legeOPtie2 = document.createElement("option");
+        legeOPtie2.value = "";
+        legeOPtie2.innerText = "Kies een geslacht";
+        selectSexe.appendChild(legeOPtie2);
         for (const elSexe of data) {
             let optionSexe = elSexe.sexe;
             arraySexe.push(optionSexe);
@@ -751,6 +773,5 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 //Jan's Domain & David's Domain
 //--------------------------------------------------------------------------------------------------------------------------------------
-
 
 
