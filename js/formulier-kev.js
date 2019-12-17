@@ -1,9 +1,9 @@
 "use strict"
 console.log("loading script");
 //VARIABLES
-const foutmeldingspan = document.getElementById("foutmeldingspan");
 let imgData;
 let fotoName;
+let foutmeldingspan = document.getElementById("foutmeldingspan");
 //USER object.
 let user = {
   id: "",
@@ -42,12 +42,19 @@ async function mainFunction() {
   user.grootte = input['grootte'].value;
   user.nickname = input['nickname'].value;
   user.wachtwoord = input['wachtwoord'].value;
-  await uploadPictureToApi(imgData);
 
+   //console.log(testret);
+  if(await checkIfUserExist()) {
+    foutmeldingspan.innerText = "de bijnaam bestaat al";
+    console.log("User Exist");
+    return false;
+  }
   if (await validateForm()) {
+    await uploadPictureToApi(imgData);
     await requestApiCreate();
     console.log("it has been sended");
-    console.log(user);   
+    console.log(user);
+    foutmeldingspan.innerText ="";
 } else { 
   console.log("Error validateForm");
   return false;
@@ -90,29 +97,29 @@ function requestApiCreate() {
                     'Content-Type': 'application/json'
                 })
             });
-            const response = await fetch(request);
+                const response = await fetch(request);
                 const users = await response.json();
                 console.log(users);
                 user.foto = users.fileName;
                 console.log(users.fileName);
                 // .catch(function (error) { console.log(error); return false; });
-
                 return true;
         }
-        
-  //  .then(function (data) {
-  //                   console.log('==> OK (Foto te vinden op url = ' + data.fileURL + ')');
-  //                   console.log('• Foto inladen in IMG, OK');
-  //                   user.foto = data.fileName;           
-  //               })
-  // user.id = users[users.length-1].id;
-
  // Validate that inputs are not wrong so form is sended good.
  function validateForm() {
- //Validate het zelfde wachtwoord
- 
+  
+
+  const dateValue = document.getElementById("geboortedatum");
  const herhaalWachtwoord = document.getElementById("h-wachtwoord");
  const wachtwoord = document.getElementById("wachtwoord");
+ if(dateValue.checkValidity() === false ){ /*er is ivalid invoer*/
+
+    let labeltext = dateValue.id;
+    foutmeldingspan.innerText= `een valid invoer is verplict bij ${labeltext}`;
+    return false
+
+  }
+ 
   if ( herhaalWachtwoord.value !== wachtwoord.value && wachtwoord.value !== "" && herhaalWachtwoord.value !== ""){        
       herhaalWachtwoord.classList.add("fout");
       foutmeldingspan.innerText="de wachtwoord werd niet het zefde hehaald";
@@ -125,15 +132,24 @@ function requestApiCreate() {
 
 //Validate that inputs are not empty
   let inputs = document.getElementsByTagName("input");
-  
+      foutmeldingspan.innerText="";
   for (var i = 0; i < 12; i++) {
     inputs[i].classList.remove('invalid-warning');
-    if (inputs[i].value == "") {
+    if (inputs[i].checkValidity() === false) {
+      if(inputs[i].id["gewicht"] !== null) {
+        foutmeldingspan.innerText="min 30 max 450";
+      }
+      if(inputs[i].id["grootte"] !== null) {
+        foutmeldingspan.innerText="min 80 max 250";
+      }
+
     inputs[i].focus();
     inputs[i].classList.toggle('invalid-warning');
       return false;
     }
   }
+  
+ 
   return true;
 
 //End ValidateForm  
@@ -145,6 +161,30 @@ async function getUserId() {
   const users = await response.json();
   user.id = users[users.length-1].id;
 }
+
+async function checkIfUserExist() {
+  const nickname = document.getElementById("nickname").value;
+  let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
+  let data = {
+   nickname: nickname
+  }
+
+  var request = new Request(url, {
+   method: 'POST',                 //request methode
+   body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+   headers: new Headers({          //onze API verwacht application/json
+  'Content-Type': 'application/json'
+   })
+  });
+  const response = await (await fetch(request).catch()).json();
+  console.log(response.message);
+
+  if (response.message === "Profiel nickname niet beschikbaar") {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 //SYNC FUNCTION
 //Update img url to img tag.
@@ -161,7 +201,17 @@ document.getElementById("fotoSrc").addEventListener("change", function() {
    
 });
 
+function checkDateInput() {
+  const nu = new Date();
+  const dag = nu.getDate();
+  const dag2 = ((dag < 10) ? "0" : "") + dag;
+  const maand = nu.getMonth() + 1;
+  const maand2 = ((maand < 10) ? "0" : "") + maand;
+  const jaar = nu.getFullYear()-18;
+  document.getElementById("geboortedatum").max=`${jaar}-${maand2}-${dag2}`;
+  console.log(dag); 
+}
 
 // Submit button VALIDATION MAIN FUNCTION
 document.getElementById("button").onclick = mainFunction;
-
+checkDateInput();

@@ -8,7 +8,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/formulier-kev.js" defer></script>
+   <script type="text/javascript" src="js/formulier-kev.js" defer></script>
+
     <title>Inscrijven</title>
 </head>
 <body>
@@ -16,10 +17,10 @@
     <form class="p-5 text-center" id="inschrijving" name="inschrijving">
     <fieldset id="Personalia">
       <legend>Personalia:</legend>
-          <div class="text-center" id="kader"><img id="fotoToDiv" src="#" alt="jouw Foto" height="150" width="150"></div><input id="fotoSrc" type="file" name="pic" accept="image/*" >
+          <div class="mx-auto" id="kader"><img id="fotoToDiv" src="#" alt="jouw Foto" height="150" width="150"></div><input id="fotoSrc" class="text-center" type="file" name="pic" accept="image/*" required >
           <div><label for="familienaam">familienaam</label><input type="text" name="fname" id="familienaam" required ></div>
           <div><label for="voornaam">voornaam</label><input type="text" id="voornaam" required ></div>
-          <div><label for="geboortedatum">geboortedatum</label><input type="date" id="geboortedatum"  required ></div>
+          <div><label id="Geboortedatum" for="geboortedatum">geboortedatum</label><input type="date" id="geboortedatum"  required ></div>
           <div><label for="email">email</label><input type="email" id="email" placeholder="je@example.com" required ></div>
           <div><label for="beroep">beroep</label><input type="text" id="beroep" required ></div>
           <div>
@@ -41,7 +42,7 @@
             <div><label for="nickname">nickname</label><input type="text" id="nickname" required ></div>
             <div><label for="wachtwoord">wachtwoord</label><input type="password" id="wachtwoord" required ></div>
             <div><label for="h-wachtwoord">herhaal je wachtwoord</label><input type="password" id="h-wachtwoord" required></div>
-            <div id="formfoot"><button type="button" id="button">Verzenden</button><span id="foutmeldingspan"></span></div>
+            <div id="formfoot"><button class type="button" id="button">Verzenden</button><span id="foutmeldingspan"></span></div>
          
     </fieldset>
     

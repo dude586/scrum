@@ -8,18 +8,18 @@ const maand = nu.getMonth() + 1;
 const maand2 = ((maand < 10) ? "0" : "") + maand;
 const jaar = nu.getFullYear()-18;
 document.getElementById("geboortedatum").max=`${jaar}-${maand2}-${dag2}`;
+console.log(dag);
 
 function validateForm(){
 	let allesok=true;
 	const foutmeldingspan=document.getElementById("foutmeldingspan");
-	
 	const herhaalWachtwoord=document.getElementById("h-wachtwoord");
 	const img=document.getElementById("fotoToDiv");
 
 	
 	//controleer eerst als alle gegeven werd ingevoerd
 	const eersteInvalid=document.querySelector("input:not([type=file]):invalid,select:invalid");
-	if(eersteInvalid !==null ){ /*er is ivalid invoer*/
+	if(eersteInvalid !== null ){ /*er is ivalid invoer*/
 	    let labeltext=eersteInvalid.previousElementSibling.innerText;
 		foutmeldingspan.innerText=`een valid invoer is verplict bij ${labeltext}`;
 		allesok=false;
@@ -29,7 +29,7 @@ function validateForm(){
 	    if(document.getElementById("wachtwoord").value !==herhaalWachtwoord.value){ //niet het zelfde
 			foutmeldingspan.innerText="de wachtwoord werd niet het zefde hehaald";
 			allesok=false;
-		}else{	
+		} else {	
 			    // controleer als de nicknaam al bestaat
 			    const nickname=document.getElementById("nickname").value;
 			    let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
@@ -65,6 +65,7 @@ function validateForm(){
 							}
 
 					}
+					//end verwerkdataresponse
 				}
 			
 		}

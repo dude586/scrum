@@ -56,7 +56,6 @@ form #formfoot{
 }
 
 input[type=file] {
-    width: 85px;
     height: 100%;
 }
 
