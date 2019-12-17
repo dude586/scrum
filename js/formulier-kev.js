@@ -110,6 +110,7 @@ function requestApiCreate() {
  // Validate that inputs are not wrong so form is sended good.
  function validateForm() {
  //Validate het zelfde wachtwoord
+ 
  const herhaalWachtwoord = document.getElementById("h-wachtwoord");
  const wachtwoord = document.getElementById("wachtwoord");
   if ( herhaalWachtwoord.value !== wachtwoord.value && wachtwoord.value !== "" && herhaalWachtwoord.value !== ""){        
