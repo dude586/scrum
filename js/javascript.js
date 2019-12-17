@@ -607,8 +607,9 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     .then(function (data) {
                         //console.log(data);
                         if (data.message === "Geen profielen gevonden.") {
-                            toonDIV("zoek");
+                            
                             alert('geen overeenkomsten gevonden');
+                            toonDIV("zoek");
                         } else {
                             for (const tmp of data) {
                                 teller = teller + 1;
