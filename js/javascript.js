@@ -376,7 +376,7 @@ let lovecoins;
                             lovecoins=profielData.lovecoins;
                             console.log("lovecoins");
                             console.log(lovecoins);
-                            if (lovecoins === 0) {alert("U heeft geen lovecoins!")}
+                            if (lovecoins <= 0) {alert("U heeft geen lovecoins!")}
                             else {      
 
                             
