@@ -1,17 +1,29 @@
 "use strict"
+
+
+// bepalen de max attribuut van de geboortedatum :leeftijd >=18 jaar
+const nu = new Date();
+const dag = nu.getDate();
+const dag2 = ((dag < 10) ? "0" : "") + dag;
+const maand = nu.getMonth() + 1;
+const maand2 = ((maand < 10) ? "0" : "") + maand;
+const jaar = nu.getFullYear() - 18;
+document.getElementById("detailGeboortedatum").max = `${jaar}-${maand2}-${dag2}`;
+
+
 // Globale Scope variabelen
 let alleDivid = ["login",
-                 "profiel", 
-                 "zoek",
-                  "zoekresults",
-                   "nieuwegebruiker",
-                   "toonprofiel",
-                   "techprobleem",
-                   "techprobleemdatabank",
-                   "registreernieuwegebruiker",
-                   "loginerrormessage"];
+    "profiel",
+    "zoek",
+    "zoekresults",
+    "nieuwegebruiker",
+    "toonprofiel",
+    "techprobleem",
+    "techprobleemdatabank",
+    "registreernieuwegebruiker",
+    "loginerrormessage"];
 
-let superuserid="";
+let superuserid = "";
 
 // Toont de juiste div in de stagin area
 
@@ -44,49 +56,47 @@ function toonaddDIV(divid) {
 
 //Checkt of er een verbinding is
 
-function checkVerbinding()
-{  
-   // let ok = true;
+function checkVerbinding() {
+    // let ok = true;
     const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-let url = rooturl + '/profiel/read.php';
+    let url = rooturl + '/profiel/read.php';
 
 
-fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-       
+    fetch(url)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
 
-    })
-    .catch(function (error) {
-       toonDIV("techprobleemdatabank");
-       ok=false;
-       throw new Error('Error in the Database');
-    });
-    
+
+        })
+        .catch(function (error) {
+            toonDIV("techprobleemdatabank");
+            ok = false;
+            throw new Error('Error in the Database');
+        });
+
 }
 
-function booleanCheckVerbinding()
-{  
-   let ok = true;
+function booleanCheckVerbinding() {
+    let ok = true;
     const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-let url = rooturl + '/profiel/read.php';
+    let url = rooturl + '/profiel/read.php';
 
-fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-       
+    fetch(url)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
 
-    })
-    .catch(function (error) {
-       toonDIV("techprobleemdatabank");
-       ok=false;
-       
-    });
-    return ok;  
+
+        })
+        .catch(function (error) {
+            toonDIV("techprobleemdatabank");
+            ok = false;
+
+        });
+    return ok;
 }
 
 let menuDIVid = ["ingelogdmenu", "nietingelogdmenu"];
@@ -248,7 +258,7 @@ function toonprofiel(profielid) {
 
 window.onload = function () {
 
-    
+
     toonDIV("login");
 
     toonmenuDIV("nietingelogdmenu");
@@ -303,12 +313,12 @@ window.onload = function () {
                     let profielData;
                     let profielNickData;
                     console.log("id " + tmpID);
-                    superuserid=tmpID;
+                    superuserid = tmpID;
 
                     console.log(superuserid);
 
                     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + tmpID;
-                    
+
                     fetch(url)
                         .then(function (resp) { return resp.json(); })
                         .then(function (data) {
@@ -347,67 +357,72 @@ window.onload = function () {
                         let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
 
                         let data = {
-                            nickname:  profielData.nickname
+                            nickname: profielData.nickname
 
                         }
+                        if (document.getElementById("detailGeboortedatum").checkValidity() === false) {
+                            alert("u geeft een invalid datum in, u moet minstens 18 zijn");
+                            document.getElementById('detailGeboortedatum').value = profielDateData;
+                        }
+                        else {
 
-                        var request = new Request(url, {
-                            method: 'POST',                 //request methode
-                            body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
-                            headers: new Headers({          //onze API verwacht application/json
-                                'Content-Type': 'application/json'
-                            })
-                        });
-                        let GekozenNicknaam = false;
-                        checkVerbinding();
-                        fetch(request)
-                            .then(function (response) { return response.json(); })
-                            .then(function (data) {
-                                if (data.message == "Profiel nickname beschikbaar" ){}else { GekozenNicknaam = true }
-                                if (GekozenNicknaam == true && profielNickData !== profielData.nickname) {
-                                    alert("u zal een andere nicknaam moeten kiezen");
-                                    document.getElementById('detailNick').value = profielNickData
-                                }
-                             else {
+                            var request = new Request(url, {
+                                method: 'POST',                 //request methode
+                                body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+                                headers: new Headers({          //onze API verwacht application/json
+                                    'Content-Type': 'application/json'
+                                })
+                            });
+                            let GekozenNicknaam = false;
+                            checkVerbinding();
+                            fetch(request)
+                                .then(function (response) { return response.json(); })
+                                .then(function (data) {
+                                    if (data.message == "Profiel nickname beschikbaar") { } else { GekozenNicknaam = true }
+                                    if (GekozenNicknaam == true && profielNickData !== profielData.nickname) {
+                                        alert("u zal een andere nicknaam moeten kiezen");
+                                        document.getElementById('detailNick').value = profielNickData
+                                    }
+                                    else {
                                         profielNickData = document.getElementById('detailNick').value;
 
 
-                                    // profielData.lovecoins = document.getElementById('detailLovecoins').value;
-                                    let email = profielData.email;
-                                    if (email.includes("@") !== true) {
-                                        alert("uw email adres zit in een fout formaat");
+                                        // profielData.lovecoins = document.getElementById('detailLovecoins').value;
+                                        let email = profielData.email;
+                                        if (email.includes("@") !== true) {
+                                            alert("uw email adres zit in een fout formaat");
 
-                                    } else {
-
-
+                                        } else {
 
 
 
 
-                                        var request = new Request(urlUpdate, {
-                                            method: 'PUT',
-                                            body: JSON.stringify(profielData),
-                                            headers: new Headers({
-                                                'Content-Type': 'application/json'
-                                            })
-                                        });
-                                        checkVerbinding();
-                                        fetch(request)
-                                            .then(function (resp) { return resp.json(); })
-                                            .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
-                                            .catch(function (error) { console.log(error); });
+
+
+                                            var request = new Request(urlUpdate, {
+                                                method: 'PUT',
+                                                body: JSON.stringify(profielData),
+                                                headers: new Headers({
+                                                    'Content-Type': 'application/json'
+                                                })
+                                            });
+                                            checkVerbinding();
+                                            fetch(request)
+                                                .then(function (resp) { return resp.json(); })
+                                                .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
+                                                .catch(function (error) { console.log(error); });
+                                        }
                                     }
-                                }
 
-                            })
-                            .catch(function (error) { console.log(error); });
+                                })
+                                .catch(function (error) { console.log(error); });
+                        }
 
-                    
-                    
+
 
                     });
-                
-                
+
+
 
                     // scope test later
                     //
@@ -549,8 +564,8 @@ function sterrenBeeldNaarJpeg(Datum) {
 
 document.getElementById('zoekformulier').addEventListener('click', function () {
     //console.log("zoekformulier");
-     document.getElementById("geslacht").value = "";
-    
+    document.getElementById("geslacht").value = "";
+
     toonDIV("zoek");
     const deKnop = document.getElementById("verstuur");
     deKnop.onclick = function () {
@@ -604,7 +619,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     toonDIV("zoek");
                 }
             }
-           
+
             //console.log(IDmaxLeeftijd);
             //console.log(IDminLeeftijd);
 
@@ -662,7 +677,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     .then(function (data) {
                         //console.log(data);
                         if (data.message === "Geen profielen gevonden.") {
-                            
+
                             alert('geen overeenkomsten gevonden');
                             toonDIV("zoek");
                         } else {
@@ -747,7 +762,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
     function getArrayOfPersons(data) {
         const select = document.getElementById("kleurHaar");
         let arrayHaar = [];
-        while(select.hasChildNodes()){
+        while (select.hasChildNodes()) {
             select.removeChild(select.firstChild);
         }
         let legeOPtie3 = document.createElement("option");
@@ -767,7 +782,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const select2 = document.getElementById("kleurOgen");
         let arrayOgen = [];
-        while(select2.hasChildNodes()){
+        while (select2.hasChildNodes()) {
             select2.removeChild(select2.firstChild);
         }
         let legeOPtie = document.createElement("option");
@@ -786,7 +801,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const selectSexe = document.getElementById("geslacht");
         let arraySexe = [];
-        while(selectSexe.hasChildNodes()){
+        while (selectSexe.hasChildNodes()) {
             selectSexe.removeChild(selectSexe.firstChild);
         }
         let legeOPtie2 = document.createElement("option");
