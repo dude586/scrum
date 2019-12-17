@@ -16,7 +16,6 @@ let alleDivid = ["login",
     "profiel",
     "zoek",
     "zoekresults",
-    "nieuwegebruiker",
     "toonprofiel",
     "techprobleem",
     "techprobleemdatabank",
@@ -26,6 +25,9 @@ let alleDivid = ["login",
 let superuserid = "";
 
 // Toont de juiste div in de stagin area
+
+
+
 
 function toonDIV(divid) {
     for (let teller = 0; teller < alleDivid.length; teller++) {
@@ -123,6 +125,19 @@ let userID = "";
 
 //David domain 
 //---------------------------------------------------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------------------------------------------------
+//Kevin en Mai domain
+
+
+
+
+//Kenny en Mai domain
+//---------------------------------------------------------------------------------------------------------------------
+
+
+
 
 function betaalLovecoinstoonprofiel(id)
 
