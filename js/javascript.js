@@ -1,12 +1,12 @@
 "use strict"
 let alleDivid = ["login",
-                 "profiel", 
-                 "zoek",
-                  "zoekresults",
-                   "nieuwegebruiker",
-                   "toonprofiel",
-                   "techprobleem",
-                   "techprobleemdatabank"];
+    "profiel",
+    "zoek",
+    "zoekresults",
+    "nieuwegebruiker",
+    "toonprofiel",
+    "techprobleem",
+    "techprobleemdatabank"];
 
 // Toont de juiste div in de stagin area
 
@@ -54,7 +54,7 @@ let userID = "";
 
 
 document.getElementById('menulogout').addEventListener('click', function (e) {
-document.location.reload(true);
+    document.location.reload(true);
 
 
 })
@@ -67,27 +67,25 @@ document.location.reload(true);
 document.getElementById('mijnprofiel').addEventListener('click', function (e) {
     toonDIV("profiel");
 
-  })
+})
 
-  document.getElementById('menulucky').addEventListener('click', function (e)
-  {let randomID = Math.floor(Math.random() * 5000)+1;
+document.getElementById('menulucky').addEventListener('click', function (e) {
+    let randomID = Math.floor(Math.random() * 5000) + 1;
     let idTekst = randomID.toString();
     toonprofiel(idTekst);
 
     console.log(randomID);
     console.log(idTekst);
 
-  })
+})
 
-  document.getElementById('menulogin').addEventListener('click', function (e)
-  {toonDIV("login");
+document.getElementById('menulogin').addEventListener('click', function (e) {
+    toonDIV("login");
 
-  })
+})
 
-function toonprofiel(profielid)
-{toonDIV("toonprofiel");
-    
-    
+function toonprofiel(profielid) {
+    toonDIV("toonprofiel");
 
 
 
@@ -98,91 +96,93 @@ function toonprofiel(profielid)
 
 
 
-            let profielData;
 
-           
 
-            //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
-
-            let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
-            console.log(url);   
-
-            fetch(url)
-                .then(function (resp) { return resp.json(); })
-                .then(function (data) {
-
-                    profielData = data;
-                    
-
-                    document.getElementById('toondetailNick').value = profielData.nickname;
-                    document.getElementById('toondetailFnaam').value = profielData.familienaam;
-                    document.getElementById('toondetailVnaam').value = profielData.voornaam;
-                    document.getElementById('toondetailGeboortedatum').value = profielData.geboortedatum;
-                    document.getElementById('toondetailHaarkleur').value = profielData.haarkleur;
-                    document.getElementById('toondetailBeroep').value = profielData.beroep;
-                    document.getElementById('toondetailEmail').value = profielData.email;
-                   // document.getElementById('detailLovecoins').value = profielData.lovecoins;
-                    document.getElementById('toondetailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
-                    document.getElementById('toondetailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
-                    document.getElementById('toonprofielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
-
-                    console.log("TESTING");
-                    GetSterrenbeeld(profielData.geboortedatum);
-                })
-                .catch(function (error) { console.log(error); });
-
-                function GetSterrenbeeld(PersoonObj) {
-                    console.log("test");
-                    console.log(PersoonObj);
-                    var Datum = new Date(PersoonObj);
-                    SterrenbeeldDatum(Datum);
-                }
+    let profielData;
 
 
 
-                function SterrenbeeldDatum(Datum) {
-                    if ((Datum >= new Date(Datum.getFullYear() + "-11-23") || Datum <= new Date(Datum.getFullYear() + "-01-19")))
-                        ToonSterrenbeeldFoto("steenbok");
+    //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-01-20") && Datum <= new Date(Datum.getFullYear() + "-02-19")))
-                        ToonSterrenbeeldFoto("waterman");
+    let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
+    console.log(url);
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-02-20") && Datum <= new Date(Datum.getFullYear() + "-03-20")))
-                        ToonSterrenbeeldFoto("vissen");
+    fetch(url)
+        .then(function (resp) { return resp.json(); })
+        .then(function (data) {
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-03-21") && Datum <= new Date(Datum.getFullYear() + "-04-20")))
-                        ToonSterrenbeeldFoto("ram");
+            profielData = data;
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-04-21") && Datum <= new Date(Datum.getFullYear() + "-05-20")))
-                        ToonSterrenbeeldFoto("stier");
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-05-21") && Datum <= new Date(Datum.getFullYear() + "-06-21")))
-                        ToonSterrenbeeldFoto("tweeling");
+            document.getElementById('toondetailNick').value = profielData.nickname;
+            document.getElementById('toondetailFnaam').value = profielData.familienaam;
+            document.getElementById('toondetailVnaam').value = profielData.voornaam;
+            document.getElementById('toondetailGeboortedatum').value = profielData.geboortedatum;
+            document.getElementById('toondetailHaarkleur').value = profielData.haarkleur;
+            document.getElementById('toondetailBeroep').value = profielData.beroep;
+            document.getElementById('toondetailEmail').value = profielData.email;
+            // document.getElementById('detailLovecoins').value = profielData.lovecoins;
+            document.getElementById('toondetailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
+            document.getElementById('toondetailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
+            document.getElementById('toonprofielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-22")))
-                        ToonSterrenbeeldFoto("kreeft");
+            console.log("TESTING");
+            GetSterrenbeeld(profielData.geboortedatum);
+        })
+        .catch(function (error) { console.log(error); });
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-07-23") && Datum <= new Date(Datum.getFullYear() + "-08-23")))
-                        ToonSterrenbeeldFoto("leeuw");
+    function GetSterrenbeeld(PersoonObj) {
+        console.log("test");
+        console.log(PersoonObj);
+        var Datum = new Date(PersoonObj);
+        SterrenbeeldDatum(Datum);
+    }
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-08-24") && Datum <= new Date(Datum.getFullYear() + "-09-23")))
-                        ToonSterrenbeeldFoto("maagd");
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-09-24") && Datum <= new Date(Datum.getFullYear() + "-10-23")))
-                        ToonSterrenbeeldFoto("weegschaal");
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-10-24") && Datum <= new Date(Datum.getFullYear() + "-11-22")))
-                        ToonSterrenbeeldFoto("schorpioen");
+    function SterrenbeeldDatum(Datum) {
+        if ((Datum >= new Date(Datum.getFullYear() + "-11-23") || Datum <= new Date(Datum.getFullYear() + "-01-19")))
+            ToonSterrenbeeldFoto("steenbok");
 
-                    else if ((Datum >= new Date(Datum.getFullYear() + "-11-23") && Datum <= new Date(Datum.getFullYear() + "-12-21")))
-                        ToonSterrenbeeldFoto("boogschutter");
-                }
+        else if ((Datum >= new Date(Datum.getFullYear() + "-01-20") && Datum <= new Date(Datum.getFullYear() + "-02-19")))
+            ToonSterrenbeeldFoto("waterman");
 
-                function ToonSterrenbeeldFoto(Sterrenbeeld) {
-                    var URL = "img/" + Sterrenbeeld + ".png";
-                    document.getElementById("toonSterrenbeeldimg").src = URL;
-                    document.getElementById("toonSterrenbeeldLabel").textContent = Sterrenbeeld;
-                }
+        else if ((Datum >= new Date(Datum.getFullYear() + "-02-20") && Datum <= new Date(Datum.getFullYear() + "-03-20")))
+            ToonSterrenbeeldFoto("vissen");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-03-21") && Datum <= new Date(Datum.getFullYear() + "-04-20")))
+            ToonSterrenbeeldFoto("ram");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-04-21") && Datum <= new Date(Datum.getFullYear() + "-05-20")))
+            ToonSterrenbeeldFoto("stier");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-05-21") && Datum <= new Date(Datum.getFullYear() + "-06-21")))
+            ToonSterrenbeeldFoto("tweeling");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-06-21") && Datum <= new Date(Datum.getFullYear() + "-07-22")))
+            ToonSterrenbeeldFoto("kreeft");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-07-23") && Datum <= new Date(Datum.getFullYear() + "-08-23")))
+            ToonSterrenbeeldFoto("leeuw");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-08-24") && Datum <= new Date(Datum.getFullYear() + "-09-23")))
+            ToonSterrenbeeldFoto("maagd");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-09-24") && Datum <= new Date(Datum.getFullYear() + "-10-23")))
+            ToonSterrenbeeldFoto("weegschaal");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-10-24") && Datum <= new Date(Datum.getFullYear() + "-11-22")))
+            ToonSterrenbeeldFoto("schorpioen");
+
+        else if ((Datum >= new Date(Datum.getFullYear() + "-11-23") && Datum <= new Date(Datum.getFullYear() + "-12-21")))
+            ToonSterrenbeeldFoto("boogschutter");
+    }
+
+    function ToonSterrenbeeldFoto(Sterrenbeeld) {
+        var URL = "img/" + Sterrenbeeld + ".png";
+        document.getElementById("toonSterrenbeeldimg").src = URL;
+        document.getElementById("toonSterrenbeeldLabel").textContent = Sterrenbeeld;
+    }
 
 }
 //---------------------------------------------------------------------------------------------------------------------
@@ -264,7 +264,7 @@ window.onload = function () {
 
 
                     let profielData;
-
+                    let profielNickData;
                     console.log("id " + tmpID);
 
                     //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
@@ -288,7 +288,7 @@ window.onload = function () {
                             document.getElementById('detailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
                             document.getElementById('detailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
                             document.getElementById('profielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
-
+                            profielNickData = profielData.nickname;
                             console.log("TESTING");
                             GetSterrenbeeld(profielData.geboortedatum);
                         })
@@ -306,19 +306,63 @@ window.onload = function () {
                         profielData.beroep = document.getElementById('detailBeroep').value;
                         profielData.email = document.getElementById('detailEmail').value;
                         // profielData.lovecoins = document.getElementById('detailLovecoins').value;
+                        let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
 
-                        var request = new Request(urlUpdate, {
-                            method: 'PUT',
-                            body: JSON.stringify(profielData),
-                            headers: new Headers({
+                        let data = {
+                            nickname:  profielData.nickname
+
+                        }
+
+                        var request = new Request(url, {
+                            method: 'POST',                 //request methode
+                            body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+                            headers: new Headers({          //onze API verwacht application/json
                                 'Content-Type': 'application/json'
                             })
                         });
-
+                        let GekozenNicknaam = false;
                         fetch(request)
-                            .then(function (resp) { return resp.json(); })
-                            .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
+                            .then(function (response) { return response.json(); })
+                            .then(function (data) {
+                                if (data.message == "Profiel nickname beschikbaar" ){}else { GekozenNicknaam = true }
+                                if (GekozenNicknaam == true && profielNickData !== profielData.nickname) {
+                                    alert("u zal een andere nicknaam moeten kiezen");
+                                    document.getElementById('detailNick').value = profielNickData
+                                }
+                             else {
+                                        profielNickData = document.getElementById('detailNick').value;
+
+
+                                    // profielData.lovecoins = document.getElementById('detailLovecoins').value;
+                                    let email = profielData.email;
+                                    if (email.includes("@") !== true) {
+                                        alert("uw email adres zit in een fout formaat");
+
+                                    } else {
+
+
+
+
+
+
+                                        var request = new Request(urlUpdate, {
+                                            method: 'PUT',
+                                            body: JSON.stringify(profielData),
+                                            headers: new Headers({
+                                                'Content-Type': 'application/json'
+                                            })
+                                        });
+
+                                        fetch(request)
+                                            .then(function (resp) { return resp.json(); })
+                                            .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
+                                            .catch(function (error) { console.log(error); });
+                                    }
+                                }
+
+                            })
                             .catch(function (error) { console.log(error); });
+
 
                     });
 
@@ -562,7 +606,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 
                 let teller = 0;
-                
+
                 const zoektabelid = document.getElementById("uitvoerzoektabel");
                 let url = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?" + zoekurl;
                 console.log(url);
