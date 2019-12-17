@@ -9,13 +9,25 @@ const maand2 = ((maand < 10) ? "0" : "") + maand;
 const jaar = nu.getFullYear()-18;
 document.getElementById("geboortedatum").max=`${jaar}-${maand2}-${dag2}`;
 
+
+//valideren bij onchang()
+const foutmeldingspan=document.getElementById("foutmeldingspan");
+
+const invalidElementen=document.querySelectorAll("input:not([type=file]),select");
+for(const element of invalidElementen){
+	element.onchange=function(){
+		if(element.checkValidity()){
+			foutmeldingspan.innerText="";
+		}
+	
+	}
+}
+// valideren bij onclick()	
 function validateForm(){
 	let allesok=true;
-	const foutmeldingspan=document.getElementById("foutmeldingspan");
 	
 	const herhaalWachtwoord=document.getElementById("h-wachtwoord");
 	const img=document.getElementById("fotoToDiv");
-
 	
 	//controleer eerst als alle gegeven werd ingevoerd
 	const eersteInvalid=document.querySelector("input:not([type=file]):invalid,select:invalid");
