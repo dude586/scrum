@@ -1,5 +1,5 @@
 "use strict"
-
+//testtttt delete
 // bepalen de max attribuut van de geboortedatum :leeftijd >=18 jaar
 const nu = new Date();
 const dag = nu.getDate();
