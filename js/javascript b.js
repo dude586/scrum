@@ -436,7 +436,7 @@ document.getElementById('menulucky').addEventListener('click', function (e) {
 })
 
 document.getElementById('menulogin').addEventListener('click', function (e) {
-    document.location.reload(true);
+    toonDIV("login");
 
 })
 
@@ -525,7 +525,7 @@ function toonprofiel(profielid) {
     function ToonSterrenbeeldFoto(Sterrenbeeld) {
         var URL = "img/" + Sterrenbeeld + ".png";
         document.getElementById("toonSterrenbeeldimg").src = URL;
-       // document.getElementById("toonSterrenbeeldLabel").textContent = Sterrenbeeld;
+        document.getElementById("toonSterrenbeeldLabel").textContent = Sterrenbeeld;
     }
 
 }
@@ -762,7 +762,7 @@ window.onload = function () {
                     function ToonSterrenbeeldFoto(Sterrenbeeld) {
                         var URL = "img/" + Sterrenbeeld + ".png";
                         document.getElementById("Sterrenbeeldimg").src = URL;
-                        // document.getElementById("SterrenbeeldLabel").textContent = Sterrenbeeld;
+                        document.getElementById("SterrenbeeldLabel").textContent = Sterrenbeeld;
                     }
 
 
@@ -968,16 +968,6 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                             alert('geen overeenkomsten gevonden');
                             toonDIV("zoek");
                         } else {
-
-                            // exp
-                            var e = document.querySelector("tbody"); 
-                            var child = e.lastElementChild;
-                while (child) {
-                    e.removeChild(child);
-                    child = e.lastElementChild;
-                }
-
-                // exp
                             for (const tmp of data) {
                                 teller = teller + 1;
                                 if (teller > 20) { break; }
@@ -1022,7 +1012,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                                 const datumDatumformaat = new Date(tmp.geboortedatum);
                                 // sterrenbeeldcell.innerText = sterrenBeeldNaarJpeg(datumDatumformaat);
 
-                                sterrenbeeldcell.innerHTML = "";
+                                sterrenbeeldcell.innerHTML = sterrenBeeldNaarJpeg(datumDatumformaat);
                                 let img = document.createElement('img');
                                 img.width = 50;
                                 // img.className("smallogo-img");
