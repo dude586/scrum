@@ -27,13 +27,15 @@
 		<div class="row">
 			<div class="col-3 orange-color border">
 				<div id="ingelogdmenu">
+				  <button type="button" id="mijnprofiel" class="btn btn-primary">Mijn Profiel</button><br>
 				  <button type="button" id="zoekformulier" class="btn btn-primary">Zoek</button><br>
-				  <button type="button" id="mijnprofiel" class="btn btn-primary">Mijn Profiel</button>
+				  <button type="button" id="menulucky" class="btn btn-primary">I feel lucky!</button><br>	
+				  <button type="button" id="menulogout" class="btn btn-primary">Logout</button><br><br>
+				  Lovecoins<input type="textbox" name="output" value="0" id="toonlovecoins" readonly></input>
 				</div>
 				<div id="nietingelogdmenu">
 					<button type="button" id="menulogin" class="btn btn-primary">Login</button><br>
 					<button type="button" id="menuregistreer" class="btn btn-primary">Registreer</button><br>
-					<button type="button" id="menulucky" class="btn btn-primary">I feel lucky!</button>
 				</div>
 			</div>
 
@@ -226,7 +228,7 @@
 							<img src="assets/images/logo.png" />
 						</div>
 						<form>
-							<h3><span id="profielVan">Details van </span></h3>
+							<h3><span id="toonprofielVan">Details van </span></h3>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -265,14 +267,14 @@
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<img id="detailFoto" src="https://scrumserver.tenobe.org/scrum/img/no_image.png"
+										<img id="toondetailFoto" src="https://scrumserver.tenobe.org/scrum/img/no_image.png"
 											alt="profielfoto" class="profielfoto">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<img id="Sterrenbeeldimg" src="">
-										<label id="SterrenbeeldLabel"></label>
+										<img id="toonSterrenbeeldimg" src="">
+										<label id="toonSterrenbeeldLabel"></label>
 									</div>
 								</div>
 							</div>
@@ -282,7 +284,23 @@
 			</div>
 
 			<!-- Einde Toonprofiel-->
-			
+
+
+			<!-- Technisch probleem-->
+			<div id="techprobleemdatabank" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+					Er is een technisch probleem opgetreden met het raadplegen van de databank, probeer later eens opnieuw.
+				</div>
+			</div>
+
+
+			<div id="techprobleem" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+					Er is een onverwachte fout opgetreden, gelieve het hulpteam te contacteren op 0800/12345
+				</div>
+			</div>
+
+			<!-- Einde  Technisch probleem-->
 		</div>
 
 	</main>
