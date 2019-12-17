@@ -26,6 +26,52 @@ function toonDIV(divid) {
 }
 
 
+//Checkt of er een verbinding is
+
+function checkVerbinding()
+{  
+   // let ok = true;
+    const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
+let url = rooturl + '/profiel/read.php';
+
+fetch(url)
+    .then(function (resp) {
+        return resp.json();
+    })
+    .then(function (data) {
+       
+
+    })
+    .catch(function (error) {
+       toonDIV("techprobleemdatabank");
+       ok=false;
+       throw new Error('Error in the Database');
+    });
+    
+}
+
+function booleanCheckVerbinding()
+{  
+   let ok = true;
+    const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
+let url = rooturl + '/profiel/read.php';
+
+fetch(url)
+    .then(function (resp) {
+        return resp.json();
+    })
+    .then(function (data) {
+       
+
+    })
+    .catch(function (error) {
+       toonDIV("techprobleemdatabank");
+       ok=false;
+       
+    });
+    return ok;  
+}
+
 let menuDIVid = ["ingelogdmenu", "nietingelogdmenu"];
 
 //Toont het juiste linkermenu
@@ -196,6 +242,8 @@ function toonprofiel(profielid) {
 
 
 window.onload = function () {
+
+    
     toonDIV("login");
 
     toonmenuDIV("nietingelogdmenu");
@@ -236,7 +284,7 @@ window.onload = function () {
         //  let ID = "";  
         let tmpID = "";
 
-
+        checkVerbinding();
         fetch(request)
             .then(function (resp) { return resp.json(); })
             .then(function (data) {
@@ -246,31 +294,12 @@ window.onload = function () {
                 if (data.message == 'Authorized') {
                     console.log("Reactie van backend API : Correcte gegevens");
                     toonDIV("profiel");
-
-
-
-
-
-
-                    // toont profiel, html wordt dan aangepast
-
-
-
-
-
-
-
-
-
-
                     let profielData;
                     let profielNickData;
                     console.log("id " + tmpID);
 
-                    //let profielId = Math.floor(Math.random() * 7)+1; //random profiel van 0 - 7
-
                     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + tmpID;
-
+                    
                     fetch(url)
                         .then(function (resp) { return resp.json(); })
                         .then(function (data) {
@@ -363,8 +392,12 @@ window.onload = function () {
                             })
                             .catch(function (error) { console.log(error); });
 
+                    
+                    
 
                     });
+                
+                
 
                     // scope test later
                     //
@@ -504,9 +537,9 @@ function sterrenBeeldNaarJpeg(Datum) {
 
 
 document.getElementById('zoekformulier').addEventListener('click', function () {
-    console.log("zoekformulier");
-
-
+    //console.log("zoekformulier");
+     document.getElementById("geslacht").value = "";
+    
     toonDIV("zoek");
     const deKnop = document.getElementById("verstuur");
     deKnop.onclick = function () {
@@ -560,8 +593,9 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     toonDIV("zoek");
                 }
             }
-            console.log(IDmaxLeeftijd);
-            console.log(IDminLeeftijd);
+           
+            //console.log(IDmaxLeeftijd);
+            //console.log(IDminLeeftijd);
 
             if (checkTeller === 0) {
                 var date = new Date();
@@ -576,7 +610,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     mm = '0' + mm;
                 }
                 date = yyyy + '-' + mm + '-' + dd;
-                console.log(date);
+                //console.log(date);
                 var date2 = new Date();
                 date2.setFullYear(date2.getFullYear() - IDminLeeftijd);
                 var dd2 = date2.getDate();
@@ -609,15 +643,16 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
                 const zoektabelid = document.getElementById("uitvoerzoektabel");
                 let url = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?" + zoekurl;
-                console.log(url);
+                //console.log(url);
                 //LET OP : rooturl = https://scrumserver.tenobe.org/scrum/api
                 fetch(url)
                     .then(function (resp) { return resp.json(); })
                     .then(function (data) {
-                        console.log(data);
+                        //console.log(data);
                         if (data.message === "Geen profielen gevonden.") {
-                            toonDIV("zoek");
+                            
                             alert('geen overeenkomsten gevonden');
+                            toonDIV("zoek");
                         } else {
                             for (const tmp of data) {
                                 teller = teller + 1;
@@ -700,6 +735,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
     function getArrayOfPersons(data) {
         const select = document.getElementById("kleurHaar");
         let arrayHaar = [];
+        while(select.hasChildNodes()){
+            select.removeChild(select.firstChild);
+        }
+        let legeOPtie3 = document.createElement("option");
+        legeOPtie3.value = "";
+        legeOPtie3.innerText = "Kies een kleur van haar";
+        select.appendChild(legeOPtie3);
         for (const el of data) {
             let kleurHaar = el.haarkleur;
             arrayHaar.push(kleurHaar);
@@ -713,6 +755,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const select2 = document.getElementById("kleurOgen");
         let arrayOgen = [];
+        while(select2.hasChildNodes()){
+            select2.removeChild(select2.firstChild);
+        }
+        let legeOPtie = document.createElement("option");
+        legeOPtie.value = "";
+        legeOPtie.innerText = "Kies een kleur van ogen";
+        select2.appendChild(legeOPtie);
         for (const el of data) {
             let kleurOgen = el.oogkleur;
             arrayOgen.push(kleurOgen);
@@ -725,6 +774,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const selectSexe = document.getElementById("geslacht");
         let arraySexe = [];
+        while(selectSexe.hasChildNodes()){
+            selectSexe.removeChild(selectSexe.firstChild);
+        }
+        let legeOPtie2 = document.createElement("option");
+        legeOPtie2.value = "";
+        legeOPtie2.innerText = "Kies een geslacht";
+        selectSexe.appendChild(legeOPtie2);
         for (const elSexe of data) {
             let optionSexe = elSexe.sexe;
             arraySexe.push(optionSexe);
@@ -761,6 +817,5 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 //Jan's Domain & David's Domain
 //--------------------------------------------------------------------------------------------------------------------------------------
-
 
 
