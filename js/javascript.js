@@ -70,7 +70,7 @@ document.getElementById('mijnprofiel').addEventListener('click', function (e) {
 })
 
 document.getElementById('menulucky').addEventListener('click', function (e) {
-    let profielId = Math.floor(Math.random() * 7) + 1;
+    let profielId = Math.floor(Math.random() * 7) + 1;})
 
   document.getElementById('menulucky').addEventListener('click', function (e)
   {let randomID = Math.floor(Math.random() * 5000)+1;
