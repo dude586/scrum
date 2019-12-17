@@ -7,16 +7,28 @@ let alleDivid = ["login",
                    "toonprofiel",
                    "techprobleem",
                    "techprobleemdatabank",
-                   "registreernieuwegebruiker"];
+                   "registreernieuwegebruiker",
+                   "loginerrormessage"];
 
 // Toont de juiste div in de stagin area
-
+let superuserid="";
 function toonDIV(divid) {
     for (let teller = 0; teller < alleDivid.length; teller++) {
         const elemDividtmp = document.getElementById(alleDivid[teller]);
         console.log(alleDivid[teller]);
         elemDividtmp.style.display = "none";
     }
+    if (divid !== "none") {
+        const elemDivid = document.getElementById(divid);
+        elemDivid.style.display = "block";
+    }
+
+
+
+}
+
+function toonaddDIV(divid) {
+
     if (divid !== "none") {
         const elemDivid = document.getElementById(divid);
         elemDivid.style.display = "block";
@@ -34,6 +46,7 @@ function checkVerbinding()
    // let ok = true;
     const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
 let url = rooturl + '/profiel/read.php';
+
 
 fetch(url)
     .then(function (resp) {
@@ -153,7 +166,7 @@ function toonprofiel(profielid) {
 
     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + profielid;
     console.log(url);
-
+    checkVerbinding();
     fetch(url)
         .then(function (resp) { return resp.json(); })
         .then(function (data) {
@@ -250,7 +263,7 @@ window.onload = function () {
     toonmenuDIV("nietingelogdmenu");
 
     document.getElementById('btnlogin').addEventListener('click', function (e) {
-        toonmenuDIV("ingelogdmenu");
+        // toonmenuDIV("ingelogdmenu");
         console.log('Je hebt op de Login-knop geklikt');
         let nickname = document.getElementById('inputNick').value;
         let wachtwoord = document.getElementById('inputPassword').value;
@@ -293,11 +306,15 @@ window.onload = function () {
                 userID = tmpID;
                 console.log(data.id);
                 if (data.message == 'Authorized') {
+                    toonmenuDIV("ingelogdmenu");
                     console.log("Reactie van backend API : Correcte gegevens");
                     toonDIV("profiel");
                     let profielData;
                     let profielNickData;
                     console.log("id " + tmpID);
+                    superuserid=tmpID;
+
+                    console.log(superuserid);
 
                     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + tmpID;
                     
@@ -351,6 +368,7 @@ window.onload = function () {
                             })
                         });
                         let GekozenNicknaam = false;
+                        checkVerbinding();
                         fetch(request)
                             .then(function (response) { return response.json(); })
                             .then(function (data) {
@@ -382,7 +400,7 @@ window.onload = function () {
                                                 'Content-Type': 'application/json'
                                             })
                                         });
-
+                                        checkVerbinding();
                                         fetch(request)
                                             .then(function (resp) { return resp.json(); })
                                             .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
@@ -478,7 +496,8 @@ window.onload = function () {
 
 
                 } else {
-                    console.log("Reactie van backend API : Verkeerde gegevens");
+                    toonDIV("loginerrormessage");
+                    toonaddDIV("login");
                 }
             })
             .catch(function (error) { console.log(error); });
@@ -646,6 +665,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                 let url = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?" + zoekurl;
                 //console.log(url);
                 //LET OP : rooturl = https://scrumserver.tenobe.org/scrum/api
+                checkVerbinding();
                 fetch(url)
                     .then(function (resp) { return resp.json(); })
                     .then(function (data) {
@@ -719,7 +739,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
     const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
 
     let url = rooturl + '/profiel/read.php';
-
+    checkVerbinding();
     fetch(url)
         .then(function (resp) {
             return resp.json();
