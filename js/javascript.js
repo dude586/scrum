@@ -3,7 +3,7 @@
 let alleDivid = ["login",
                  "profiel", 
                  "zoek",
-                  "zoekresults",
+                 "zoekresults",
                    "nieuwegebruiker",
                    "toonprofiel",
                    "techprobleem",
@@ -114,7 +114,52 @@ let userID = "";
 //David domain 
 //---------------------------------------------------------------------------------------------------------------------
 
+function betaalLovecoinstoonprofiel(id)
 
+{let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + superuserid;
+let profielData;
+let lovecoins;
+                    fetch(url)
+                        .then(function (resp) { return resp.json(); })
+                        .then(function (data) {
+
+                            profielData = data;
+
+                            lovecoins=profielData.lovecoins;
+                            console.log("lovecoins");
+                            console.log(lovecoins);
+                            if (lovecoins === 0) {alert("U heeft geen lovecoins!")}
+                            else {      
+
+                            
+                            
+                            let urlUpdate = 'https://scrumserver.tenobe.org/scrum/api/profiel/update.php';
+
+                            profielData.lovecoins = lovecoins - 1;
+
+                         let request = new Request(urlUpdate, {
+                                            method: 'PUT',
+                                            body: JSON.stringify(profielData),
+                                            headers: new Headers({
+                                                'Content-Type': 'application/json'
+                                            })
+                                        })
+
+
+
+                           fetch(request)
+                            .then(function (resp)   { return resp.json(); })
+                            .then(function (data)   { console.log(data);  })
+                            .catch(function (error) { console.log(error); });
+                            document.getElementById('toonlovecoins').value=lovecoins-1;
+    
+                            toonprofiel(id);}
+                          
+                        })
+                        .catch(function (error) { console.log(error); });
+    
+
+}
 
 document.getElementById('menulogout').addEventListener('click', function (e) {
     document.location.reload(true);
@@ -573,6 +618,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         if ((IDminGr === "") && (IDmaxGr === "") && (IDminLeeftijd === "") && (IDmaxLeeftijd === "") && (IDKleurHaar === "") && (IDKLeurOgen === "") && (IDgeslacht === "")) {
             alert('invullen die handel');
+            toonDIV("zoek");
         } else {
             if (IDminGr !== "") {
                 if (IDminGr < 80 || IDminGr > 250) {
@@ -657,6 +703,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                 //console.log(url);
                 //LET OP : rooturl = https://scrumserver.tenobe.org/scrum/api
                 checkVerbinding();
+                let profielIDs = [];
                 fetch(url)
                     .then(function (resp) { return resp.json(); })
                     .then(function (data) {
@@ -672,6 +719,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 
                                 const tr = zoektabelid.insertRow();
+                                const favbuttoncell = tr.insertCell();
                                 const nicknamecell = tr.insertCell();
                                 const voornaamcell = tr.insertCell();
                                 const familienaamcell = tr.insertCell();
@@ -686,6 +734,18 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                                 const leeftijd = Math.floor((new Date() - new Date(tmp.geboortedatum).getTime()) / 3.15576e+10);
 
                                 console.log(tmp);
+
+                                let buttonhtml = document.createElement("BUTTON"); 
+                                buttonhtml.innerHTML = "Profiel";
+
+                                let tekstteller=teller.toString()
+                                buttonhtml.id = "favbutton"+tekstteller;
+                                console.log(tekstteller);
+                                buttonhtml.value = tmp.id;
+
+                                profielIDs.push(tmp.id);
+
+                                favbuttoncell.appendChild(buttonhtml);
 
                                 voornaamcell.innerText = tmp.voornaam;
                                 familienaamcell.innerText = tmp.familienaam;
@@ -705,10 +765,50 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                                 sterrenbeeldcell.appendChild(img);
 
                                 // leeftijdcell=toString(getAge("1994-06-14"));
-
+                               //console.log(teller);
+                               // document.getElementById('favbutton'+teller.toString()).addEventListener('click', function (e)
+                               //   {  const v=Math.floor(Math.random() * 5000) + 1;
+                               //        alert(v.toString())})
 
 
                             }
+                            // for (var x = 0; x < teller; x++)
+                            //  {const y=x+1;
+                            //   const tekstx=y.toString();
+                            //   console.log(tekstx);
+                            //   document.getElementById('favbutton'+tekstx).addEventListener('click', function (e)
+                            //   {betaalLovecoinstoonprofiel(profielIDs[x]);})    
+
+                            //  }
+                    
+                            
+                            
+                            
+                            document.getElementById('favbutton1').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[0]);})
+                            document.getElementById('favbutton2').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[1]);})
+                            document.getElementById('favbutton3').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[2]);})
+                            document.getElementById('favbutton4').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[3]);})
+                            document.getElementById('favbutton5').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[4]);})
+                            document.getElementById('favbutton6').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[5]);})
+                            document.getElementById('favbutton7').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[6]);})
+                            document.getElementById('favbutton8').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[7]);})
+                            document.getElementById('favbutton9').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[8]);})
+                            document.getElementById('favbutton10').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[9]);})
+                            document.getElementById('favbutton11').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[10]);})
+                            document.getElementById('favbutton12').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[11]);})
+                            document.getElementById('favbutton13').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[12]);})
+                            document.getElementById('favbutton14').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[13]);})
+                            document.getElementById('favbutton15').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[14]);})
+                            document.getElementById('favbutton16').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[15]);})
+                            document.getElementById('favbutton17').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[16]);})
+                            document.getElementById('favbutton18').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[17]);})
+                            document.getElementById('favbutton19').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[18]);})
+                            document.getElementById('favbutton20').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[19]);})
+                           
+
+                         
+
+                            
                         }
 
 
