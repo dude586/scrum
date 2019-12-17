@@ -590,6 +590,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         if ((IDminGr === "") && (IDmaxGr === "") && (IDminLeeftijd === "") && (IDmaxLeeftijd === "") && (IDKleurHaar === "") && (IDKLeurOgen === "") && (IDgeslacht === "")) {
             alert('invullen die handel');
+            toonDIV("zoek");
         } else {
             if (IDminGr !== "") {
                 if (IDminGr < 80 || IDminGr > 250) {
