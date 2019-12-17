@@ -40,6 +40,15 @@
 			</div>
 
 
+
+			<!-- Login error message -->
+			<div id="loginerrormessage" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+				  Uw nickname of paswoord is verkeerd.
+				</div>
+			</div>
+			<!-- Login error message -->
+
 			<!-- Login DIV -->
 			<div id="login" class="col-9 orange-color">
 				<div class="d-flex align-items-center justify-content-center">
@@ -71,8 +80,11 @@
 
 			<!-- Nieuwe Gebruiker end -->
 
-			<!-- Profiel -->
 
+
+
+			<!-- Profiel -->
+			
 			<div id="profiel" class="col-9 orange-color">
 				<div class="d-flex align-items-center justify-content-center">
 					<div class="container contact-form">
@@ -110,7 +122,8 @@
 									<div class="form-group">
 										<label for="detailEmail">Email : </label> <input type="text"
 											class="form-control" id="detailEmail" value="nog niet ontvangen" required>
-									</div>
+                                    </div>
+                                    <input type="hidden" id='toonId'value="">
 
 									
 
@@ -118,6 +131,10 @@
 									<div class="form-group">
 										<input type="submit" name="btnSubmit" id="btnSubmit" class="btnContact"
 											value="Update" onclick="return false;" />
+                                    </div>
+                                    <div class="form-group">
+										<input type="submit" name="btnSubmit" id="koopLoveCoins" class="btnContact"
+											value="koop lovecoins" onclick="return false;" />
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -308,6 +325,8 @@
 				
 				</div>
 			</div>
+
+
 		</div>
 
 	</main>
