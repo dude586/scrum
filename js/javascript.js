@@ -20,7 +20,8 @@ let alleDivid = ["login",
     "techprobleem",
     "techprobleemdatabank",
     "registreernieuwegebruiker",
-    "loginerrormessage"];
+    "loginerrormessage",
+    "accountaanmaaktisgedaan"];
 
 let superuserid = "";
 
@@ -129,7 +130,229 @@ let userID = "";
 
 //---------------------------------------------------------------------------------------------------------------------
 //Kevin en Mai domain
+document.getElementById('menuregistreer').addEventListener('click', function (e) {
+    toonDIV("registreernieuwegebruiker");
+    //VARIABLES
+let imgData;
+let fotoName;
+let foutmeldingspan = document.getElementById("nieuwfoutmeldingspan");
+//USER object.
+let user = {
+  id: "",
+  familienaam: "",
+  voornaam: "",
+  geboortedatum: "",
+  email: "",
+  nickname: "",
+  foto: "",
+  beroep: "",
+  sexe: "",
+  haarkleur: "",
+  oogkleur: "",
+  grootte: "",
+  gewicht: "",
+  wachtwoord: "",
+  lovecoins: "3"
+}
 
+//ASYNC FUNCTION
+async function mainFunction() {
+  await getUserId();
+  //add values from input to user object
+  const input = document.getElementsByTagName("input");
+  user.familienaam = input['nieuwfamilienaam'].value;
+  user.voornaam = input['nieuwvoornaam'].value;
+  user.geboortedatum = input['nieuwgeboortedatum'].value;
+  user.email = input['nieuwemail'].value;
+  user.beroep = input['nieuwberoep'].value;
+  const sexe = document.getElementById('nieuwsexe');
+  const sexeValue = sexe.options[sexe.selectedIndex].value;
+  user.sexe = sexeValue;
+  user.oogkleur = input['nieuwoogkleur'].value;
+  user.gewicht = input['nieuwgewicht'].value;
+  user.haarkleur = input['nieuwhaarkleur'].value;
+  user.grootte = input['nieuwgrootte'].value;
+  user.nickname = input['nieuwnickname'].value;
+  user.wachtwoord = input['nieuwwachtwoord'].value;
+
+  if(await checkIfUserExist()) {
+    foutmeldingspan.innerText = "de bijnaam bestaat al";
+    console.log("User Exist");
+    return false;
+  }
+
+  if (await validateForm()) {
+    await uploadPictureToApi(imgData);
+    await requestApiCreate();
+    console.log("it has been sended");
+    console.log(user);
+    foutmeldingspan.innerText ="";
+} else { 
+  console.log("Error validateForm");
+  return false;
+  };  
+              
+  
+  toonDIV("accountaanmaaktisgedaan");
+  toonaddDIV("login");
+  toonmenuDIV("nietingelogdmenu");
+//end mainFunction
+};
+
+////////////////FUNCTIONS/////////////////////
+function requestApiCreate() {
+  //convert object to JSON
+ var request = new Request('https://scrumserver.tenobe.org/scrum/api/profiel/create.php', {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: new Headers({
+          'Content-Type': 'application/json'
+          })
+            });                 
+            fetch(request)
+                .then( function (resp)  { return resp.json(); })
+                .then( function (user)  { console.log(user);  })
+                .catch(function (error) { console.log(error); return false;}); 
+                return true;
+ }               
+
+ async function uploadPictureToApi(base64String) {
+            console.log('•Foto wordt doorgestuurd naar de API.');
+            let naam = fotoName;
+            let afbeelding = base64String;
+            let url = 'https://scrumserver.tenobe.org/scrum/api/image/upload.php';
+            let data = {
+                naam: naam,
+                afbeelding: afbeelding
+            }
+            var request = new Request(url, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            });
+                const response = await fetch(request);
+                const users = await response.json();
+                console.log(users);
+                user.foto = users.fileName;
+                console.log(users.fileName);
+                // .catch(function (error) { console.log(error); return false; });
+                return true;
+        }
+ //Validate that inputs are not wrong so form is sended good.
+ function validateForm() {
+  
+
+  const dateValue = document.getElementById("nieuwgeboortedatum");
+ const herhaalWachtwoord = document.getElementById("nieuwh-wachtwoord");
+ const wachtwoord = document.getElementById("nieuwwachtwoord");
+ if(dateValue.checkValidity() === false ){ /*er is ivalid invoer*/
+
+    let labeltext = dateValue.id;
+    foutmeldingspan.innerText= `een valid invoer is verplict bij ${labeltext}`;
+    return false
+
+  }
+ 
+  if ( herhaalWachtwoord.value !== wachtwoord.value && wachtwoord.value !== "" && herhaalWachtwoord.value !== ""){        
+      herhaalWachtwoord.classList.add("fout");
+      foutmeldingspan.innerText="de wachtwoord werd niet het zelfde herhaald";
+      return false; 
+    }
+  else if (herhaalWachtwoord.value === wachtwoord.value) {
+    herhaalWachtwoord.classList.remove("fout");
+    foutmeldingspan.innerText="";
+  }
+
+//Validate that inputs are not empty
+  let inputs = document.querySelectorAll("fieldset input");
+  console.log(inputs);
+      foutmeldingspan.innerText="";
+  for (var i = 0; i < 12; i++) {
+    inputs[i].classList.remove('invalid-warning');
+    if (inputs[i].checkValidity() === false) {
+      // if(inputs[i].id["gewicht"] !== null) {
+      //   foutmeldingspan.innerText="min 30 max 450";
+      // }
+      // if(inputs[i].id["grootte"] !== null) {
+      //   foutmeldingspan.innerText="min 80 max 250";
+      // }
+
+    inputs[i].focus();
+    inputs[i].classList.toggle('invalid-warning');
+      return false;
+    }
+  }
+ 
+  return true;
+
+//End ValidateForm  
+}
+
+//Fetch data from server.
+async function getUserId() {
+  const response = await fetch("https://scrumserver.tenobe.org/scrum/api/profiel/read.php");
+  const users = await response.json();
+  user.id = users[users.length-1].id;
+}
+
+async function checkIfUserExist() {
+  const nickname = document.getElementById("nieuwnickname").value;
+  let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
+  let data = {
+   nickname: nickname
+  }
+
+  var request = new Request(url, {
+   method: 'POST',                 //request methode
+   body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+   headers: new Headers({          //onze API verwacht application/json
+  'Content-Type': 'application/json'
+   })
+  });
+  const response = await (await fetch(request).catch()).json();
+  console.log(response.message);
+
+  if (response.message === "Profiel nickname niet beschikbaar") {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+//SYNC FUNCTION
+//Update img url to img tag.
+document.getElementById("fotoSrc").addEventListener("change", function() {
+   if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("fotoToDiv").src = e.target.result;        
+            imgData = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);  
+        fotoName = this.files[0].name;    
+    }
+   
+});
+
+function checkDateInput() {
+  const nu = new Date();
+  const dag = nu.getDate();
+  const dag2 = ((dag < 10) ? "0" : "") + dag;
+  const maand = nu.getMonth() + 1;
+  const maand2 = ((maand < 10) ? "0" : "") + maand;
+  const jaar = nu.getFullYear()-18;
+  document.getElementById("nieuwgeboortedatum").max=`${jaar}-${maand2}-${dag2}`;
+  console.log(dag); 
+}
+
+// Submit button VALIDATION MAIN FUNCTION
+document.getElementById("button").onclick = mainFunction;
+checkDateInput();
+
+
+})
 
 
 

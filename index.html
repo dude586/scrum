@@ -38,7 +38,7 @@
 				</div>
 			</div>
 
-
+			
 
 			<!-- Login error message -->
 			<div id="loginerrormessage" class="col-9 orange-color">
@@ -47,6 +47,15 @@
 				</div>
 			</div>
 			<!-- Login error message -->
+
+
+			<!-- account aangemaakt -->
+			<div id="accountaanmaaktisgedaan" class="col-9 orange-color">
+				<div class="d-flex align-items-center justify-content-center">
+				  Uw nieuwe account is aangemaakt.
+				</div>
+			</div>
+			<!-- account aangemaakt  -->
 
 			<!-- Login DIV -->
 			<div id="login" class="col-9 orange-color">
@@ -73,13 +82,45 @@
 			<!-- Nieuwe Gebruiker -->
 			<div id="registreernieuwegebruiker" class="col-9 orange-color">
 				<div class="d-flex align-items-center justify-content-center">
-				
+					<div class="container">
+						<form class="p-5 text-center" id="inschrijving" name="inschrijving">
+						<fieldset id="Personalia">
+						  <legend>Personalia:</legend>
+							  <div class="mx-auto" id="kader"><img id="fotoToDiv" src="#" alt="jouw Foto" height="150" width="150"></div><input id="fotoSrc" class="mx-auto" type="file" name="pic" accept="image/*" required >
+							  <div><label for="familienaam">familienaam</label><input type="text" name="fname" id="nieuwfamilienaam" required ></div>
+							  <div><label for="voornaam">voornaam</label><input type="text" id="nieuwvoornaam" required ></div>
+							  <div><label id="Geboortedatum" for="geboortedatum">geboortedatum</label><input type="date" id="nieuwgeboortedatum"  required ></div>
+							  <div><label for="email">email</label><input type="email" id="nieuwemail" placeholder="je@example.com" required ></div>
+							  <div><label for="beroep">beroep</label><input type="text" id="nieuwberoep" required ></div>
+							  <div>
+								<label for="sexe">Sexe</label>  
+								<select id="nieuwsexe" required >
+								   <option value="">Maak een keuze</option>
+								   <option value="m">M</option>
+								   <option value="v">V</option>
+								   <option value="x">X</option>
+								</select>
+								<div><label for="oogkleur">oogkleur</label><input type="text" id="nieuwoogkleur" required ></div>
+								<div><label for="haarkleur">haarkleur</label><input type="text" id="nieuwhaarkleur" required ></div>
+								<div><label for="gewicht">gewicht</label><input type="number"  id="nieuwgewicht" placeholder="/kg" min="30" max="450" required ></div>
+								<div><label for="grootte">grootte</label><input type="number" id="nieuwgrootte" placeholder="/cm" min="80" max="250" required ></div> 
+							
+						</fieldset>
+						<fieldset id="identificatie">
+							<legend>voer hier uw nickname en wachtwoord in :</legend>
+								<div><label for="nickname">nickname</label><input type="text" id="nieuwnickname" required ></div>
+								<div><label for="wachtwoord">wachtwoord</label><input type="password" id="nieuwwachtwoord" required ></div>
+								<div><label for="h-wachtwoord">herhaal je wachtwoord</label><input type="password" id="nieuwh-wachtwoord" required></div>
+								<div id="formfoot"><button class type="button" id="button">Verzenden</button><span id="nieuwfoutmeldingspan"></span></div>
+							 
+						</fieldset>
+						
+					  </form>
+					</div>
 				</div>
 			</div>
 		
 			<!-- Nieuwe Gebruiker end -->
-
-
 
 
 			<!-- Profiel -->
