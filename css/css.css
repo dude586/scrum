@@ -3,7 +3,9 @@ form{
  background-color: rgb(231, 231, 107);
  /*width:50%;*/
 }
-
+body{
+    background-color: white;
+}
 form label{
     width: 120px;
     height: 30px;
@@ -36,7 +38,7 @@ form div{
 form div#kader{
     width:150px ;
     height: 150px;
-    border:1px solid gray;
+    border:1px bordersolid gray;
 }
 form #formfoot{
     overflow: auto;
@@ -93,4 +95,31 @@ input[type="file"] {
 input[type=file]{ 
     color:transparent;
    
+}
+table{
+    width: auto;
+    text-align: left;
+}
+td{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+button{
+    margin:5px ;
+}
+
+label{
+    margin: 5px;
+}
+input{
+    margin: 5px;
+}
+#detailFoto,#toondetailFoto{
+    width: 50%;
+}
+#menu{
+    background-color: orange ;
+}
+#Sterrenbeeldimg,#toonSterrenbeeldimg{
+    margin: 10px;
 }
