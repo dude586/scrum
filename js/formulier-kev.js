@@ -1,9 +1,9 @@
 "use strict"
-
+console.log("loading script");
 //VARIABLES
 const foutmeldingspan = document.getElementById("foutmeldingspan");
 let imgData;
-
+let fotoName;
 //USER object.
 let user = {
   id: "",
@@ -42,19 +42,12 @@ async function mainFunction() {
   user.grootte = input['grootte'].value;
   user.nickname = input['nickname'].value;
   user.wachtwoord = input['wachtwoord'].value;
-  //await uploadPictureToApi(imgData);  
+  await uploadPictureToApi(imgData);
 
-  if (validateForm()) {
+  if (await validateForm()) {
+    await requestApiCreate();
     console.log("it has been sended");
-    console.log(user);
-
-    if(await uploadPictureToApi(imgData)) {    
-    requestApiCreate();
-    } else {
-      console.log("Error in uploading img");
-      return false;
-    }
-          
+    console.log(user);   
 } else { 
   console.log("Error validateForm");
   return false;
@@ -81,9 +74,9 @@ function requestApiCreate() {
                 return true;
  }               
 
- function uploadPictureToApi(base64String) {
+ async function uploadPictureToApi(base64String) {
             console.log('•Foto wordt doorgestuurd naar de API.');
-            let naam = user.foto;
+            let naam = fotoName;
             let afbeelding = base64String;
             let url = 'https://scrumserver.tenobe.org/scrum/api/image/upload.php';
             let data = {
@@ -97,20 +90,22 @@ function requestApiCreate() {
                     'Content-Type': 'application/json'
                 })
             });
-            fetch(request)
-                .then(function (resp) { return resp.json(); })
-                .then(function (data) {
-                    console.log('==> OK (Foto te vinden op url = ' + data.fileURL + ')');
-                    console.log('• Foto inladen in IMG');
-                    console.log('==> OK');
-                    console.log('==> Klaar');
-                    user.foto = data.fileName;
-                    //user.foto = test.split('/').pop();               
-                })
-                .catch(function (error) { console.log(error); return false; });
+            const response = await fetch(request);
+                const users = await response.json();
+                console.log(users);
+                user.foto = users.fileName;
+                console.log(users.fileName);
+                // .catch(function (error) { console.log(error); return false; });
 
                 return true;
         }
+        
+  //  .then(function (data) {
+  //                   console.log('==> OK (Foto te vinden op url = ' + data.fileURL + ')');
+  //                   console.log('• Foto inladen in IMG, OK');
+  //                   user.foto = data.fileName;           
+  //               })
+  // user.id = users[users.length-1].id;
 
  // Validate that inputs are not wrong so form is sended good.
  function validateForm() {
@@ -156,13 +151,11 @@ document.getElementById("fotoSrc").addEventListener("change", function() {
    if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
-            document.getElementById("fotoToDiv").src = e.target.result;
-            
-            
+            document.getElementById("fotoToDiv").src = e.target.result;        
             imgData = e.target.result;
         }
         reader.readAsDataURL(this.files[0]);  
-        user.foto = this.files[0].name;    
+        fotoName = this.files[0].name;    
     }
    
 });
