@@ -6,7 +6,8 @@ let alleDivid = ["login",
                    "nieuwegebruiker",
                    "toonprofiel",
                    "techprobleem",
-                   "techprobleemdatabank"];
+                   "techprobleemdatabank",
+                   "registreernieuwegebruiker"];
 
 // Toont de juiste div in de stagin area
 
