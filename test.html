@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/filter.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="fuzzySearch">
+        <h1>Fuzzy zoeken naar profielen</h1>
+
+        <label for="input13_1" class="api_demo_lbl">voornaam :</label>
+        <input type="text" id="input13_1" value="Dar" class="api_demo_param" /><br>
+        <label for="input13_2" class="api_demo_lbl">fuzzy zoeken :</label>
+        <input type="checkbox" id="input13_2" checked> <br>
+
+        <button type="button" id="knop13">Voer Uit</button>
+
+    </div>
+    
+    <div id="zoekresultsFuzzy" class="col-9 orange-color">
+        <h1>Fuzzy resultaat</h1>
+        <div class="d-flex align-items-center justify-content-center">
+            <table id="uitvoerzoektabelFuzzy">
+                <tbody id="test">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
