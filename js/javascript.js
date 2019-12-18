@@ -411,7 +411,8 @@ window.onload = function () {
                                             checkVerbinding();
                                             fetch(request)
                                                 .then(function (resp) { return resp.json(); })
-                                                .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
+                                                .then(function (data) {GetSterrenbeeld(profielData.geboortedatum), alert("Uw wijzigingen zijn correct opgeslagen");
+                                             })
                                                 .catch(function (error) { console.log(error); });
                                         }
                                     }
