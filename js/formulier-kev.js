@@ -28,7 +28,7 @@ async function mainFunction() {
   await getUserId();
   //add values from input to user object
   const input = document.getElementsByTagName("input");
-  user.familienaam = input['familienaam'].value;
+  user.familienaam = input['newfamilienaam'].value;
   user.voornaam = input['voornaam'].value;
   user.geboortedatum = input['geboortedatum'].value;
   user.email = input['email'].value;
