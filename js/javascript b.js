@@ -1,19 +1,34 @@
 "use strict"
+
+
+// bepalen de max attribuut van de geboortedatum :leeftijd >=18 jaar
+const nu = new Date();
+const dag = nu.getDate();
+const dag2 = ((dag < 10) ? "0" : "") + dag;
+const maand = nu.getMonth() + 1;
+const maand2 = ((maand < 10) ? "0" : "") + maand;
+const jaar = nu.getFullYear() - 18;
+document.getElementById("detailGeboortedatum").max = `${jaar}-${maand2}-${dag2}`;
+
+
 // Globale Scope variabelen
 let alleDivid = ["login",
-                 "profiel", 
-                 "zoek",
-                  "zoekresults",
-                   "nieuwegebruiker",
-                   "toonprofiel",
-                   "techprobleem",
-                   "techprobleemdatabank",
-                   "registreernieuwegebruiker",
-                   "loginerrormessage"];
+    "profiel",
+    "zoek",
+    "zoekresults",
+    "toonprofiel",
+    "techprobleem",
+    "techprobleemdatabank",
+    "registreernieuwegebruiker",
+    "loginerrormessage",
+    "accountaanmaaktisgedaan"];
 
-let superuserid="";
+let superuserid = "";
 
 // Toont de juiste div in de stagin area
+
+
+
 
 function toonDIV(divid) {
     for (let teller = 0; teller < alleDivid.length; teller++) {
@@ -44,49 +59,47 @@ function toonaddDIV(divid) {
 
 //Checkt of er een verbinding is
 
-function checkVerbinding()
-{  
-   // let ok = true;
+function checkVerbinding() {
+    // let ok = true;
     const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-let url = rooturl + '/profiel/read.php';
+    let url = rooturl + '/profiel/read.php';
 
 
-fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-       
+    fetch(url)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
 
-    })
-    .catch(function (error) {
-       toonDIV("techprobleemdatabank");
-       ok=false;
-       throw new Error('Error in the Database');
-    });
-    
+
+        })
+        .catch(function (error) {
+            toonDIV("techprobleemdatabank");
+            ok = false;
+            throw new Error('Error in the Database');
+        });
+
 }
 
-function booleanCheckVerbinding()
-{  
-   let ok = true;
+function booleanCheckVerbinding() {
+    let ok = true;
     const rooturl = 'https://scrumserver.tenobe.org/scrum/api';
-let url = rooturl + '/profiel/read.php';
+    let url = rooturl + '/profiel/read.php';
 
-fetch(url)
-    .then(function (resp) {
-        return resp.json();
-    })
-    .then(function (data) {
-       
+    fetch(url)
+        .then(function (resp) {
+            return resp.json();
+        })
+        .then(function (data) {
 
-    })
-    .catch(function (error) {
-       toonDIV("techprobleemdatabank");
-       ok=false;
-       
-    });
-    return ok;  
+
+        })
+        .catch(function (error) {
+            toonDIV("techprobleemdatabank");
+            ok = false;
+
+        });
+    return ok;
 }
 
 let menuDIVid = ["ingelogdmenu", "nietingelogdmenu"];
@@ -115,6 +128,286 @@ let userID = "";
 //---------------------------------------------------------------------------------------------------------------------
 
 
+//---------------------------------------------------------------------------------------------------------------------
+//Kevin en Mai domain
+document.getElementById('menuregistreer').addEventListener('click', function (e) {
+    toonDIV("registreernieuwegebruiker");
+    //VARIABLES
+let imgData;
+let fotoName;
+let foutmeldingspan = document.getElementById("nieuwfoutmeldingspan");
+//USER object.
+let user = {
+  id: "",
+  familienaam: "",
+  voornaam: "",
+  geboortedatum: "",
+  email: "",
+  nickname: "",
+  foto: "",
+  beroep: "",
+  sexe: "",
+  haarkleur: "",
+  oogkleur: "",
+  grootte: "",
+  gewicht: "",
+  wachtwoord: "",
+  lovecoins: "3"
+}
+
+//ASYNC FUNCTION
+async function mainFunction() {
+  await getUserId();
+  //add values from input to user object
+  const input = document.getElementsByTagName("input");
+  user.familienaam = input['nieuwfamilienaam'].value;
+  user.voornaam = input['nieuwvoornaam'].value;
+  user.geboortedatum = input['nieuwgeboortedatum'].value;
+  user.email = input['nieuwemail'].value;
+  user.beroep = input['nieuwberoep'].value;
+  const sexe = document.getElementById('nieuwsexe');
+  const sexeValue = sexe.options[sexe.selectedIndex].value;
+  user.sexe = sexeValue;
+  user.oogkleur = input['nieuwoogkleur'].value;
+  user.gewicht = input['nieuwgewicht'].value;
+  user.haarkleur = input['nieuwhaarkleur'].value;
+  user.grootte = input['nieuwgrootte'].value;
+  user.nickname = input['nieuwnickname'].value;
+  user.wachtwoord = input['nieuwwachtwoord'].value;
+
+  if(await checkIfUserExist()) {
+    foutmeldingspan.innerText = "de bijnaam bestaat al";
+    console.log("User Exist");
+    return false;
+  }
+
+  if (await validateForm()) {
+    await uploadPictureToApi(imgData);
+    await requestApiCreate();
+    console.log("it has been sended");
+    console.log(user);
+    foutmeldingspan.innerText ="";
+} else { 
+  console.log("Error validateForm");
+  return false;
+  };  
+              
+  
+  toonDIV("accountaanmaaktisgedaan");
+  toonaddDIV("login");
+  toonmenuDIV("nietingelogdmenu");
+//end mainFunction
+};
+
+////////////////FUNCTIONS/////////////////////
+function requestApiCreate() {
+  //convert object to JSON
+ var request = new Request('https://scrumserver.tenobe.org/scrum/api/profiel/create.php', {
+          method: 'POST',
+          body: JSON.stringify(user),
+          headers: new Headers({
+          'Content-Type': 'application/json'
+          })
+            });                 
+            fetch(request)
+                .then( function (resp)  { return resp.json(); })
+                .then( function (user)  { console.log(user);  })
+                .catch(function (error) { console.log(error); return false;}); 
+                return true;
+ }               
+
+ async function uploadPictureToApi(base64String) {
+            console.log('•Foto wordt doorgestuurd naar de API.');
+            let naam = fotoName;
+            let afbeelding = base64String;
+            let url = 'https://scrumserver.tenobe.org/scrum/api/image/upload.php';
+            let data = {
+                naam: naam,
+                afbeelding: afbeelding
+            }
+            var request = new Request(url, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            });
+                const response = await fetch(request);
+                const users = await response.json();
+                console.log(users);
+                user.foto = users.fileName;
+                console.log(users.fileName);
+                // .catch(function (error) { console.log(error); return false; });
+                return true;
+        }
+ //Validate that inputs are not wrong so form is sended good.
+ function validateForm() {
+  
+
+  const dateValue = document.getElementById("nieuwgeboortedatum");
+ const herhaalWachtwoord = document.getElementById("nieuwh-wachtwoord");
+ const wachtwoord = document.getElementById("nieuwwachtwoord");
+ if(dateValue.checkValidity() === false ){ /*er is ivalid invoer*/
+
+    let labeltext = dateValue.id;
+    foutmeldingspan.innerText= `een valid invoer is verplict bij ${labeltext}`;
+    return false
+
+  }
+ 
+  if ( herhaalWachtwoord.value !== wachtwoord.value && wachtwoord.value !== "" && herhaalWachtwoord.value !== ""){        
+      herhaalWachtwoord.classList.add("fout");
+      foutmeldingspan.innerText="de wachtwoord werd niet het zelfde herhaald";
+      return false; 
+    }
+  else if (herhaalWachtwoord.value === wachtwoord.value) {
+    herhaalWachtwoord.classList.remove("fout");
+    foutmeldingspan.innerText="";
+  }
+
+//Validate that inputs are not empty
+  let inputs = document.querySelectorAll("fieldset input");
+  console.log(inputs);
+      foutmeldingspan.innerText="";
+  for (var i = 0; i < 12; i++) {
+    inputs[i].classList.remove('invalid-warning');
+    if (inputs[i].checkValidity() === false) {
+      // if(inputs[i].id["gewicht"] !== null) {
+      //   foutmeldingspan.innerText="min 30 max 450";
+      // }
+      // if(inputs[i].id["grootte"] !== null) {
+      //   foutmeldingspan.innerText="min 80 max 250";
+      // }
+
+    inputs[i].focus();
+    inputs[i].classList.toggle('invalid-warning');
+      return false;
+    }
+  }
+ 
+  return true;
+
+//End ValidateForm  
+}
+
+//Fetch data from server.
+async function getUserId() {
+  const response = await fetch("https://scrumserver.tenobe.org/scrum/api/profiel/read.php");
+  const users = await response.json();
+  user.id = users[users.length-1].id;
+}
+
+async function checkIfUserExist() {
+  const nickname = document.getElementById("nieuwnickname").value;
+  let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
+  let data = {
+   nickname: nickname
+  }
+
+  var request = new Request(url, {
+   method: 'POST',                 //request methode
+   body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+   headers: new Headers({          //onze API verwacht application/json
+  'Content-Type': 'application/json'
+   })
+  });
+  const response = await (await fetch(request).catch()).json();
+  console.log(response.message);
+
+  if (response.message === "Profiel nickname niet beschikbaar") {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+//SYNC FUNCTION
+//Update img url to img tag.
+document.getElementById("fotoSrc").addEventListener("change", function() {
+   if (this.files && this.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("fotoToDiv").src = e.target.result;        
+            imgData = e.target.result;
+        }
+        reader.readAsDataURL(this.files[0]);  
+        fotoName = this.files[0].name;    
+    }
+   
+});
+
+function checkDateInput() {
+  const nu = new Date();
+  const dag = nu.getDate();
+  const dag2 = ((dag < 10) ? "0" : "") + dag;
+  const maand = nu.getMonth() + 1;
+  const maand2 = ((maand < 10) ? "0" : "") + maand;
+  const jaar = nu.getFullYear()-18;
+  document.getElementById("nieuwgeboortedatum").max=`${jaar}-${maand2}-${dag2}`;
+  console.log(dag); 
+}
+
+// Submit button VALIDATION MAIN FUNCTION
+document.getElementById("button").onclick = mainFunction;
+checkDateInput();
+
+
+})
+
+
+
+//Kenny en Mai domain
+//---------------------------------------------------------------------------------------------------------------------
+
+
+
+
+function betaalLovecoinstoonprofiel(id)
+
+{let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + superuserid;
+let profielData;
+let lovecoins;
+                    fetch(url)
+                        .then(function (resp) { return resp.json(); })
+                        .then(function (data) {
+
+                            profielData = data;
+
+                            lovecoins=profielData.lovecoins;
+                            console.log("lovecoins");
+                            console.log(lovecoins);
+                            if (lovecoins === 0) {alert("U heeft geen lovecoins!")}
+                            else {      
+
+                            
+                            
+                            let urlUpdate = 'https://scrumserver.tenobe.org/scrum/api/profiel/update.php';
+
+                            profielData.lovecoins = lovecoins - 1;
+
+                         let request = new Request(urlUpdate, {
+                                            method: 'PUT',
+                                            body: JSON.stringify(profielData),
+                                            headers: new Headers({
+                                                'Content-Type': 'application/json'
+                                            })
+                                        })
+
+
+
+                           fetch(request)
+                            .then(function (resp)   { return resp.json(); })
+                            .then(function (data)   { console.log(data);  })
+                            .catch(function (error) { console.log(error); });
+                            document.getElementById('toonlovecoins').value=lovecoins-1;
+    
+                            toonprofiel(id);}
+                          
+                        })
+                        .catch(function (error) { console.log(error); });
+    
+
+}
 
 document.getElementById('menulogout').addEventListener('click', function (e) {
     document.location.reload(true);
@@ -248,7 +541,7 @@ function toonprofiel(profielid) {
 
 window.onload = function () {
 
-    
+
     toonDIV("login");
 
     toonmenuDIV("nietingelogdmenu");
@@ -302,13 +595,14 @@ window.onload = function () {
                     toonDIV("profiel");
                     let profielData;
                     let profielNickData;
+                    let profielDateData;
                     console.log("id " + tmpID);
-                    superuserid=tmpID;
+                    superuserid = tmpID;
 
                     console.log(superuserid);
 
                     let url = 'https://scrumserver.tenobe.org/scrum/api/profiel/read_one.php?id=' + tmpID;
-                    
+
                     fetch(url)
                         .then(function (resp) { return resp.json(); })
                         .then(function (data) {
@@ -323,11 +617,11 @@ window.onload = function () {
                             document.getElementById('detailBeroep').value = profielData.beroep;
                             document.getElementById('detailEmail').value = profielData.email;
                             document.getElementById('toonlovecoins').value = profielData.lovecoins;
-                            document.getElementById('toonId').value = profielData.id;
                             document.getElementById('detailFoto').setAttribute('src', 'https://scrumserver.tenobe.org/scrum/img/' + profielData.foto);
                             document.getElementById('detailFoto').setAttribute('alt', 'foto van ' + profielData.voornaam + ' ' + profielData.familienaam);
                             document.getElementById('profielVan').innerText = 'Details van ' + profielData.voornaam + ' ' + profielData.familienaam;
                             profielNickData = profielData.nickname;
+                            profielDateData = profielData.geboortedatum
                             console.log("TESTING");
                             GetSterrenbeeld(profielData.geboortedatum);
                         })
@@ -348,67 +642,72 @@ window.onload = function () {
                         let url = `https://scrumserver.tenobe.org/scrum/api/profiel/exists.php`;
 
                         let data = {
-                            nickname:  profielData.nickname
+                            nickname: profielData.nickname
 
                         }
+                        if (document.getElementById("detailGeboortedatum").checkValidity() === false) {
+                            alert("u geeft een invalid datum in, u moet minstens 18 zijn");
+                            document.getElementById('detailGeboortedatum').value = profielDateData;
+                        }
+                        else {
 
-                        var request = new Request(url, {
-                            method: 'POST',                 //request methode
-                            body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
-                            headers: new Headers({          //onze API verwacht application/json
-                                'Content-Type': 'application/json'
-                            })
-                        });
-                        let GekozenNicknaam = false;
-                        checkVerbinding();
-                        fetch(request)
-                            .then(function (response) { return response.json(); })
-                            .then(function (data) {
-                                if (data.message == "Profiel nickname beschikbaar" ){}else { GekozenNicknaam = true }
-                                if (GekozenNicknaam == true && profielNickData !== profielData.nickname) {
-                                    alert("u zal een andere nicknaam moeten kiezen");
-                                    document.getElementById('detailNick').value = profielNickData
-                                }
-                             else {
+                            var request = new Request(url, {
+                                method: 'POST',                 //request methode
+                                body: JSON.stringify(data),     //body waar de data aan meegegeven wordt
+                                headers: new Headers({          //onze API verwacht application/json
+                                    'Content-Type': 'application/json'
+                                })
+                            });
+                            let GekozenNicknaam = false;
+                            checkVerbinding();
+                            fetch(request)
+                                .then(function (response) { return response.json(); })
+                                .then(function (data) {
+                                    if (data.message == "Profiel nickname beschikbaar") { } else { GekozenNicknaam = true }
+                                    if (GekozenNicknaam == true && profielNickData !== profielData.nickname) {
+                                        alert("u zal een andere nicknaam moeten kiezen");
+                                        document.getElementById('detailNick').value = profielNickData
+                                    }
+                                    else {
                                         profielNickData = document.getElementById('detailNick').value;
 
 
-                                    // profielData.lovecoins = document.getElementById('detailLovecoins').value;
-                                    let email = profielData.email;
-                                    if (email.includes("@") !== true) {
-                                        alert("uw email adres zit in een fout formaat");
+                                        // profielData.lovecoins = document.getElementById('detailLovecoins').value;
+                                        let email = profielData.email;
+                                        if (email.includes("@") !== true) {
+                                            alert("uw email adres zit in een fout formaat");
 
-                                    } else {
-
-
+                                        } else {
 
 
 
 
-                                        var request = new Request(urlUpdate, {
-                                            method: 'PUT',
-                                            body: JSON.stringify(profielData),
-                                            headers: new Headers({
-                                                'Content-Type': 'application/json'
-                                            })
-                                        });
-                                        checkVerbinding();
-                                        fetch(request)
-                                            .then(function (resp) { return resp.json(); })
-                                            .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
-                                            .catch(function (error) { console.log(error); });
+
+
+                                            var request = new Request(urlUpdate, {
+                                                method: 'PUT',
+                                                body: JSON.stringify(profielData),
+                                                headers: new Headers({
+                                                    'Content-Type': 'application/json'
+                                                })
+                                            });
+                                            checkVerbinding();
+                                            fetch(request)
+                                                .then(function (resp) { return resp.json(); })
+                                                .then(function (data) { alert("Uw wijzigingen zijn correct opgeslagen"); })
+                                                .catch(function (error) { console.log(error); });
+                                        }
                                     }
-                                }
 
-                            })
-                            .catch(function (error) { console.log(error); });
+                                })
+                                .catch(function (error) { console.log(error); });
+                        }
 
-                    
-                    
+
 
                     });
-                
-                
+
+
 
                     // scope test later
                     //
@@ -550,8 +849,8 @@ function sterrenBeeldNaarJpeg(Datum) {
 
 document.getElementById('zoekformulier').addEventListener('click', function () {
     //console.log("zoekformulier");
-     document.getElementById("geslacht").value = "";
-    
+    document.getElementById("geslacht").value = "";
+
     toonDIV("zoek");
     const deKnop = document.getElementById("verstuur");
     deKnop.onclick = function () {
@@ -574,6 +873,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         if ((IDminGr === "") && (IDmaxGr === "") && (IDminLeeftijd === "") && (IDmaxLeeftijd === "") && (IDKleurHaar === "") && (IDKLeurOgen === "") && (IDgeslacht === "")) {
             alert('invullen die handel');
+            toonDIV("zoek");
         } else {
             if (IDminGr !== "") {
                 if (IDminGr < 80 || IDminGr > 250) {
@@ -605,7 +905,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                     toonDIV("zoek");
                 }
             }
-           
+
             //console.log(IDmaxLeeftijd);
             //console.log(IDminLeeftijd);
 
@@ -658,12 +958,13 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                 //console.log(url);
                 //LET OP : rooturl = https://scrumserver.tenobe.org/scrum/api
                 checkVerbinding();
+                let profielIDs = [];
                 fetch(url)
                     .then(function (resp) { return resp.json(); })
                     .then(function (data) {
                         //console.log(data);
                         if (data.message === "Geen profielen gevonden.") {
-                            
+
                             alert('geen overeenkomsten gevonden');
                             toonDIV("zoek");
                         } else {
@@ -673,6 +974,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 
                                 const tr = zoektabelid.insertRow();
+                                const favbuttoncell = tr.insertCell();
                                 const nicknamecell = tr.insertCell();
                                 const voornaamcell = tr.insertCell();
                                 const familienaamcell = tr.insertCell();
@@ -687,6 +989,18 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                                 const leeftijd = Math.floor((new Date() - new Date(tmp.geboortedatum).getTime()) / 3.15576e+10);
 
                                 console.log(tmp);
+
+                                let buttonhtml = document.createElement("BUTTON"); 
+                                buttonhtml.innerHTML = "Profiel";
+
+                                let tekstteller=teller.toString()
+                                buttonhtml.id = "favbutton"+tekstteller;
+                                console.log(tekstteller);
+                                buttonhtml.value = tmp.id;
+
+                                profielIDs.push(tmp.id);
+
+                                favbuttoncell.appendChild(buttonhtml);
 
                                 voornaamcell.innerText = tmp.voornaam;
                                 familienaamcell.innerText = tmp.familienaam;
@@ -706,10 +1020,50 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
                                 sterrenbeeldcell.appendChild(img);
 
                                 // leeftijdcell=toString(getAge("1994-06-14"));
-
+                               //console.log(teller);
+                               // document.getElementById('favbutton'+teller.toString()).addEventListener('click', function (e)
+                               //   {  const v=Math.floor(Math.random() * 5000) + 1;
+                               //        alert(v.toString())})
 
 
                             }
+                            // for (var x = 0; x < teller; x++)
+                            //  {const y=x+1;
+                            //   const tekstx=y.toString();
+                            //   console.log(tekstx);
+                            //   document.getElementById('favbutton'+tekstx).addEventListener('click', function (e)
+                            //   {betaalLovecoinstoonprofiel(profielIDs[x]);})    
+
+                            //  }
+                    
+                            
+                            
+                            
+                            document.getElementById('favbutton1').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[0]);})
+                            document.getElementById('favbutton2').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[1]);})
+                            document.getElementById('favbutton3').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[2]);})
+                            document.getElementById('favbutton4').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[3]);})
+                            document.getElementById('favbutton5').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[4]);})
+                            document.getElementById('favbutton6').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[5]);})
+                            document.getElementById('favbutton7').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[6]);})
+                            document.getElementById('favbutton8').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[7]);})
+                            document.getElementById('favbutton9').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[8]);})
+                            document.getElementById('favbutton10').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[9]);})
+                            document.getElementById('favbutton11').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[10]);})
+                            document.getElementById('favbutton12').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[11]);})
+                            document.getElementById('favbutton13').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[12]);})
+                            document.getElementById('favbutton14').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[13]);})
+                            document.getElementById('favbutton15').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[14]);})
+                            document.getElementById('favbutton16').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[15]);})
+                            document.getElementById('favbutton17').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[16]);})
+                            document.getElementById('favbutton18').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[17]);})
+                            document.getElementById('favbutton19').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[18]);})
+                            document.getElementById('favbutton20').addEventListener('click', function (e) {betaalLovecoinstoonprofiel(profielIDs[19]);})
+                           
+
+                         
+
+                            
                         }
 
 
@@ -748,7 +1102,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
     function getArrayOfPersons(data) {
         const select = document.getElementById("kleurHaar");
         let arrayHaar = [];
-        while(select.hasChildNodes()){
+        while (select.hasChildNodes()) {
             select.removeChild(select.firstChild);
         }
         let legeOPtie3 = document.createElement("option");
@@ -768,7 +1122,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const select2 = document.getElementById("kleurOgen");
         let arrayOgen = [];
-        while(select2.hasChildNodes()){
+        while (select2.hasChildNodes()) {
             select2.removeChild(select2.firstChild);
         }
         let legeOPtie = document.createElement("option");
@@ -787,7 +1141,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
         const selectSexe = document.getElementById("geslacht");
         let arraySexe = [];
-        while(selectSexe.hasChildNodes()){
+        while (selectSexe.hasChildNodes()) {
             selectSexe.removeChild(selectSexe.firstChild);
         }
         let legeOPtie2 = document.createElement("option");
@@ -831,8 +1185,4 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 //Jan's Domain & David's Domain
 //--------------------------------------------------------------------------------------------------------------------------------------
 
-document.getElementById('koopLoveCoins').onclick = function(){
-    toonDIV(profiel);
-    let id = document.getElementById('toonId').value;
-    console.log("hallo");
-}
+

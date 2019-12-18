@@ -219,20 +219,27 @@ function sterrenBeeldNaarJpeg(Datum) {
 
 const zoektabelid = document.getElementById("uitvoerzoektabelFuzzy");
 document.getElementById('knop13').addEventListener('click', function (e) {
+    //toonDIV("zoekresultsFuzzy");
     let nickname = document.getElementById('input13_1').value;
+    let beroep = document.getElementById('input13_3').value;
+    let familienaam = document.getElementById('input13_4').value;
     let TabelBody = document.getElementById("test");
     let fuzzy = document.getElementById('input13_2').checked;
-    let rooturl = "https://scrumserver.tenobe.org/scrum/api";
-    let url = rooturl + '/profiel/search.php?voornaam=' + nickname;
+    let rooturl = "https://scrumserver.tenobe.org/scrum/api/profiel/search.php?";
+    if (nickname !== "") { rooturl = rooturl + 'nicknameFuzzy=' + nickname + '&'; }
+    if (familienaam !== "") { rooturl = rooturl + 'familienaamFuzzy=' + familienaam + '&'; }
+    if (beroep !== "") { rooturl = rooturl + 'beroepFuzzy=' + beroep + '&'; }
+    rooturl = rooturl.substring(0, rooturl.length - 1);
+    //let url = rooturl + '/profiel/search.php?nicknameFuzzy=' + nickname + '&familienaamFuzzy=' + familienaam + '&beroepFuzzy=' + beroep;
     
-    if (fuzzy) {
-        url += '&voornaamFuzzy=1';
-    }
-
-    fetch(url)
+    // if (fuzzy) {
+    //     rooturl += '&voornaamFuzzy=1';
+    // }
+    console.log(rooturl);
+    fetch(rooturl)
         .then(function (resp) { return resp.json(); })
         .then(function (data) {
-            
+        
             console.log(data);
             if (data.message === "Geen profielen gevonden.") {
 

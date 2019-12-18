@@ -1,0 +1,158 @@
+/*formulier*/
+.basiColor {
+    background-color: #f1f1f1;
+}
+form label{
+    width: 130px;
+    height: 30px;
+    text-align: left;
+    display: inline-block;
+}
+
+#registreernieuwegebruiker input, #registreernieuwegebruiker select, #zoek input, #zoek select{
+    width: 500px;
+    height: 30px;
+    padding-left: 5px;
+    display: inline-block;
+}
+#registreernieuwegebruiker input[type="file"]{
+    width: 104px;
+}
+form #upload{
+    display:inline-block;
+    width: 102px;
+    height: 30px;
+ 
+}
+form #submit{
+    width: 100px;
+    height: 40px; 
+    display: block; 
+    float: left;
+}
+form div{
+    padding: 8px 0;
+}
+
+form div#kader{
+    width:150px ;
+    height: 150px;
+    border:1px bordersolid gray;
+}
+form #formfoot{
+    overflow: auto;
+}
+
+/*valideren*/ 
+#foutmeldingspan{
+    display: inline-block;
+    padding-left: 15px;
+    margin-top:10px;
+    color:red;
+    font-size:large;
+}
+
+.invalid-warning {
+    border: solid 3px red;
+}
+
+input[type=file] {
+    height: 100%;
+}
+/*index*/
+
+.scroll {
+    height: 100vh;
+    overflow-y: scroll;
+}
+#cover {
+	width: 100%;
+	height: 150px;
+	background: url("../assets/images/everton-vila-AsahNlC0VhQ-unsplash.jpg");
+    background-color: rgb(100,0,0.5);
+	background-size: cover;
+	background-position: top;
+}
+.bg-color {
+	background-image: linear-gradient(120deg, #3498db, #8e44ad);
+}
+.login-form {
+    width: 360px;
+    background: #f1f1f1;
+    height: 580px;
+    padding: 80px 40px;
+    border-radius: 10px;
+}
+#btnlogin {
+  width: 100px;
+}
+.register-form {
+    width: 900px;
+    background: #f1f1f1;
+    padding: 80px 40px;
+    border-radius: 10px;
+}
+
+
+main {
+	height: 100vh;
+}
+logo-img {
+	width: 230px;
+	
+}
+/*imagegrotes*/
+
+smallogo-img {
+    width: 50px;
+
+}
+
+input[type="file"] {
+	padding: 0;
+	margin-top: 10px;
+    color:transparent;
+    content: "test";
+}
+
+table{
+    width: auto;
+    text-align: left;
+}
+td{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+#ingelogdmenu, #nietingelogdmenu {
+    
+    }
+#ingelogdmenu button, #nietingelogdmenu button{
+    width: 50%;
+    margin-top:25px;
+}
+
+label{
+    margin: 5px;
+}
+input{
+    margin: 5px;
+}
+#detailFoto,#toondetailFoto{
+    width: 50%;
+}
+#menu{
+    /*background: #f1f1f1;*/
+    border-radius: 0 5px;
+    border: 1px solid #333;
+    border-left: 0px;
+    background: white;
+    height: 100vh;
+}
+#Sterrenbeeldimg,#toonSterrenbeeldimg{
+    margin: 10px;
+}
+
+#loginerrormessage, #accountaanmaaktisgedaan {
+    font-size: 18px;
+    color: #f70d1a;
+}

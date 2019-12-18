@@ -28,20 +28,29 @@ async function mainFunction() {
   await getUserId();
   //add values from input to user object
   const input = document.getElementsByTagName("input");
+<<<<<<< HEAD
   user.familienaam = input['newfamilienaam'].value;
   user.voornaam = input['voornaam'].value;
   user.geboortedatum = input['geboortedatum'].value;
   user.email = input['email'].value;
   user.beroep = input['beroep'].value;
   const sexe = document.getElementById('sexe');
+=======
+  user.familienaam = input['nieuwfamilienaam'].value;
+  user.voornaam = input['nieuwvoornaam'].value;
+  user.geboortedatum = input['nieuwgeboortedatum'].value;
+  user.email = input['nieuwemail'].value;
+  user.beroep = input['nieuwberoep'].value;
+  const sexe = document.getElementById('nieuwsexe');
+>>>>>>> 0576f56194a9242b0c0a0e8e37541fe3e57ad35d
   const sexeValue = sexe.options[sexe.selectedIndex].value;
   user.sexe = sexeValue;
-  user.oogkleur = input['oogkleur'].value;
-  user.gewicht = input['gewicht'].value;
-  user.haarkleur = input['haarkleur'].value;
-  user.grootte = input['grootte'].value;
-  user.nickname = input['nickname'].value;
-  user.wachtwoord = input['wachtwoord'].value;
+  user.oogkleur = input['nieuwoogkleur'].value;
+  user.gewicht = input['nieuwgewicht'].value;
+  user.haarkleur = input['nieuwhaarkleur'].value;
+  user.grootte = input['nieuwgrootte'].value;
+  user.nickname = input['nieuwnickname'].value;
+  user.wachtwoord = input['nieuwwachtwoord'].value;
 
   if(await checkIfUserExist()) {
     foutmeldingspan.innerText = "de bijnaam bestaat al";
