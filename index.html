@@ -15,20 +15,35 @@
 	<script type="text/javascript" src="js/javascript.js" defer></script>
 	<title>Document</title>
 </head>
-
 <body>
-
 	<head>
 		<div id="cover">
 			<div class="text-center"><img id="logo-img" src="assets/images/logo.png"></div>
 		</div>
 	</head>
-	<main class="m-5 high">
+	<main class=" high">
+		<!-- Login error message -->
+		<div id="loginerrormessage" class="col-12 orange-color">
+			<div class="d-flex align-items-center justify-content-center">
+			  <h2>Uw nickname of paswoord is verkeerd.</h2>
+			</div>
+		</div>
+		
+		<!-- Login error message -->
+
+		<!-- account aangemaakt -->
+		<div id="accountaanmaaktisgedaan" class="col-12 orange-color">
+			<div class="d-flex align-items-center justify-content-center">
+			  <h2>Uw nieuwe account is aangemaakt.</h2>
+			</div>
+		</div>
+		<!-- account aangemaakt  -->
 		<div class="row">
-			<div class="col-3 orange-color border">
+			<div id="menu"class="col-3 ">
 				<div id="ingelogdmenu">
 				  <button type="button" id="mijnprofiel" class="btn btn-primary">Mijn Profiel</button><br>
 				  <button type="button" id="zoekformulier" class="btn btn-primary">Zoek</button><br>
+			
 				  <button type="button" id="menulucky" class="btn btn-primary">I feel lucky!</button><br>	
 				  <button type="button" id="menulogout" class="btn btn-primary">Logout</button><br><br>
 				  Lovecoins<input type="textbox" name="output" value="0" id="toonlovecoins" readonly></input>
@@ -39,15 +54,12 @@
 				</div>
 			</div>
 
+			
+
+			
 
 
-			<!-- Login error message -->
-			<div id="loginerrormessage" class="col-9 orange-color">
-				<div class="d-flex align-items-center justify-content-center">
-				  Uw nickname of paswoord is verkeerd.
-				</div>
-			</div>
-			<!-- Login error message -->
+			
 
 			<!-- Login DIV -->
 			<div id="login" class="col-9 orange-color">
@@ -72,15 +84,47 @@
 
 
 			<!-- Nieuwe Gebruiker -->
-
-			<div id="nieuwegebruiker" class="col-9 orange-color">
+			<div id="registreernieuwegebruiker" class="col-9 orange-color">
 				<div class="d-flex align-items-center justify-content-center">
+					<div class="container">
+						<form class="p-5 text-center" id="inschrijving" name="inschrijving">
+						<fieldset id="Personalia">
+						  <legend>Personalia:</legend>
+							  <div class="mx-auto" id="kader"><img id="fotoToDiv" src="#" alt="jouw Foto" height="150" width="150"></div><input id="fotoSrc" class="mx-auto" type="file" name="pic" accept="image/*" required >
+							  <div><label for="familienaam">familienaam</label><input type="text" name="fname" id="nieuwfamilienaam" required ></div>
+							  <div><label for="voornaam">voornaam</label><input type="text" id="nieuwvoornaam" required ></div>
+							  <div><label id="Geboortedatum" for="geboortedatum">geboortedatum</label><input type="date" id="nieuwgeboortedatum"  required ></div>
+							  <div><label for="email">email</label><input type="email" id="nieuwemail" placeholder="je@example.com" required ></div>
+							  <div><label for="beroep">beroep</label><input type="text" id="nieuwberoep" required ></div>
+							  <div>
+								<label for="sexe">Sexe</label>  
+								<select id="nieuwsexe" required >
+								   <option value="">Maak een keuze</option>
+								   <option value="m">M</option>
+								   <option value="v">V</option>
+								   <option value="x">X</option>
+								</select>
+								<div><label for="oogkleur">oogkleur</label><input type="text" id="nieuwoogkleur" required ></div>
+								<div><label for="haarkleur">haarkleur</label><input type="text" id="nieuwhaarkleur" required ></div>
+								<div><label for="gewicht">gewicht</label><input type="number"  id="nieuwgewicht" placeholder="/kg" min="30" max="450" required ></div>
+								<div><label for="grootte">grootte</label><input type="number" id="nieuwgrootte" placeholder="/cm" min="80" max="250" required ></div> 
+							
+						</fieldset>
+						<fieldset id="identificatie">
+							<legend>voer hier uw nickname en wachtwoord in :</legend>
+								<div><label for="nickname">nickname</label><input type="text" id="nieuwnickname" required ></div>
+								<div><label for="wachtwoord">wachtwoord</label><input type="password" id="nieuwwachtwoord" required ></div>
+								<div><label for="h-wachtwoord">herhaal je wachtwoord</label><input type="password" id="nieuwh-wachtwoord" required></div>
+								<div id="formfoot"><button class type="button" id="button">Verzenden</button><span id="nieuwfoutmeldingspan"></span></div>
+							 
+						</fieldset>
+						
+					  </form>
+					</div>
 				</div>
 			</div>
-
+		
 			<!-- Nieuwe Gebruiker end -->
-
-
 
 
 			<!-- Profiel -->
@@ -315,11 +359,7 @@
 			<!-- Einde  Technisch probleem-->
 
 
-			<div id="registreernieuwegebruiker" class="col-9 orange-color">
-				<div class="d-flex align-items-center justify-content-center">
-				
-				</div>
-			</div>
+		
 
 
 		</div>
