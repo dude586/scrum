@@ -250,7 +250,7 @@ function requestApiCreate() {
  if(dateValue.checkValidity() === false ){ /*er is ivalid invoer*/
 
     let labeltext = dateValue.id;
-    foutmeldingspan.innerText= `een valid invoer is verplict bij ${labeltext}`;
+    foutmeldingspan.innerText= `een valid invoer is verplicht bij ${labeltext}`;
     return false
 
   }
@@ -873,7 +873,7 @@ document.getElementById('zoekformulier').addEventListener('click', function () {
 
 
         if ((IDminGr === "") && (IDmaxGr === "") && (IDminLeeftijd === "") && (IDmaxLeeftijd === "") && (IDKleurHaar === "") && (IDKLeurOgen === "") && (IDgeslacht === "")) {
-            alert('invullen die handel');
+            alert('gelieve iets in te vullen');
             toonDIV("zoek");
         } else {
             if (IDminGr !== "") {
